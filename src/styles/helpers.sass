@@ -1,0 +1,31 @@
+@forward "../node_modules/rfs/sass"
+@forward "./text-stroke.sass"
+
+$font-text: 'Switzer', sans-serif
+$font-mono: "Jetbrains mono", monospace
+$font-display: 'Clash Grotesk', sans-serif
+
+$c5: #ffffff
+$c1: #f8f8f8
+$c2: #f3f3f3
+$c4: #747474
+$c0: #141413
+
+$blue: #ffbca0
+
+@mixin for-size($size)
+  @if $size == phone-only
+    @media (max-width: 599px) 
+        @content
+  @else if $size == tablet-portrait-up
+    @media (min-width: 600px) 
+        @content
+  @else if $size == tablet-landscape-up
+    @media (min-width: 900px) 
+        @content
+  @else if $size == desktop-up
+    @media (min-width: 1200px)
+        @content
+  @else if $size == big-desktop-up
+    @media (min-width: 1800px)
+        @content

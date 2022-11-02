@@ -1,0 +1,32 @@
+@import "./helpers"
+
+body
+    @include font-size(1rem)
+    font-family: $font-text
+    background-color: $c0
+    color: $c5
+
+:root
+    @include font-size(1rem)
+    font-family: $font-text
+    color: $c5
+
+h1
+    @include font-size(4rem)
+    font-family: $font-display
+    font-weight: normal
+
+h2
+    @include font-size(2.6rem)
+    font-family: $font-display
+    font-weight: normal
+
+h3
+    @include font-size(1.8rem)
+    font-family: $font-display
+    font-weight: normal
+
+.column
+    display: flex
+    flex-direction: column
+    @include rfs(0.5rem, gap)
