@@ -62,7 +62,7 @@
 <div class="header">
     <div class="title-container">
         <div class="title">
-            <h1>Anicet Nougaret<span class="apostroph">'s</span></h1>
+            <h1><span class="baguette">🪄</span> Anicet Nougaret<span class="apostroph">'s</span></h1>
             <p class="subtitle">2022 Portfolio</p>
         </div>
     </div>
@@ -71,9 +71,11 @@
 <div class="bottom">
     <Marquee speed={0.15}>
         <div class="content">
-            <p>
-                scroll down ⁕ scrollez vers le bas ⁕ desplazarse hacia abajo ⁕ 向下滚动 ⁕ 下へスクロール ⁕ прокрутить вниз ⁕ 
-            </p>
+            {#each [...new Array(2)] as _}
+                <p>
+                    <i>scroll down ⁕ scrollez vers le bas ⁕ desplazarse hacia abajo ⁕ 向下滚动 ⁕ 下へスクロール ⁕ прокрутить вниз ⁕ </i>
+                </p>
+            {/each}
         </div>
     </Marquee>
 </div>
@@ -105,7 +107,22 @@
 </div>
 
 <div class="footer">
-
+    <div class="statements">
+        <p>
+            Made with ❤️ in Lyon, France.
+        </p>
+        <p>
+            Tech used: SvelteKit, SASS
+        </p>
+        <p>
+            All rights reserved @ Anicet Nougaret 2022
+        </p>
+    </div>
+    <div class="links">
+        <a href="https://www.linkedin.com/in/anicet-nougaret-b7846b174/">⁕ Linkedin</a>
+        <a href="https://github.com/AnicetNgrt">⁕ Github</a>
+        <a href="https://twitter.com/AniC_dev">⁕ Twitter</a>
+    </div>
 </div>
 
 <style lang="sass">
@@ -128,10 +145,10 @@
             font-weight: 300
             color: $c0
             height: 2.5rem
-            padding-right: 0.8rem
+            padding-right: 0.4rem
             border-top: solid 2px $c0
             border-bottom: solid 2px $c0
-            font-family: 'Jetbrains Mono', monospace
+            font-weight: 800
 
             p
                 margin-bottom: 0.05rem
@@ -187,11 +204,11 @@
                     padding: 2rem
                     gap: 2rem
 
-                grid-template-columns: 1.5rem 1fr 2rem
-                grid-template-rows: 1.5rem 1fr 2rem
+                grid-template-columns: 2rem 1fr 2rem
+                grid-template-rows: 2rem 1fr 2rem
                 @include for-size(tablet-landscape-up)
-                    grid-template-columns: 2rem 1fr 3rem
-                    grid-template-rows: 2rem 1fr 3rem
+                    grid-template-columns: 3rem 1fr 3rem
+                    grid-template-rows: 3rem 1fr 3rem
 
                 align-items: start
                 justify-content: start
@@ -205,6 +222,9 @@
                 .description
                     justify-content: end
                     align-items: center
+                    @include font-size(0.8rem)
+                    @include for-size(tablet-landscape-up)
+                        @include font-size(1rem)
                     //grid-column-end: span 2
 
                 .icon, .number
@@ -212,11 +232,13 @@
                     justify-content: center
 
                 .top-left
-                    border: dashed 2px $blue
-                    border-radius: 0.8rem
-                    transform: rotate(20deg)
-                    box-shadow: -2px 4px 0px transparentize($blue, 0.8)
+                    @include for-size(tablet-landscape-up)
+                        border: solid 2px $blue
+                        border-radius: 1.1rem
+                        box-shadow: -2px 4px 0px transparentize($blue, 0.8)
+                        @include font-size(2rem)
 
+                    transform: rotate(20deg)
 
                 .right
                     position: relative
@@ -225,13 +247,15 @@
 
                     > div
                         position: absolute
-                        width: 10rem
-                        height: 2rem
+                        width: 7rem
+                        height: 3rem
                         top: 2.25rem
-                        left: -3.4rem
-                        @include font-size(0.75rem)
+                        left: -2.4rem
+                        @include font-size(0.5rem)
                         @include for-size(tablet-landscape-up)
                             @include font-size(0.7rem)
+                            left: -3.4rem
+                            width: 10rem
                             height: 3rem
 
                         display: flex
@@ -248,10 +272,12 @@
 
                 h2
                     font-family: $font-display
-                    @include font-size(3rem)
-                    @include rfs(3rem, line-height)
-                    font-weight: 400
+                    @include font-size(5.5rem)
+                    @include rfs(5.5rem, line-height)
+                    font-weight: 800
                     @include for-size(tablet-landscape-up)
+                        @include font-size(4.5rem)
+                        @include rfs(4.5rem, line-height)
                         max-width: 70%  
 
                 *
@@ -260,7 +286,7 @@
 
                 transition: all 1s
 
-            .top:hover
+            .top:hover, .top:active
                 transition: all 1s
                 backdrop-filter: blur(0px)
                 background-color: transparentize($c0, 0.8)
@@ -293,6 +319,11 @@
         align-items: center
         justify-content: center
         border: double 0.5rem $blue
+    
+    .baguette
+        display: none
+        @include for-size(tablet-landscape-up)
+            display: inline
 
     .title
         max-width: 100%
@@ -306,6 +337,7 @@
         padding: 0rem 2rem
         @include for-size(tablet-landscape-up)
             padding: 0rem 3rem
+            margin-left: -3rem
 
         margin-bottom: 3rem
 
@@ -317,6 +349,7 @@
             @include rfs(5.5rem, line-height)
             width: max-content
             max-width: 100%
+            font-weight: 800
 
             // color: transparent
             // background-clip: text
@@ -347,8 +380,52 @@
 
 
     .footer
+        display: flex
+
+        flex-direction: column-reverse
+        padding: 5rem 3rem 
+        justify-content: start
+        align-items: start
+        gap: 4rem
+
+        @include for-size(tablet-landscape-up)
+            padding: 8rem
+            flex-direction: row 
+            justify-content: center
+            align-items: center
+            gap: 8rem
+
+        color: $blue
         z-index: 3
         background-color: $c0
         height: 100vh
         width: 100%
+
+        .statements
+            display: flex
+            flex-direction: column
+            height: fit-content
+
+        .links
+            display: flex
+            flex-direction: column
+            gap: 1rem
+            height: fit-content
+
+        p
+            @include font-size(1.5rem)
+            @include rfs(2rem, line-height)
+            @include for-size(tablet-landscape-up)
+                @include font-size(2rem)
+                @include rfs(2.5rem, line-height)
+
+        a
+            font-family: $font-display
+            color: $blue
+            font-weight: 800
+            @include font-size(4rem)
+            @include rfs(4rem, line-height)
+
+        a:hover
+            color: $c1
 </style>

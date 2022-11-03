@@ -80,7 +80,7 @@
     //         top: 50%
     //         left: 50%
     //         transform: translate(-50%, -50%)
-    //         background: radial-gradient(circle at left 60% top 20%, $c0, $blue, $c5)
+    //         background: radial-gradient(circle at left 60% top 20%, $c0, var(--color), $c5)
     //         border-radius: 100%
 
     .marquee-container
@@ -95,6 +95,6 @@
         .role
             min-width: fit-content
             font-weight: 500
-            color: $blue
+            color: var(--color)
 
 </style>
