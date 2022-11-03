@@ -10,7 +10,7 @@ body
     font-size: 13px
     font-family: $font-text
     color: $c5
-    --color: $blue
+    @include defineColorHSL(--color, 67, 100%, 70%)
 
 h1
     @include font-size(4rem)

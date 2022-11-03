@@ -7,9 +7,21 @@
     for (let i = 0; i < lines; i++) indexes.push(i)
 
     let scrollY: number
+    let t = Math.random()*1000
+
+    function incT() {
+        t += 0.01
+        setTimeout(incT, 100)
+    }
+
+    incT()
+
+    function curve(n: number) {
+        return (Math.sin(n)/2)+0.5
+    }
 </script>
 
-<div class="page">
+<div class="page" style={`--color-h: ${(curve(t+3.14)+0.3)*360}; --color: hsl(${(curve(t+3.14)+0.3)*360}, ${(curve(t*10)+0.3)*50}%, var(--color-l))`}>
     <div class="content">
         <slot/>
     </div>

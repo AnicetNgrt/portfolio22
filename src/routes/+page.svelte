@@ -97,7 +97,7 @@
                         {desc}
                     </div>
                     <div class="number">
-                        0<span class="num">{i}</span>
+                        <span class="num">0</span>{i}
                     </div>
                 </div>
                 <img src={cover} alt={name}>
@@ -135,7 +135,7 @@
         display: flex
         justify-content: center
         align-items: center
-        background-color: $blue
+        background-color: var(--color)
 
         .content
             display: flex
@@ -168,7 +168,7 @@
         padding: 3px
         padding-top: 0px
         gap: 3px
-        background: $blue
+        background: var(--color)
         
         .section-container
             position: sticky
@@ -195,7 +195,7 @@
                 height: 100%
                 backdrop-filter: blur(30px)
                 background-color: transparentize($c0, 0.3)
-                color: $blue
+                color: var(--color)
                 display: grid
 
                 padding: 0.5rem
@@ -233,9 +233,8 @@
 
                 .top-left
                     @include for-size(tablet-landscape-up)
-                        border: solid 2px $blue
+                        border: solid 2px var(--color)
                         border-radius: 1.1rem
-                        box-shadow: -2px 4px 0px transparentize($blue, 0.8)
                         @include font-size(2rem)
 
                     transform: rotate(20deg)
@@ -265,10 +264,11 @@
 
                 .number
                     @include font-size(1.5rem)
-                    color: transparentize($blue, 0.8)
+                    
+                    color: var(--color)
 
                     .num
-                        color: $blue
+                        opacity: 0.5
 
                 h2
                     font-family: $font-display
@@ -282,18 +282,18 @@
 
                 *
                     opacity: 1
-                    transition: all 1s
+                    transition: opacity 1s
 
-                transition: all 1s
+                transition: opacity 1s, backdrop-filter 1s, background-color 1s
 
             .top:hover, .top:active
-                transition: all 1s
+                transition: backdrop-filter 1s, background-color 1s
                 backdrop-filter: blur(0px)
                 background-color: transparentize($c0, 0.8)
                 cursor: pointer
 
                 *
-                    transition: all 0.5s
+                    transition: opacity 0.5s, filter 0.5s
                     filter: blur(5px)
                     opacity: 0
 
@@ -318,7 +318,7 @@
         flex-direction: column
         align-items: center
         justify-content: center
-        border: double 0.5rem $blue
+        border: double 0.5rem var(--color)
     
     .baguette
         display: none
@@ -329,7 +329,7 @@
         max-width: 100%
         width: fit-content
 
-        color: $blue
+        color: var(--color)
 
         display: flex
         flex-direction: column
@@ -353,7 +353,7 @@
 
             // color: transparent
             // background-clip: text
-            // background-image: linear-gradient($blue, $c5)
+            // background-image: linear-gradient(var(--color), $c5)
             
             @include for-size(tablet-portrait-up)
                 @include font-size(6rem)
@@ -395,7 +395,7 @@
             align-items: center
             gap: 8rem
 
-        color: $blue
+        color: var(--color)
         z-index: 3
         background-color: $c0
         height: 100vh
@@ -421,7 +421,7 @@
 
         a
             font-family: $font-display
-            color: $blue
+            color: var(--color)
             font-weight: 800
             @include font-size(4rem)
             @include rfs(4rem, line-height)

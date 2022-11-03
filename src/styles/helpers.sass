@@ -12,7 +12,6 @@ $c4: #747474
 $c0: #141413
 
 // $blue: #ffbca0
-$blue: #edff64
 
 @mixin for-size($size)
   @if $size == phone-only
@@ -30,3 +29,26 @@ $blue: #edff64
   @else if $size == big-desktop-up
     @media (min-width: 1800px)
         @content
+
+
+@function alpha($color, $opacity)
+  $color: str-replace($color, 'var(')
+  $color: str-replace($color, ')')
+  $color-h: var(#{$color+'-h'})
+  $color-s: var(#{$color+'-s'})
+  $color-l: var(#{$color+'-l'})
+  @return hsla($color-h, $color-s, $color-l, $opacity)
+
+// replace substring with another string
+// credits: https://css-tricks.com/snippets/sass/str-replace-function/
+@function str-replace($string, $search, $replace: '')
+  $index: str-index($string, $search)
+  @if $index
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace)
+  @return $string
+
+@mixin defineColorHSL($color, $hue, $saturation, $lightness)
+  #{$color}: unquote("hsl(#{$hue}, #{$saturation}, #{$lightness})")
+  #{$color}-h: #{$hue}
+  #{$color}-s: #{$saturation}
+  #{$color}-l: #{$lightness}
