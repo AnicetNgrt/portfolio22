@@ -1,51 +1,228 @@
 <script lang=ts>
     import "../styles/app.sass"
-    import Roles from '../comps/roles.svelte';
+	import Footer from "../comps/footer.svelte";
+	import SpinnyRolesBg from "../comps/spinnyRolesBg.svelte";
+    import { browser } from '$app/environment';
+    import { tweened } from 'svelte/motion';
+    import { linear } from 'svelte/easing';
+	import { onMount } from "svelte";
 
-    const lines = 14
-    let indexes: number[] = []
-    for (let i = 0; i < lines; i++) indexes.push(i)
-
-    let scrollY: number
-    let t = Math.random()*1000
-
-    function incT() {
-        t += 0.01
-        setTimeout(incT, 100)
+    function randint(min: number, max: number) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
     }
 
-    incT()
+    const HSLToRGB = (h: number, s: number, l: number) => {
+        h = h/360
+        s = s/100
+        l = l/100
+        var r, g, b;
 
-    function curve(n: number) {
-        return (Math.sin(n)/2)+0.5
+        if(s == 0){
+            r = g = b = l; // achromatic
+        }else{
+            var hue2RGB = (p: number, q: number, t: number) => {
+                if(t < 0) t += 1;
+                if(t > 1) t -= 1;
+                if(t < 1/6) return p + (q - p) * 6 * t;
+                if(t < 1/2) return q;
+                if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                return p;
+            }
+
+            var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+            var p = 2 * l - q;
+            r = hue2RGB(p, q, h + 1/3);
+            g = hue2RGB(p, q, h);
+            b = hue2RGB(p, q, h - 1/3);
+        }
+
+        return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
     }
+
+    const RGBToHSL = (r: number, g: number, b: number) => {
+        r /= 255;
+        g /= 255;
+        b /= 255;
+        const l = Math.max(r, g, b);
+        const s = l - Math.min(r, g, b);
+        const h = s
+            ? l === r
+            ? (g - b) / s
+            : l === g
+            ? 2 + (b - r) / s
+            : 4 + (r - g) / s
+            : 0;
+        return [
+            60 * h < 0 ? 60 * h + 360 : 60 * h,
+            100 * (s ? (l <= 0.5 ? s / (2 * l - s) : s / (2 - (2 * l - s))) : 0),
+            (100 * (2 * l - s)) / 2,
+        ];
+    };
+
+    const newRGB = (rgb: number[]) => {
+        let h = RGBToHSL(rgb[0], rgb[1], rgb[2])[0]
+
+        return HSLToRGB(
+            randint(h+100, h+180) % 360,
+            randint(50, 100),
+            randint(75, 90)
+        )
+    }
+
+    const refreshColor = () => {
+        rgb = newRGB(rgb)
+        r.set(rgb[0])
+        g.set(rgb[1])
+        b.set(rgb[2])
+    }
+
+    let targetSpeed = -50
+
+    const newSpeed = (speed: number) => {
+        if (Math.abs(speed) < Math.abs(targetSpeed)) return speed * 1.1
+        if (Math.sign(speed) == Math.sign(targetSpeed)) {
+            targetSpeed = targetSpeed * -1
+            refreshColor()
+        }
+        return targetSpeed * 0.01
+    }
+
+    let rgb = newRGB([0, 0, 0])
+
+    const r = tweened(rgb[0], {
+        duration: 200,
+        easing: linear
+    })
+
+    const g = tweened(rgb[1], {
+        duration: 200,
+        easing: linear 
+    })
+
+    const b = tweened(rgb[2], {
+        duration: 200,
+        easing: linear 
+    })
+
+    let speed = tweened(newSpeed(targetSpeed), {
+        duration: 1000,
+        easing: linear
+    })
+
+    if (browser) {
+        window.onclick = () => {
+            rgb = newRGB(rgb)
+            r.set(rgb[0])
+            g.set(rgb[1])
+            b.set(rgb[2])
+            
+            setTimeout(() => speed.set(newSpeed($speed)), 500)
+        }
+    }
+
+    const refreshSpeedLoop = () => {
+        speed.set(newSpeed($speed))
+
+        setTimeout(refreshSpeedLoop, 1000)
+    }
+
+    //setTimeout(refreshColorLoop, 1000)
+    setTimeout(refreshSpeedLoop, 1000)
+
+    $: hsl = RGBToHSL($r, $g, $b)
+
+    let size: number = 4
+    let lines: number = 9
+
+    let loading = 0
+    let startUnshowingLoading = false
+    let showLoading = true
+
+    function progressFakeLoading() {
+        loading += 1
+        
+        if (loading < 100)
+            setTimeout(progressFakeLoading, Math.random()*Math.random()*300)
+        else {
+            startUnshowingLoading = true
+            setTimeout(() => showLoading = false, 2000)
+        }
+    }
+
+    onMount(() => {
+        console.log("mounted")
+
+        window.onafterprint
+
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("loaded")
+        });
+
+        progressFakeLoading()
+    })
 </script>
 
-<div class="page" style={`--color-h: ${(curve(t+3.14)+0.3)*360}; --color: hsl(${(curve(t+3.14)+0.3)*360}, ${(curve(t*10)+0.3)*50}%, var(--color-l))`}>
+<div class="page" style={`--color-h: ${hsl[0]}; --color: hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`}>
+    {#if showLoading}
+        <div class:unshow={startUnshowingLoading} class="loading">
+            <h1><span class="zeroes">{loading < 10 ? "00" : loading < 100 ? "0" : ""}</span>{loading}<span class="percent">%</span></h1>
+        </div>
+    {/if}
+
     <div class="content">
         <slot/>
     </div>
-    <div class="spinnybg" style={`${scrollY > 100 && "filter: blur(7px) grayscale(1)"}`}>
-        <div class="desc">
-            {#each [...indexes].reverse() as index}
-                <Roles stop={scrollY > 100} {index} quantity={lines}/>
-            {/each}
-        </div> 
-        <div class="desc">
-            {#each indexes as index}
-                <Roles stop={scrollY > 100} {index} quantity={lines}/>
-            {/each}
-        </div>
+    <Footer/>
+    <div class="bg-container">
+        <SpinnyRolesBg stop={false} speed={Number($speed.toFixed(3))} opacity={0.75} size={size} lines={lines} shift={37}/>
     </div>
 </div>
 
-<svelte:window bind:scrollY={scrollY} />
-
 <style lang=sass>
+    .loading
+        position: absolute
+        top: 0
+        left: 0
+        height: 100vh
+        width: 100vw
+        background-color: $c0
+        z-index: 3
+        display: flex
+        justify-content: center
+        align-items: center
+
+        h1
+            @include font-size(5rem)
+            font-family: $font-mono
+            font-weight: 400
+            color: var(--color)
+
+            .percent
+                font-family: $font-display
+                margin-left: 0.2rem
+                opacity: 0.5
+                @include font-size(2rem)
+
+            .zeroes
+                opacity: 0.5
+
+    .loading.unshow
+        transition: opacity 2s
+        opacity: 0
+
+    .bg-container
+        position: absolute
+        top: 0
+        left: 0
+        height: 100vh
+        width: 100%
+
     .page
         position: relative
         min-height: 100vh
-        width: 100vw
+        width: 100%
 
     .content
         display: flex
@@ -53,27 +230,4 @@
         align-items: center
         // border: double 3px $c5
         width: 100%
-
-    .spinnybg
-        z-index: -1
-        position: fixed
-        top: 0
-        left: 0
-        width: 100%
-        height: calc(100vh + 20%)
-        transform: translateY(-10%)
-        background-color: $c0
-
-        .desc
-            display: flex
-            flex-direction: column
-
-            width: 100%
-            height: 55vh
-            justify-content: space-around
-            opacity: 0.5
-
-        @include for-size(tablet-landscape-up)
-            flex-grow: 1
-
 </style>
