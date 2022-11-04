@@ -64,7 +64,7 @@
 <MainHeader/>
 
 <div class="scroll-hint">
-    <Marquee speed={0.15} stopIfFpsBelow={0} slowdownWithLag={false}>
+    <Marquee speed={0.15}>
         <div class="content">
             {#each [...new Array(2)] as _}
                 <p>

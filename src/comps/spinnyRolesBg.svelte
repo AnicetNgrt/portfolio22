@@ -1,4 +1,6 @@
 <script lang=ts>
+	import { loading } from "$lib/loadingStore";
+	import { onMount } from "svelte";
     import IntersectionObserver from "svelte-intersection-observer";
 
     import Roles from '../comps/roles.svelte';
@@ -21,6 +23,62 @@
 
     let botIndicator: HTMLElement;
     let botIntersecting: boolean = false;
+    
+    let stopIfFpsBelow = 8
+    let stoppedPerformance = true
+    const minLatency = 1/144
+    const maxLatency = 1/(stopIfFpsBelow+1)
+    let restartIfFpsAbove = stopIfFpsBelow * 2.5
+
+    const sampleSize = 4*lines
+    let perfs: number[] = [...new Array(sampleSize)].map(_ => maxLatency)
+    let lag = 0.5
+    let moy = 0
+    let lastReportedPerf = 1/(stopIfFpsBelow+1)
+    let latency = minLatency
+    let latencyScale = 1
+
+    let reportedCount = 0
+
+    const onPerfRecorded = (perf: number) => {
+        if (Math.random() > 0.5) {
+            perfs.push(perf)
+            if (perfs.length > sampleSize) perfs = perfs.slice(1)
+            moy = perfs.reduce((sum, perf) => sum+perf, 0) / perfs.length / 1000
+        }
+        if (reportedCount % 20 == 0) {
+            let scale = Math.max((moy - latency) / ((2*latency) - latency), 0)
+            let perfDelta = ((scale*0.6)+0.7)
+            lag = Math.min(lag * perfDelta, 1)
+            latency = (lag*(maxLatency-minLatency))+minLatency
+            latencyScale = ((latency - minLatency) / (maxLatency - minLatency))
+        }
+
+        reportedCount += 1
+        if (reportedCount % 5 == 0 &&  $loading < 100) {
+            loading.set((reportedCount/(sampleSize))*100)
+        }
+    } 
+
+    function reportPerfs() {
+        console.log(`latency: ${(1/latency).toFixed(4)} | fps: ${(1/moy).toFixed(4)} | lsc: ${latencyScale}`)
+
+        if (1/moy <= stopIfFpsBelow && !stoppedPerformance) {
+            console.log("STOPPING COZ LAG")
+            stoppedPerformance = true
+        } else if (1/moy >= restartIfFpsAbove && stoppedPerformance) {
+            console.log("RESTARTING")
+            stoppedPerformance = false
+        }
+
+        lastReportedPerf = 1/moy
+        setTimeout(reportPerfs, 1000)
+    }
+
+    onMount(() => {
+        setTimeout(reportPerfs, 1000)
+    })
+    
 </script>
 
 <div
@@ -29,12 +87,12 @@
     {#if fullIntersecting}
         <div class="desc">
             {#each [...indexes].reverse() as index}
-                <Roles speed={speed} size={size} stop={stop || !topIntersecting || !botIntersecting} {index} quantity={lines}/>
+                <Roles {latency} {stoppedPerformance} {onPerfRecorded} speed={speed} size={size} stop={stop || !topIntersecting || !botIntersecting} {index} quantity={lines}/>
             {/each}
         </div> 
         <div class="desc">
             {#each indexes as index}
-                <Roles speed={speed} size={size} stop={stop || !topIntersecting || !botIntersecting} {index} quantity={lines}/>
+                <Roles {latency} {stoppedPerformance} {onPerfRecorded} speed={speed} size={size} stop={stop || !topIntersecting || !botIntersecting} {index} quantity={lines}/>
             {/each}
         </div>
     {/if}

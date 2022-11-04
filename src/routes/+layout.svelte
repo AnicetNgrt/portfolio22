@@ -6,6 +6,7 @@
     import { tweened } from 'svelte/motion';
     import { linear } from 'svelte/easing';
 	import { onMount } from "svelte";
+	import { loading } from "$lib/loadingStore";
 
     function randint(min: number, max: number) {
         min = Math.ceil(min);
@@ -133,23 +134,12 @@
 
     $: hsl = RGBToHSL($r, $g, $b)
 
-    let size: number = 4
-    let lines: number = 9
+    let size: number = 2
+    let lines: number = 18
 
-    let loading = 0
     let startUnshowingLoading = false
     let showLoading = true
 
-    function progressFakeLoading() {
-        loading += 1
-        
-        if (loading < 100)
-            setTimeout(progressFakeLoading, Math.random()*Math.random()*300)
-        else {
-            startUnshowingLoading = true
-            setTimeout(() => showLoading = false, 2000)
-        }
-    }
 
     onMount(() => {
         console.log("mounted")
@@ -159,17 +149,22 @@
         document.addEventListener("DOMContentLoaded", function() {
             console.log("loaded")
         });
+    })
 
-        progressFakeLoading()
+    loading.subscribe(loading => {
+        if (loading >= 100) {
+            startUnshowingLoading = true
+            setTimeout(() => showLoading = false, 2000)
+        }
     })
 </script>
 
 <div class="page" style={`--color-h: ${hsl[0]}; --color: hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`}>
-    {#if showLoading}
+    <!-- {#if showLoading}
         <div class:unshow={startUnshowingLoading} class="loading">
-            <h1><span class="zeroes">{loading < 10 ? "00" : loading < 100 ? "0" : ""}</span>{loading}<span class="percent">%</span></h1>
+            <h1><span class="zeroes">{$loading < 10 ? "00" : $loading < 100 ? "0" : ""}</span>{Math.min(Math.round($loading), 100)}<span class="percent">%</span></h1>
         </div>
-    {/if}
+    {/if} -->
 
     <div class="content">
         <slot/>
