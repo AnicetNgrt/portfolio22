@@ -25,7 +25,7 @@
         </div>
     
     </div>
-    <SpinnyRolesBg speed={0.4} size={5} lines={12} opacity={0.5} shift={100}/>
+    <SpinnyRolesBg speed={0.4} opacity={0.5} shift={100}/>
 </div>
 
 <style lang=sass>

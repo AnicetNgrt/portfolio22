@@ -1,10 +1,10 @@
 <script lang=ts>
+	import { browser } from "$app/environment";
 	import { onDestroy, onMount } from "svelte";
 
     export let speed: number;
     export let speedMultiplier: number = 1
-    export let stop: boolean = false
-    export let latency: number = 1/144
+    export let externalStop: boolean = false
     export let stoppedPerformance = false
     export let onPerfRecorded: (perf: number) => void = _ => {}
 
@@ -15,21 +15,21 @@
 
     let shift = Math.random()*10;
 
-    $: trullyStopped = hovering || stop || stoppedPerformance
+    $: trullyStopped = hovering || externalStop || stoppedPerformance
+    let stopped = false
 
     let progress = 0
 
-    let t0 = performance.now();
     $: trueSpeed = trullyStopped ? 0 : speed * speedMultiplier /* * (slowdownWithLag ? Math.min(1.1-latencyScale, 1) : 1)*/
 
     let i = 0
 
-    function animate() {
-        let t1 = performance.now();
-        if (trullyStopped) t1 -= 1000
+    let previousTimeStamp = performance.now()
+    const animate: FrameRequestCallback = (timestamp) => {
+        const elapsed = timestamp - previousTimeStamp;
+        const latency = elapsed/1000
         
-        onPerfRecorded(Math.max(t1-t0, 1000/256))
-        t0 = performance.now();
+        onPerfRecorded(elapsed)
 
         if (!trullyStopped) {
             let duration = Math.pow(width, 0.001)/((trueSpeed+0.0001)/10)
@@ -46,14 +46,24 @@
         }
 
         i += 1
-        let finalLatency = trullyStopped ? (latency*1000 + 1000) : latency*1000
-        if (!wasDestroyed)
-            setTimeout(animate, finalLatency)
+
+        previousTimeStamp = timestamp;
+
+        if (wasDestroyed || externalStop || hovering) {
+            stopped = true
+        } else {
+            window.requestAnimationFrame(animate);
+        }
     }
 
     onMount(() => {
-        animate()
+        window.requestAnimationFrame(animate);
     })
+
+    $: if (stopped && (!externalStop && !hovering)) {
+        stopped = false
+        window.requestAnimationFrame(animate);
+    }
 
     onDestroy(() => {
         wasDestroyed = true
@@ -67,7 +77,7 @@ on:click={() => stopped = !stopped} -->
 
 <div 
     bind:clientWidth={width}
-    style={`--shift: ${-shift}%; height: ${height}px;  opacity: ${stoppedPerformance ? 0.5 : 1}`}  
+    style={`--shift: ${-shift}%; height: ${height}px;  opacity: ${stopped || stoppedPerformance ? 0.5 : 1}`}  
     class="marquee-container"
 >
     <div bind:clientHeight={height} style={`transform: translateX(${progress*-100}%)`} class="marquee-a"><slot/></div>

@@ -171,7 +171,7 @@
     </div>
     <Footer/>
     <div class="bg-container">
-        <SpinnyRolesBg stop={false} speed={Number($speed.toFixed(3))} opacity={0.75} shift={37}/>
+        <SpinnyRolesBg stop={false} speed={Number($speed.toFixed(3))} opacity={1} shift={37}/>
     </div>
 </div>
 

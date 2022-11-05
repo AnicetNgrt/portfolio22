@@ -10,11 +10,11 @@
     export let speed: number
     export let opacity: number = 1
 
-    const maxLines = 20
+    const maxLines = 32
     const minLines = 8
     let predictedLines: number = (maxLines+minLines)/2
     let lines: number = (maxLines+minLines)/2
-    $: size = 32 / lines
+    $: size = 32/lines
 
     let indexes: number[] = []
     $: {
@@ -31,53 +31,50 @@
     let botIndicator: HTMLElement;
     let botIntersecting: boolean = false;
     
-    let stopIfFpsBelow = 8
     let stoppedPerformance = false
-    const minLatency = 1/144
-    const maxLatency = 1/(stopIfFpsBelow+1)
-    let restartIfFpsAbove = stopIfFpsBelow * 2.5
+    const minFps = 15
+    const maxFps = 144
+    const targetFps = (minFps+maxFps)/2
+    let restartIfFpsAbove = minFps * 2.5
 
-    $: sampleSize = 4*lines
-    $: perfs = [...new Array(sampleSize)].map(_ => ((minLatency+maxLatency)/2)*1000)
+    $: sampleSize = 10*lines
+    $: recordedLatencies = [...new Array(sampleSize)].map(_ => (1/targetFps)*1000)
     let lag = 0.5
-    let moy = (minLatency+maxLatency)/2
-    let lastReportedPerf = 1/(stopIfFpsBelow+1)
-    let latency = (minLatency+maxLatency)/2
-    let latencyScale = 0.5
+    let meanFps = targetFps
+    let fpsScale = 0.5
 
     const onPerfRecorded = (perf: number) => {
-        perfs.push(perf)
-        if (perfs.length > sampleSize) perfs = perfs.slice(1)
+        recordedLatencies.push(perf)
+        if (recordedLatencies.length > sampleSize) recordedLatencies = recordedLatencies.slice(1)
     } 
 
     function reportPerfs() {
         if (fullIntersecting) {
-            moy = perfs.reduce((sum, perf) => sum+perf, 0) / perfs.length / 1000
-            let scale = Math.max((moy - latency) / ((2*latency) - latency), 0)
-            let perfDelta = ((scale*0.4)+0.8)
+            const meanLatency = recordedLatencies.reduce((sum, perf) => sum+perf, 0) / recordedLatencies.length / 1000
+            meanFps = 1/meanLatency
+            let fpsScale = Math.min(Math.max((meanFps - minFps) / ((targetFps) - minFps), 0), 1)
+            let fpsToAnimateScale = Math.max((meanFps - minFps) / ((targetFps) - minFps), 0)
+            let perfDelta = ((fpsToAnimateScale*0.9)+0.1)
             lag = Math.min(lag * perfDelta, 1)
-            latency = (lag*(maxLatency-minLatency))+minLatency
-            latencyScale = ((latency - minLatency) / (maxLatency - minLatency))
 
-            console.log(`latency: ${(1/latency).toFixed(4)} | fps: ${(1/moy).toFixed(4)} | lsc: ${latencyScale}`)
+            console.log(`fps: ${meanFps.toFixed(3)} | scale: ${fpsScale.toFixed(3)} | restart: ${fpsToAnimateScale.toFixed(3)}`)
             
             if ($loading < 70) {
-                predictedLines = Math.round(((1-latencyScale) * (maxLines-minLines)) + minLines)
+                predictedLines = Math.round(((fpsToAnimateScale/2) * (maxLines-minLines)) + minLines)
                 console.log(`predicted lines: ${predictedLines}`)
             } else {
-                // if (1/moy <= stopIfFpsBelow && !stoppedPerformance) {
-                //     console.log("STOPPING COZ LAG")
-                //     stoppedPerformance = true
-                // } else if (1/moy >= restartIfFpsAbove && stoppedPerformance) {
-                //     console.log("RESTARTING")
-                //     stoppedPerformance = false
-                // }
+                if (meanFps <= minFps && !stoppedPerformance) {
+                    console.log(`STOPPING COZ LAG ${meanFps} ${minFps}`)
+                    stoppedPerformance = true
+                } else if (meanFps >= restartIfFpsAbove && stoppedPerformance) {
+                    console.log("RESTARTING")
+                    stoppedPerformance = false
+                }
             }
-
-            lastReportedPerf = 1/moy
         }
-        setTimeout(reportPerfs, $loading < 70 ? 100 : 1000)
+        window.requestAnimationFrame(reportPerfs)
     }
+
 
     function updateLoading() {
         loading.update((loading: number) => loading + Math.random()*1)
@@ -86,11 +83,14 @@
         if ($loading > 70 && lines != predictedLines) {
             lines = predictedLines
         }
+
+        setTimeout(() => window.requestAnimationFrame(updateLoading), 1000)
     }
 
     onMount(() => {
         setTimeout(reportPerfs, 1000)
-        updateLoading()
+        window.requestAnimationFrame(updateLoading)
+        window.requestAnimationFrame(reportPerfs)
     })
     
 </script>
@@ -101,12 +101,12 @@
     {#if fullIntersecting}
         <div class="desc">
             {#each [...indexes].reverse() as index}
-                <Roles {latency} {stoppedPerformance} {onPerfRecorded} speed={speed} size={size} stop={stop || !topIntersecting || !botIntersecting} {index} quantity={lines}/>
+                <Roles {stoppedPerformance} {onPerfRecorded} speed={speed*fpsScale} size={size} stop={stop || !topIntersecting || !botIntersecting} {index} quantity={lines}/>
             {/each}
         </div> 
         <div class="desc">
             {#each indexes as index}
-                <Roles {latency} {stoppedPerformance} {onPerfRecorded} speed={speed} size={size} stop={stop || !topIntersecting || !botIntersecting} {index} quantity={lines}/>
+                <Roles {stoppedPerformance} {onPerfRecorded} speed={speed*fpsScale} size={size} stop={stop || !topIntersecting || !botIntersecting} {index} quantity={lines}/>
             {/each}
         </div>
     {/if}

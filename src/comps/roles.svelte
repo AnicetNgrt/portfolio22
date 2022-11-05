@@ -9,7 +9,6 @@
     export let speed: number
     export let onPerfRecorded: (perf: number) => void
     export let stoppedPerformance: boolean
-    export let latency: number
 
     // function getRandomArbitrary(min: number, max: number) {
     //     return Math.random() * (max - min) + min;
@@ -64,14 +63,18 @@
         "Please enjoy this website"
     ]
     shuffle(roles)
+
+    function wave(x: number) {
+        return (Math.cos(2*Math.PI*x + Math.PI)/2)+0.5
+    }
 </script>
 
 {#if size}
     <div class="marquee-container">
-        <Marquee {latency} {stoppedPerformance} {onPerfRecorded} stop={stop} speed={computedSpeed} speedMultiplier={speed}>
+        <Marquee {stoppedPerformance} {onPerfRecorded} externalStop={stop} speed={computedSpeed} speedMultiplier={speed}>
             <div class="marquee-content">
                 {#each [...roles, roles[0], roles[1], roles[2]] as role, i}
-                    <div class="role" style={`opacity: ${inverseDistance*0.8}; filter: blur(${(inverseDistance-0.2)*6}px) hue-rotate(${(inverseDistance*Math.random())*380}deg); line-height: ${(0.4+inverseDistance*size)*1.5}rem; font-size: ${0.4+inverseDistance*size}rem`}>
+                    <div class="role" style={`opacity: ${wave(distance)+0.2}; filter: blur(${(1-(wave(distance)))*10}px) hue-rotate(${(inverseDistance*Math.random())*380}deg); line-height: ${(0.4+inverseDistance*size)*1.5}rem; font-size: ${0.4+inverseDistance*size}rem`}>
                         {role}
                     </div>
                 {/each}
