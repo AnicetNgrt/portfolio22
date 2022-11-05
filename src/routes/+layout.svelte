@@ -151,7 +151,7 @@
         });
     })
 
-    loading.subscribe(loading => {
+    loading.subscribe((loading: number) => {
         if (loading >= 100) {
             startUnshowingLoading = true
             setTimeout(() => showLoading = false, 2000)
@@ -160,18 +160,18 @@
 </script>
 
 <div class="page" style={`--color-h: ${hsl[0]}; --color: hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`}>
-    <!-- {#if showLoading}
+    {#if showLoading}
         <div class:unshow={startUnshowingLoading} class="loading">
             <h1><span class="zeroes">{$loading < 10 ? "00" : $loading < 100 ? "0" : ""}</span>{Math.min(Math.round($loading), 100)}<span class="percent">%</span></h1>
         </div>
-    {/if} -->
+    {/if}
 
     <div class="content">
         <slot/>
     </div>
     <Footer/>
     <div class="bg-container">
-        <SpinnyRolesBg stop={false} speed={Number($speed.toFixed(3))} opacity={0.75} size={size} lines={lines} shift={37}/>
+        <SpinnyRolesBg stop={false} speed={Number($speed.toFixed(3))} opacity={0.75} shift={37}/>
     </div>
 </div>
 

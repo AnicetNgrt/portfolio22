@@ -6,14 +6,21 @@
     import Roles from '../comps/roles.svelte';
     
     export let stop: boolean = false
-    export let lines: number
-    export let size: number
     export let shift: number
     export let speed: number
     export let opacity: number = 1
 
+    const maxLines = 20
+    const minLines = 8
+    let predictedLines: number = (maxLines+minLines)/2
+    let lines: number = (maxLines+minLines)/2
+    $: size = 32 / lines
+
     let indexes: number[] = []
-    for (let i = 0; i < lines; i++) indexes.push(i)
+    $: {
+        indexes = []
+        for (let i = 0; i < lines; i++) indexes.push(i)
+    }
     
     let fullIndicator: HTMLElement;
     let fullIntersecting: boolean = false;
@@ -25,58 +32,65 @@
     let botIntersecting: boolean = false;
     
     let stopIfFpsBelow = 8
-    let stoppedPerformance = true
+    let stoppedPerformance = false
     const minLatency = 1/144
     const maxLatency = 1/(stopIfFpsBelow+1)
     let restartIfFpsAbove = stopIfFpsBelow * 2.5
 
-    const sampleSize = 4*lines
-    let perfs: number[] = [...new Array(sampleSize)].map(_ => maxLatency)
+    $: sampleSize = 4*lines
+    $: perfs = [...new Array(sampleSize)].map(_ => ((minLatency+maxLatency)/2)*1000)
     let lag = 0.5
-    let moy = 0
+    let moy = (minLatency+maxLatency)/2
     let lastReportedPerf = 1/(stopIfFpsBelow+1)
-    let latency = minLatency
-    let latencyScale = 1
-
-    let reportedCount = 0
+    let latency = (minLatency+maxLatency)/2
+    let latencyScale = 0.5
 
     const onPerfRecorded = (perf: number) => {
-        if (Math.random() > 0.5) {
-            perfs.push(perf)
-            if (perfs.length > sampleSize) perfs = perfs.slice(1)
-            moy = perfs.reduce((sum, perf) => sum+perf, 0) / perfs.length / 1000
-        }
-        if (reportedCount % 20 == 0) {
-            let scale = Math.max((moy - latency) / ((2*latency) - latency), 0)
-            let perfDelta = ((scale*0.6)+0.7)
-            lag = Math.min(lag * perfDelta, 1)
-            latency = (lag*(maxLatency-minLatency))+minLatency
-            latencyScale = ((latency - minLatency) / (maxLatency - minLatency))
-        }
-
-        reportedCount += 1
-        if (reportedCount % 5 == 0 &&  $loading < 100) {
-            loading.set((reportedCount/(sampleSize))*100)
-        }
+        perfs.push(perf)
+        if (perfs.length > sampleSize) perfs = perfs.slice(1)
     } 
 
     function reportPerfs() {
-        console.log(`latency: ${(1/latency).toFixed(4)} | fps: ${(1/moy).toFixed(4)} | lsc: ${latencyScale}`)
+        if (fullIntersecting) {
+            moy = perfs.reduce((sum, perf) => sum+perf, 0) / perfs.length / 1000
+            let scale = Math.max((moy - latency) / ((2*latency) - latency), 0)
+            let perfDelta = ((scale*0.4)+0.8)
+            lag = Math.min(lag * perfDelta, 1)
+            latency = (lag*(maxLatency-minLatency))+minLatency
+            latencyScale = ((latency - minLatency) / (maxLatency - minLatency))
 
-        if (1/moy <= stopIfFpsBelow && !stoppedPerformance) {
-            console.log("STOPPING COZ LAG")
-            stoppedPerformance = true
-        } else if (1/moy >= restartIfFpsAbove && stoppedPerformance) {
-            console.log("RESTARTING")
-            stoppedPerformance = false
+            console.log(`latency: ${(1/latency).toFixed(4)} | fps: ${(1/moy).toFixed(4)} | lsc: ${latencyScale}`)
+            
+            if ($loading < 70) {
+                predictedLines = Math.round(((1-latencyScale) * (maxLines-minLines)) + minLines)
+                console.log(`predicted lines: ${predictedLines}`)
+            } else {
+                // if (1/moy <= stopIfFpsBelow && !stoppedPerformance) {
+                //     console.log("STOPPING COZ LAG")
+                //     stoppedPerformance = true
+                // } else if (1/moy >= restartIfFpsAbove && stoppedPerformance) {
+                //     console.log("RESTARTING")
+                //     stoppedPerformance = false
+                // }
+            }
+
+            lastReportedPerf = 1/moy
         }
+        setTimeout(reportPerfs, $loading < 70 ? 100 : 1000)
+    }
 
-        lastReportedPerf = 1/moy
-        setTimeout(reportPerfs, 1000)
+    function updateLoading() {
+        loading.update((loading: number) => loading + Math.random()*1)
+        
+        if ($loading < 100) setTimeout(updateLoading, Math.random()*200)
+        if ($loading > 70 && lines != predictedLines) {
+            lines = predictedLines
+        }
     }
 
     onMount(() => {
         setTimeout(reportPerfs, 1000)
+        updateLoading()
     })
     
 </script>

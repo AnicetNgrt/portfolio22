@@ -22,9 +22,9 @@
         }
     }
 
-    let distance = (quantity-(index+1))/quantity
-    let inverseDistance = 1 - distance
-    let computedSpeed = ((distance-0.5)*0.5 + (Math.random()*0.05))
+    $: distance = (quantity-(index+1))/quantity
+    $: inverseDistance = 1 - distance
+    $: computedSpeed = ((distance-0.5)*0.5 + (Math.random()*0.05))
 
     let roles = [
         "▦",

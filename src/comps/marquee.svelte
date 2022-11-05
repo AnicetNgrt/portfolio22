@@ -28,9 +28,7 @@
         let t1 = performance.now();
         if (trullyStopped) t1 -= 1000
         
-        if (Math.random() > 0.99) {
-            onPerfRecorded(Math.max(t1-t0, 1000/144))
-        }
+        onPerfRecorded(Math.max(t1-t0, 1000/256))
         t0 = performance.now();
 
         if (!trullyStopped) {
@@ -69,7 +67,7 @@ on:click={() => stopped = !stopped} -->
 
 <div 
     bind:clientWidth={width}
-    style={`--shift: ${-shift}%; height: ${height}px; /*filter: blur(${stoppedPerformance ? 2 : 0}px);*/ opacity: ${stoppedPerformance ? 0.5 : 1}`}  
+    style={`--shift: ${-shift}%; height: ${height}px;  opacity: ${stoppedPerformance ? 0.5 : 1}`}  
     class="marquee-container"
 >
     <div bind:clientHeight={height} style={`transform: translateX(${progress*-100}%)`} class="marquee-a"><slot/></div>
