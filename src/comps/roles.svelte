@@ -23,44 +23,36 @@
 
     $: distance = (quantity-(index+1))/quantity
     $: inverseDistance = 1 - distance
-    $: computedSpeed = ((distance-0.5)*0.5 + (Math.random()*0.05))
+    $: computedSpeed = (distance-0.5)*0.5
 
     let roles = [
-        "▦",
-        "⁂",
-        "♪",
-        "::<T>",
-        "typedef struct _A {} A",
-        "@dataclass",
-        "realloc(pfPtr, portfolio)",
-        "new Hashmap()",
-        "my name is Anicet Nougaret",
-        "Я говорю на испанском",
-        "Estoy aprendiendo ruso",
-        "Wow, regardez ça tourne !",
-        "日本語は話せませんが、書道が好きです",
-        "It took hours to tweak this ;)",
-        "lambda: x -> log(x, 4)",
-        "if i % 2 == 0 { 10 } else { 20 }",
-        "|> IO.stream(bytes)",
-        "Indie game creator",
-        "Living in Lyon",
-        "DeFi founder",
-        "Multi-paradigm programmer",
-        "Full-stack engineer",
-        "Designer",
-        "From Paris",
-        "Private programming tutor",
-        "INSA Lyon Computer Science student",
-        "Hobbyist illustrator",
-        "Gamejamer",
-        "Pixelartist",
-        "Rustacean",
-        "Front-end ninja",
-        "Co-Founder & CTO of a tiny startup",
-        "Hackathons enjoyer (and winner sometimes)",
-        "Doing too many things at once",
-        "Please enjoy this website"
+        "and an indie game creator",
+        "currently living in Lyon",
+        "with experience in Web3",
+        "while exploring multiple paradigms",
+        "and is a full-stack engineer",
+        "who also does UX/UI design",
+        "whom can work in Paris too",
+        "currently 21 years old if I don't forget to update this website",
+        "sometimes a private programming tutor",
+        "an INSA Lyon Computer Science 4th year student",
+        "can speak French and English very fluently",
+        "knowing some Spanish and Russian as well",
+        "significant programming language polyglot",
+        "hobbyist illustrator as well",
+        "and a gamejamer",
+        "also a pixelartist",
+        "spending days optimizing effects like this on mobile",
+        "understanding some Rust",
+        "called a front-end ninja by some",
+        "co-founding a tiny DeFi startup",
+        "extensively used Vim in the past, honestly use paper instead",
+        "winning hackathons",
+        "proficient with software architecture",
+        "totally able to do complex backend tasks as well",
+        "and absolutely doing too many things at once",
+        "enjoying the creative web",
+        "as you guessed, who likes spinny things"
     ]
     shuffle(roles)
 
@@ -73,7 +65,7 @@
     <div class="marquee-container">
         <Marquee {stoppedPerformance} {onPerfRecorded} externalStop={stop} speed={computedSpeed} speedMultiplier={speed}>
             <div class="marquee-content">
-                {#each [...roles, roles[0], roles[1], roles[2]] as role, i}
+                {#each [...roles] as role, i}
                     <div class="role" style={`opacity: ${wave(distance)+0.2}; filter: blur(${(1-(wave(distance)))*10}px) hue-rotate(${(inverseDistance*Math.random())*380}deg); line-height: ${(0.4+inverseDistance*size)*1.5}rem; font-size: ${0.4+inverseDistance*size}rem`}>
                         {role}
                     </div>
@@ -91,10 +83,11 @@
     .marquee-content
         @include font-size(1rem)
         display: flex
-        gap: 3em
+        gap: 1em
         font-family: $font-mono
 
         .role
+            letter-spacing: -0.07em
             min-width: fit-content
             font-weight: 500
             color: var(--color)

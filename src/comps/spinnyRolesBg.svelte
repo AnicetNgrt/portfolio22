@@ -32,13 +32,14 @@
     let botIntersecting: boolean = false;
     
     let stoppedPerformance = false
-    const minFps = 15
+    const minFps = 8
     const maxFps = 144
     const targetFps = (minFps+maxFps)/2
-    let restartIfFpsAbove = minFps * 2.5
+    let restartIfFpsAbove = minFps * 3
 
     $: sampleSize = 10*lines
     $: recordedLatencies = [...new Array(sampleSize)].map(_ => (1/targetFps)*1000)
+    $: predictedDeltas = [...new Array(sampleSize)].map(_ => 8)
     let lag = 0.5
     let meanFps = targetFps
     let fpsScale = 0.5
@@ -60,8 +61,12 @@
             console.log(`fps: ${meanFps.toFixed(3)} | scale: ${fpsScale.toFixed(3)} | restart: ${fpsToAnimateScale.toFixed(3)}`)
             
             if ($loading < 70) {
-                predictedLines = Math.round(((fpsToAnimateScale/2) * (maxLines-minLines)) + minLines)
-                console.log(`predicted lines: ${predictedLines}`)
+                let predictedDelta = Math.round(((fpsToAnimateScale/2) * (maxLines-minLines)) + minLines) - predictedLines
+                predictedLines = predictedLines + predictedDelta
+                predictedDeltas.push(predictedDelta)
+                if (predictedDeltas.length > sampleSize) predictedDeltas = predictedDeltas.slice(1)
+
+                console.log(`predicted lines: ${predictedLines} | predicted delta ${predictedDelta}`)
             } else {
                 if (meanFps <= minFps && !stoppedPerformance) {
                     console.log(`STOPPING COZ LAG ${meanFps} ${minFps}`)
@@ -77,14 +82,16 @@
 
 
     function updateLoading() {
-        loading.update((loading: number) => loading + Math.random()*1)
+        const meanPredDelta = predictedDeltas.reduce((sum, d) => sum+d, 0) / predictedDeltas.length
+
+        //console.log(2 - (meanPredDelta/8))
+        loading.update((loading: number) => loading + 2 - (meanPredDelta/8))
         
-        if ($loading < 100) setTimeout(updateLoading, Math.random()*200)
         if ($loading > 70 && lines != predictedLines) {
             lines = predictedLines
         }
 
-        setTimeout(() => window.requestAnimationFrame(updateLoading), 1000)
+        setTimeout(() => window.requestAnimationFrame(updateLoading), Math.random()*200)
     }
 
     onMount(() => {
