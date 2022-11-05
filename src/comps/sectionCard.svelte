@@ -7,9 +7,10 @@
 	export let desc: string;
 	export let cover: string;
 	export let i = -1;
+    export let href: string;
 </script>
 
-<div class="section-container">
+<a class="section-container" alt={title} {href}>
 	<div class="section">
 		<div class="top">
 			<div class="icon top-left">{topLeft}</div>
@@ -32,7 +33,7 @@
 		</div>
 		<img src={cover} alt={title} />
 	</div>
-</div>
+</a>
 
 <style lang="sass">
     .section-container
@@ -154,7 +155,7 @@
         .top:hover, .top:active
             transition: backdrop-filter 0.3s, background-color 0.3s
             backdrop-filter: blur(0px)
-            background-color: alpha(var(--color), 0.1)
+            background-color: alpha(var(--color), 0.2)
             cursor: pointer
 
             *

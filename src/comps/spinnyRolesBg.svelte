@@ -54,7 +54,7 @@
         let perfDelta = ((fpsToAnimateScale*0.9)+0.1)
         lag = Math.min(lag * perfDelta, 1)
 
-        console.log(`fps: ${meanFps.toFixed(3)} | scale: ${fpsScale.toFixed(3)} | restart: ${fpsToAnimateScale.toFixed(3)}`)
+        // console.log(`fps: ${meanFps.toFixed(3)} | scale: ${fpsScale.toFixed(3)} | restart: ${fpsToAnimateScale.toFixed(3)}`)
         
         if ($loading >= 70) {
             if (meanFps <= minFps && !stoppedPerformance) {

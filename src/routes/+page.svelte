@@ -11,7 +11,8 @@
             topRight: "◥",
             botLeft: "◣",
             right: "← ← ← ← ← ← ← ←",
-            desc: "CV et contact"
+            desc: "CV et contact",
+            href: "/resume"
         },
         {
             title: "Front-end development",
@@ -20,7 +21,8 @@
             topRight: "◪",
             botLeft: "◩",
             right: "<div>Hello</div>",
-            desc: "Développement front-end"
+            desc: "Développement front-end",
+            href: "/resume"
         },
         {
             title: "Back-end development",
@@ -29,7 +31,8 @@
             topRight: "◈",
             botLeft: "◆",
             right: "HTTP/2 200 OK",
-            desc: "Développement back-end"
+            desc: "Développement back-end",
+            href: "/resume"
         },
         {
             title: "Game development",
@@ -38,7 +41,8 @@
             topRight: "▨",
             botLeft: "▦",
             right: "« It's dangerous to go alone! Take this. »",
-            desc: "Développement de jeux-vidéo"
+            desc: "Développement de jeux-vidéo",
+            href: "/resume"
         },
         {
             title: "Art gallery",
@@ -47,7 +51,8 @@
             topRight: "◒",
             botLeft: "◓",
             right: "« Le vent se lève, il faut tenter de vivre. »",
-            desc: "Travaux artistiques"
+            desc: "Travaux artistiques",
+            href: "/resume"
         },
         {
             title: "Brand identity & design",
@@ -56,7 +61,8 @@
             topRight: "⫸",
             botLeft: "⫷",
             right: "—————————————————————",
-            desc: "Identités de marques et design"
+            desc: "Identités de marques et design",
+            href: "/resume"
         }
     ]
 </script>
