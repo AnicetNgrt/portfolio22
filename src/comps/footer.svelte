@@ -1,7 +1,8 @@
-<script>
-
+<script lang=ts>
 	import SpinnyRolesBg from "./spinnyRolesBg.svelte";
-
+    
+    export let lines: number;
+    let size = 64/lines
 </script>
 
 <div class="footer-container">
@@ -25,7 +26,7 @@
         </div>
     
     </div>
-    <SpinnyRolesBg speed={0.4} opacity={0.5} shift={100}/>
+    <SpinnyRolesBg {size} lines={Math.round(lines/1.5)} speed={0.5} opacity={0.5} shift={90}/>
 </div>
 
 <style lang=sass>

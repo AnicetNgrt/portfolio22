@@ -67,7 +67,6 @@
 
     onDestroy(() => {
         wasDestroyed = true
-        console.log("oh no I'm dying")
     })
 </script>
 <!-- 

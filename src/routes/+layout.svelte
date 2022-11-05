@@ -5,8 +5,8 @@
     import { browser } from '$app/environment';
     import { tweened } from 'svelte/motion';
     import { linear } from 'svelte/easing';
-	import { onMount } from "svelte";
 	import { loading } from "$lib/loadingStore";
+	import { onMount } from "svelte";
 
     function randint(min: number, max: number) {
         min = Math.ceil(min);
@@ -129,27 +129,12 @@
         setTimeout(refreshSpeedLoop, 1000)
     }
 
-    //setTimeout(refreshColorLoop, 1000)
     setTimeout(refreshSpeedLoop, 1000)
 
     $: hsl = RGBToHSL($r, $g, $b)
 
-    let size: number = 2
-    let lines: number = 18
-
     let startUnshowingLoading = false
     let showLoading = true
-
-
-    onMount(() => {
-        console.log("mounted")
-
-        window.onafterprint
-
-        document.addEventListener("DOMContentLoaded", function() {
-            console.log("loaded")
-        });
-    })
 
     loading.subscribe((loading: number) => {
         if (loading >= 100) {
@@ -157,9 +142,51 @@
             setTimeout(() => showLoading = false, 2000)
         }
     })
+
+    const maxLines = 32
+    const minLines = 8
+    let predictedLines: number = (maxLines+minLines)/2
+    let lines: number = (maxLines+minLines)/2
+    $: size = 32/lines
+
+    const sampleSize = 20
+    $: predictedDeltas = [...new Array(sampleSize)].map(_ => 8)
+
+
+    function onFpsToAnimateScaleChange(fpsToAnimateScale: number) {
+        if ($loading < 70) {
+            let predictedDelta = Math.round(((fpsToAnimateScale/2) * (maxLines-minLines)) + minLines) - predictedLines
+            predictedLines = predictedLines + predictedDelta
+            predictedDeltas.push(predictedDelta)
+            if (predictedDeltas.length > sampleSize) predictedDeltas = predictedDeltas.slice(1)
+
+            console.log(`predicted lines: ${predictedLines} | predicted delta ${predictedDelta}`)
+        }
+    }
+
+    function updateLoading() {
+        const meanPredDelta = predictedDeltas.reduce((sum, d) => sum+d, 0) / predictedDeltas.length
+
+        loading.update((loading: number) => loading + 2 - (meanPredDelta/8))
+        
+        if ($loading > 70 && lines != predictedLines) {
+            lines = predictedLines
+        }
+
+        setTimeout(() => window.requestAnimationFrame(updateLoading), Math.random()*200)
+    }
+
+    onMount(() => {
+        window.requestAnimationFrame(updateLoading)
+        window.onscroll = function () { 
+            if (!startUnshowingLoading) {
+                window.scrollTo(0, 0);
+            }
+        };
+    })
 </script>
 
-<div class="page" style={`--color-h: ${hsl[0]}; --color: hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`}>
+<div  class="page" style={`--color-h: ${hsl[0]}; --color: hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`}>
     {#if showLoading}
         <div class:unshow={startUnshowingLoading} class="loading">
             <h1><span class="zeroes">{$loading < 10 ? "00" : $loading < 100 ? "0" : ""}</span>{Math.min(Math.round($loading), 100)}<span class="percent">%</span></h1>
@@ -169,15 +196,15 @@
     <div class="content">
         <slot/>
     </div>
-    <Footer/>
+    <Footer {lines}/>
     <div class="bg-container">
-        <SpinnyRolesBg stop={false} speed={Number($speed.toFixed(3))} opacity={1} shift={37}/>
+        <SpinnyRolesBg {onFpsToAnimateScaleChange} {lines} {size} stop={false} speed={Number($speed.toFixed(3))} opacity={1} shift={37}/>
     </div>
 </div>
 
 <style lang=sass>
     .loading
-        position: absolute
+        position: fixed
         top: 0
         left: 0
         height: 100vh
@@ -219,10 +246,14 @@
         min-height: 100vh
         width: 100%
 
+    .page.loading
+        overflow-y: hidden
+
     .content
         display: flex
         flex-direction: column
         align-items: center
         // border: double 3px $c5
         width: 100%
+        height: max-content
 </style>

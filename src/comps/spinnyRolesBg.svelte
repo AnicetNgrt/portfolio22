@@ -9,12 +9,9 @@
     export let shift: number
     export let speed: number
     export let opacity: number = 1
-
-    const maxLines = 32
-    const minLines = 8
-    let predictedLines: number = (maxLines+minLines)/2
-    let lines: number = (maxLines+minLines)/2
-    $: size = 32/lines
+    export let onFpsToAnimateScaleChange: (fpsToAnimateScale: number) => void = _ => {}
+    export let lines: number
+    export let size: number
 
     let indexes: number[] = []
     $: {
@@ -29,17 +26,16 @@
     let topIntersecting: boolean = false;
 
     let botIndicator: HTMLElement;
-    let botIntersecting: boolean = false;
+    let botIntersecting: boolean = false;  
     
     let stoppedPerformance = false
     const minFps = 8
-    const maxFps = 144
+    const maxFps = 90
     const targetFps = (minFps+maxFps)/2
     let restartIfFpsAbove = minFps * 3
 
     $: sampleSize = 10*lines
     $: recordedLatencies = [...new Array(sampleSize)].map(_ => (1/targetFps)*1000)
-    $: predictedDeltas = [...new Array(sampleSize)].map(_ => 8)
     let lag = 0.5
     let meanFps = targetFps
     let fpsScale = 0.5
@@ -50,56 +46,32 @@
     } 
 
     function reportPerfs() {
-        if (fullIntersecting) {
-            const meanLatency = recordedLatencies.reduce((sum, perf) => sum+perf, 0) / recordedLatencies.length / 1000
-            meanFps = 1/meanLatency
-            let fpsScale = Math.min(Math.max((meanFps - minFps) / ((targetFps) - minFps), 0), 1)
-            let fpsToAnimateScale = Math.max((meanFps - minFps) / ((targetFps) - minFps), 0)
-            let perfDelta = ((fpsToAnimateScale*0.9)+0.1)
-            lag = Math.min(lag * perfDelta, 1)
+        const meanLatency = recordedLatencies.reduce((sum, perf) => sum+perf, 0) / recordedLatencies.length / 1000
+        meanFps = 1/meanLatency
+        let fpsScale = Math.min(Math.max((meanFps - minFps) / ((targetFps) - minFps), 0), 1)
+        let fpsToAnimateScale = Math.max((meanFps - minFps) / ((targetFps) - minFps), 0)
+        onFpsToAnimateScaleChange(fpsToAnimateScale)
+        let perfDelta = ((fpsToAnimateScale*0.9)+0.1)
+        lag = Math.min(lag * perfDelta, 1)
 
-            console.log(`fps: ${meanFps.toFixed(3)} | scale: ${fpsScale.toFixed(3)} | restart: ${fpsToAnimateScale.toFixed(3)}`)
-            
-            if ($loading < 70) {
-                let predictedDelta = Math.round(((fpsToAnimateScale/2) * (maxLines-minLines)) + minLines) - predictedLines
-                predictedLines = predictedLines + predictedDelta
-                predictedDeltas.push(predictedDelta)
-                if (predictedDeltas.length > sampleSize) predictedDeltas = predictedDeltas.slice(1)
-
-                console.log(`predicted lines: ${predictedLines} | predicted delta ${predictedDelta}`)
-            } else {
-                if (meanFps <= minFps && !stoppedPerformance) {
-                    console.log(`STOPPING COZ LAG ${meanFps} ${minFps}`)
-                    stoppedPerformance = true
-                } else if (meanFps >= restartIfFpsAbove && stoppedPerformance) {
-                    console.log("RESTARTING")
-                    stoppedPerformance = false
-                }
+        console.log(`fps: ${meanFps.toFixed(3)} | scale: ${fpsScale.toFixed(3)} | restart: ${fpsToAnimateScale.toFixed(3)}`)
+        
+        if ($loading >= 70) {
+            if (meanFps <= minFps && !stoppedPerformance) {
+                console.log(`STOPPING LAG ${meanFps} ${minFps}`)
+                stoppedPerformance = true
+            } else if (meanFps >= restartIfFpsAbove && stoppedPerformance) {
+                console.log("RESTARTING")
+                stoppedPerformance = false
             }
         }
-        window.requestAnimationFrame(reportPerfs)
-    }
-
-
-    function updateLoading() {
-        const meanPredDelta = predictedDeltas.reduce((sum, d) => sum+d, 0) / predictedDeltas.length
-
-        //console.log(2 - (meanPredDelta/8))
-        loading.update((loading: number) => loading + 2 - (meanPredDelta/8))
         
-        if ($loading > 70 && lines != predictedLines) {
-            lines = predictedLines
-        }
-
-        setTimeout(() => window.requestAnimationFrame(updateLoading), Math.random()*200)
+        window.requestAnimationFrame(reportPerfs)
     }
 
     onMount(() => {
-        setTimeout(reportPerfs, 1000)
-        window.requestAnimationFrame(updateLoading)
         window.requestAnimationFrame(reportPerfs)
     })
-    
 </script>
 
 <div
