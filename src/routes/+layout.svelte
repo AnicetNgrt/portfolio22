@@ -7,7 +7,7 @@
 	import { loading } from "$lib/loadingStore";
 	import { onMount } from "svelte";
 	import FullscreenMultiscroll from "../comps/fullscreenMultiscroll.svelte";
-	import { afterNavigate, beforeNavigate } from "$app/navigation";
+	import { afterNavigate, beforeNavigate, goto } from "$app/navigation";
 
     let mounted = false
 
@@ -56,13 +56,14 @@
 
     setTimeout(refreshSpeedLoop, 1000)
 
-    let startUnshowingLoading = false
-    let showLoading = false
+    let startUnshowingLoading: boolean
+    let showLoading: boolean
     
-    let startUnshowingTransition = false
-    let showTransition = false
+    let startUnshowingTransition: boolean
+    let showTransition: boolean
     let from = ""
     let to = ""
+    let exiting = false
 
     loading.subscribe((loading: number) => {
         if (loading >= 100) startUnshowingLoading = true
@@ -95,6 +96,11 @@
         
         if ($loading > 70 && lines != predictedLines) {
             lines = predictedLines
+            
+            localStorage.setItem("benchmark", JSON.stringify({
+                when: Date.now(),
+                lines: lines
+            }))
         }
 
         setTimeout(() => window.requestAnimationFrame(updateLoading), Math.random()*200)
@@ -106,16 +112,18 @@
         const benchmarkStr = localStorage.getItem("benchmark")
         if (benchmarkStr != null) {
             const benchmark = JSON.parse(benchmarkStr)
-            if (Date.now() - benchmark.when < 6*1000) {
+            if (Date.now() - benchmark.when < 360*1000) {
                 predictedLines = benchmark.lines
                 lines = benchmark.lines
                 showLoading = false
                 loading.set(100)
             } else {
                 showLoading = true
+                startUnshowingLoading = false
             }
         } else {
             showLoading = true
+            startUnshowingLoading = false
         }
 
         if (showLoading) {
@@ -130,33 +138,37 @@
     })
 
     beforeNavigate(navigation => {
-        localStorage.setItem("benchmark", JSON.stringify({
-            when: Date.now(),
-            lines: lines
-        }))
-    })
-
-    afterNavigate(navigation => {
-        startUnshowingLoading = false
+        if (exiting) return
+        
         startUnshowingTransition = false
-        showLoading = false
         showTransition = false
-
         to = navigation.to?.url.pathname ?? ""
         from = navigation.from?.url.pathname ?? ""
 
         if (from.length > 0 && to.length > 0) {
+            exiting = true
             showTransition = true
+            navigation.cancel()
+    
+            const url = navigation.to?.url.toString() ?? "/"
             setTimeout(() => {
-                startUnshowingTransition = true
-            }, 2000)
+                goto(url)
+            }, 500)
         }
+
+    })
+
+    afterNavigate(_ => {
+        exiting = false
+        setTimeout(() => {
+            startUnshowingTransition = true
+        }, 1500)
     })
 </script>
 
 
 <div  class="page" style={`--color-h: ${hsl[0]}; --color-s:${hsl[1]}%; --color-l:${hsl[2]}%; --color: hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`}>
-    <FullscreenMultiscroll let:i speeds={[-1, 0.2, -0.1, 0.2, -1]} show={showLoading} lines={5} startUnshowing={startUnshowingLoading}>
+    <FullscreenMultiscroll animIn={true} let:i speeds={[-1, 0.2, -0.1, 0.2, -1]} show={showLoading} lines={5} startUnshowing={startUnshowingLoading}>
         {#if i == 2}
             {#each [...new Array(13)] as _}
                 <div class="loading-indicator">
@@ -183,14 +195,20 @@
         {/if}
     </FullscreenMultiscroll>
 
-    <FullscreenMultiscroll let:i speeds={[-1, 1, -1]} show={showTransition} lines={3} startUnshowing={startUnshowingTransition}>
-        {#if i == 1}
+    <FullscreenMultiscroll animIn={true} let:i speeds={[-1.5, 1, -0.5, 1, -1.5]} show={showTransition} lines={5} startUnshowing={startUnshowingTransition}>
+        {#if i == 2}
             {#each [...new Array(10)] as _, j}
                 <div class="transition-indicator">
                     {j % 2 == 0 ? from : to}
                 </div>
                 <div class="arrow">{j % 2 == 0 ? '==>' : '<=='}</div>
-            {/each}      
+            {/each} 
+        {:else if i == 1 || i == 3}
+            {#each [...new Array(2)] as _}
+            <div class="transition-decoration">
+                {`<-▦-> Anicet Nougaret's 2022 portfolio`}
+            </div>
+            {/each}
         {:else}
             {#each [...new Array(4)] as _}
             <div class="loading-emojis">
@@ -227,13 +245,19 @@
         padding: 0.3em 0.1em
         align-items: center
 
+    .transition-decoration
+        font-family: $font-mono
+        padding: 0em 0.5em
+        opacity: 0.2
+        font-weight: 700
+
     .transition-indicator
-        padding: 0em 1em
-        font-size: 1em
+        padding: 0em 0.5em
+        font-size: 1.5em
         font-weight: 600
 
         + .arrow
-            font-size: 0.5em
+            font-size: 1em
 
     .loading-indicator
         padding: 0em 1em
@@ -261,7 +285,7 @@
     .arrow
         font-weight: 500
         font-family: $font-mono
-        opacity: 0.5
+        opacity: 0.2
 
     .bg-container
         position: absolute

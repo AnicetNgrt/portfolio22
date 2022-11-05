@@ -6,15 +6,9 @@
     export let startUnshowing: boolean
     export let show: boolean
     export let speeds: number[] = []
+    export let animIn: boolean
 
     let mounted = false
-
-    $: if (startUnshowing) {
-        setTimeout(() => {
-            show = false
-            startUnshowing = false
-        }, 500)
-    }
     
     onMount(() => {
         mounted = true
@@ -28,7 +22,7 @@
 </script>
 
 {#if show}
-<div class:unshow={startUnshowing} class="fullscreen">
+<div class:anim-in={animIn} class:unshow={startUnshowing} class="fullscreen">
     {#if mounted}
     {#each [...new Array(lines)] as _, i}
     <div class="multiscroll" style={`font-size: ${25/lines}vh`}>
@@ -58,9 +52,17 @@
         justify-content: space-around
         padding: 1rem 0rem
 
+    .fullscreen.anim-in
+        animation: anim-in 0.5s
+        margin-top: 0%
+        filter: blur(0px)
+        opacity: 1
+
     .fullscreen.unshow
-        transition: opacity 0.5s
-        opacity: 0
+        animation: anim-out 3s
+        margin-top: -100%
+        filter: blur(30px)
+        opacity: 1
 
     .multiscroll
         height: fit-content
@@ -80,5 +82,25 @@
         border-left: none
         border-right: none
         color: var(--color)
+
+    @keyframes anim-in
+        0%
+            margin-top: -100%
+            filter: blur(30px)
+            opacity: 1
+        100%
+            margin-top: 0
+            filter: blur(0px)
+            opacity: 1
+
+    @keyframes anim-out
+        0%
+            margin-top: 0%
+            filter: blur(0px)
+            opacity: 1
+        100%
+            margin-top: -100%
+            filter: blur(30px)
+            opacity: 1
 
 </style>
