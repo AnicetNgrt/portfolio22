@@ -7,6 +7,7 @@
     import { linear } from 'svelte/easing';
 	import { loading } from "$lib/loadingStore";
 	import { onMount } from "svelte";
+	import Marquee from "../comps/marquee.svelte";
 
     function randint(min: number, max: number) {
         min = Math.ceil(min);
@@ -74,9 +75,9 @@
 
     const refreshColor = () => {
         rgb = newRGB(rgb)
-        r.set(rgb[0])
-        g.set(rgb[1])
-        b.set(rgb[2])
+        r = rgb[0]
+        g = rgb[1]
+        b = rgb[2]
     }
 
     let targetSpeed = -50
@@ -92,20 +93,11 @@
 
     let rgb = newRGB([0, 0, 0])
 
-    const r = tweened(rgb[0], {
-        duration: 200,
-        easing: linear
-    })
+    let r = rgb[0]
 
-    const g = tweened(rgb[1], {
-        duration: 200,
-        easing: linear 
-    })
+    let g = rgb[1]
 
-    const b = tweened(rgb[2], {
-        duration: 200,
-        easing: linear 
-    })
+    let b = rgb[2]
 
     let speed = tweened(newSpeed(targetSpeed), {
         duration: 1000,
@@ -115,9 +107,9 @@
     if (browser) {
         window.onclick = () => {
             rgb = newRGB(rgb)
-            r.set(rgb[0])
-            g.set(rgb[1])
-            b.set(rgb[2])
+            r = rgb[0]
+            g = rgb[1]
+            b = rgb[2]
             
             setTimeout(() => speed.set(newSpeed($speed)), 500)
         }
@@ -131,7 +123,7 @@
 
     setTimeout(refreshSpeedLoop, 1000)
 
-    $: hsl = RGBToHSL($r, $g, $b)
+    $: hsl = RGBToHSL(r, g, b)
 
     let startUnshowingLoading = false
     let showLoading = true
@@ -188,8 +180,17 @@
 
 <div  class="page" style={`--color-h: ${hsl[0]}; --color: hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`}>
     {#if showLoading}
-        <div class:unshow={startUnshowingLoading} class="loading">
-            <h1><span class="zeroes">{$loading < 10 ? "00" : $loading < 100 ? "0" : ""}</span>{Math.min(Math.round($loading), 100)}<span class="percent">%</span></h1>
+        <div class:unshow={startUnshowingLoading} class="loader">
+            <div class="loader-animation">
+                <Marquee speed={-0.1}>
+                    <div class="loader-animation-content">
+                        {#each [...new Array(13)] as _}
+                            <h1 style="width: 12ch; text-align: center; margin-left: 1rem">LOADING {Math.min(Math.round($loading), 100)}<span class="percent">%</span></h1>
+                            <h1>→</h1>
+                        {/each}
+                    </div>
+                </Marquee>
+            </div>
         </div>
     {/if}
 
@@ -203,23 +204,45 @@
 </div>
 
 <style lang=sass>
-    .loading
+    .loader
         position: fixed
         top: 0
         left: 0
         height: 100vh
         width: 100vw
-        background-color: $c0
+        background-color: transparentize($c0, 0.2)
+        backdrop-filter: blur(10px)
         z-index: 3
+
+    .loader.unshow
+        transition: opacity 2s
+        opacity: 0
+
+    .loader-animation
+        position: absolute
+        top: 45%
+        left: 50%
+        transform: translate(-50%, -50%)
+        height: fit-content
+        width: 100%
+        background: var(--color)
+        padding: 0.5rem
+
+    .loader-animation-content
+        height: fit-content
         display: flex
-        justify-content: center
-        align-items: center
+        gap: 3rem
+        padding: 0.3rem
+        padding-left: 3rem
+        border: dotted 0.3rem $c0
+        border-left: none
+        border-right: none
 
         h1
-            @include font-size(5rem)
+            @include font-size(3rem)
             font-family: $font-mono
             font-weight: 400
-            color: var(--color)
+            color: $c0
 
             .percent
                 font-family: $font-display
@@ -229,10 +252,6 @@
 
             .zeroes
                 opacity: 0.5
-
-    .loading.unshow
-        transition: opacity 2s
-        opacity: 0
 
     .bg-container
         position: absolute

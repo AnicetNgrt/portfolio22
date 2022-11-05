@@ -58,8 +58,8 @@
             position: absolute
             width: 100%
             height: 100%
-            backdrop-filter: blur(30px)
-            background-color: transparentize($c0, 0.5)
+            backdrop-filter: blur(5px)
+            background-color: transparentize($c0, 0.4)
             color: var(--color)
             display: grid
 
@@ -152,15 +152,15 @@
             transition: opacity 1s, background-color 1s, backdrop-filter 1s
 
         .top:hover, .top:active
-            transition: backdrop-filter 1s, background-color 1s
+            transition: backdrop-filter 0.3s, background-color 0.3s
             backdrop-filter: blur(0px)
             background-color: alpha(var(--color), 0.1)
             cursor: pointer
 
             *
-                transition: opacity 0.5s, filter 0.5s
-                filter: blur(5px)
-                opacity: 0.8
+                transition: opacity 0.3s, filter 0.3s
+                filter: blur(3px)
+                opacity: 0
 
             h2
                 opacity: 0
