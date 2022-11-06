@@ -43,6 +43,7 @@
         gap: 4rem
 
         backdrop-filter: blur(10px)
+        -webkit-backdrop-filter: blur(10px)
 
         @include for-size(tablet-landscape-up)
             padding: 8rem

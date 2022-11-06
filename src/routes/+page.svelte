@@ -103,13 +103,12 @@
             justify-content: center
             align-items: center
             font-size: 1.5rem
-            font-weight: 300
             color: $c0
             height: 2.5rem
             padding-right: 0.4rem
             border-top: solid 2px $c0
             border-bottom: solid 2px $c0
-            font-weight: 800
+            font-weight: 500
 
             p
                 margin-bottom: 0.05rem

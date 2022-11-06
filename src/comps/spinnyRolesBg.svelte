@@ -1,10 +1,10 @@
 <script lang=ts>
-	import { loading } from "$lib/loadingStore";
 	import { onMount } from "svelte";
     import IntersectionObserver from "svelte-intersection-observer";
 
     import Roles from '../comps/roles.svelte';
     
+    export let benchmarking: boolean = false
     export let stop: boolean = false
     export let shift: number
     export let speed: number
@@ -56,7 +56,7 @@
 
         // console.log(`fps: ${meanFps.toFixed(3)} | scale: ${fpsScale.toFixed(3)} | restart: ${fpsToAnimateScale.toFixed(3)}`)
         
-        if ($loading >= 70) {
+        if (benchmarking) {
             if (meanFps <= minFps && !stoppedPerformance) {
                 console.log(`STOPPING LAG ${meanFps} ${minFps}`)
                 stoppedPerformance = true

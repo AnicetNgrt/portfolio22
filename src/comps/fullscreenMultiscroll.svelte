@@ -1,40 +1,63 @@
 <script lang=ts>
+    import type { PanelState } from "$lib/panelState"
 	import { onMount } from "svelte";
+	import { cubicOut, quadIn, quadOut, quintIn, quintOut } from "svelte/easing";
+	import { tweened } from "svelte/motion";
+	import type { Writable } from "svelte/store";
 	import Marquee from "./marquee.svelte";
 
     export let lines: number
-    export let startUnshowing: boolean
-    export let show: boolean
     export let speeds: number[] = []
-    export let animIn: boolean
+    export let state: Writable<PanelState>
 
-    let mounted = false
+    let fadeProgress = tweened(1)
+
+    state.subscribe(state => {
+        console.log(state)
+        if (state == "FADE_IN") {
+            fadeProgress.set(1, { duration: 1500, easing: cubicOut })
+        }
+        if (state == "FADE_OUT") {
+            fadeProgress.set(0, { duration: 1500, easing: cubicOut })
+        }
+        if (state == "HIDDEN" && $fadeProgress != 0) {
+            fadeProgress.set(0, { duration: 0 })
+        }
+        if (state == "SHOWING" && $fadeProgress != 1) {
+            fadeProgress.set(1, { duration: 0 })
+        }
+    })
+
+    fadeProgress.subscribe(progress => {
+        if (progress >= 1 && $state != "SHOWING") {
+            state.set("SHOWING")
+        }
+        if (progress <= 0 && $state != "HIDDEN") {
+            state.set("HIDDEN")
+        }
+    })
     
     onMount(() => {
-        mounted = true
-
         window.onscroll = function () { 
-            if (show && !startUnshowing) {
+            if ($state == "SHOWING") {
                 window.scrollTo(0, 0);
             }
         };
     })
 </script>
 
-{#if show}
-<div class:anim-in={animIn} class:unshow={startUnshowing} class="fullscreen">
-    {#if mounted}
-    {#each [...new Array(lines)] as _, i}
-    <div class="multiscroll" style={`font-size: ${25/lines}vh`}>
-        <Marquee speed={speeds.length-1 >= i ? speeds[i] : 0.1*(0.5-Math.random()) }>
-            <div class="content">
-                <slot {i}/>
-            </div>
-        </Marquee>
+{#if $state != "HIDDEN"}
+    <div style={`--progress: ${$fadeProgress}`} class="fullscreen">
+        {#each [...new Array(lines)] as _, i}
+        <div class="multiscroll" style={`font-size: ${25/lines}vh`}>
+            <Marquee speed={speeds.length-1 >= i ? speeds[i] : 0.1*(0.5-Math.random()) }>
+                <div class="content">
+                    <slot {i}/>
+                </div>
+            </Marquee>
+        </div>
+        {/each}
     </div>
-    {/each}
-    {/if}
-</div>
 {/if}
 
 <style lang=sass>
@@ -46,23 +69,16 @@
         width: 100vw
         background-color: alpha(var(--color), 0.3)
         backdrop-filter: blur(30px)
+        -webkit-backdrop-filter: blur(30px)
         z-index: 3
         display: flex
         flex-direction: column
         justify-content: space-around
         padding: 1rem 0rem
 
-    .fullscreen.anim-in
-        animation: anim-in 0.5s
-        margin-top: 0%
-        filter: blur(0px)
-        opacity: 1
-
-    .fullscreen.unshow
-        animation: anim-out 3s
-        margin-top: -100%
-        filter: blur(30px)
-        opacity: 1
+        margin-top: calc(calc(1 - var(--progress)) * -100vh)
+        // filter: blur(calc(calc(1 - var(--progress)) * 5px))
+        // opacity: calc(var(--progress) + 0.5)
 
     .multiscroll
         height: fit-content
@@ -82,25 +98,4 @@
         border-left: none
         border-right: none
         color: var(--color)
-
-    @keyframes anim-in
-        0%
-            margin-top: -100%
-            filter: blur(30px)
-            opacity: 1
-        100%
-            margin-top: 0
-            filter: blur(0px)
-            opacity: 1
-
-    @keyframes anim-out
-        0%
-            margin-top: 0%
-            filter: blur(0px)
-            opacity: 1
-        100%
-            margin-top: -100%
-            filter: blur(30px)
-            opacity: 1
-
 </style>
