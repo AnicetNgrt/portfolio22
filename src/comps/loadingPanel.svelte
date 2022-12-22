@@ -1,9 +1,8 @@
 <script lang=ts>
-	import { emojis } from "$lib/content";
+	import { loadingEmojis } from "$lib/content";
 	import { loadingPanelState } from "$lib/panelsStores";
+	import { loading } from "$lib/perfStores";
 	import FullscreenMultiscroll from "./fullscreenMultiscroll.svelte";
-
-    export let loading: number
 
 </script>
 
@@ -13,7 +12,7 @@
             <div class="loading-indicator">
                 <div class="loading">LOADING</div>
                 <div class="number">
-                    <span class="zeroes">{ loading < 10 ? "00" : loading < 100 ? "0" : "" }</span>{Math.min(loading, 100).toFixed(0)}
+                    <span class="zeroes">{ $loading < 10 ? "00" : $loading < 100 ? "0" : "" }</span>{Math.min($loading, 100).toFixed(0)}
                 </div>
                 <div class="percent">%</div>
             </div>
@@ -28,7 +27,7 @@
     {:else}
         {#each [...new Array(4)] as _}
         <div class="loading-emojis">
-            <div>{emojis["loading"]}</div>
+            <div>{loadingEmojis}</div>
         </div>
         {/each}
     {/if}

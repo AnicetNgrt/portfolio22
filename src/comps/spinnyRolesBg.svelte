@@ -1,4 +1,5 @@
 <script lang=ts>
+	import { reportPerformance } from "$lib/perfStores";
 	import { onMount } from "svelte";
     import IntersectionObserver from "svelte-intersection-observer";
 
@@ -9,9 +10,9 @@
     export let shift: number
     export let speed: number
     export let opacity: number = 1
-    export let onFpsToAnimateScaleChange: (fpsToAnimateScale: number) => void = _ => {}
     export let lines: number
     export let size: number
+    export let fixed: boolean = false
 
     let indexes: number[] = []
     $: {
@@ -48,9 +49,12 @@
     function reportPerfs() {
         const meanLatency = recordedLatencies.reduce((sum, perf) => sum+perf, 0) / recordedLatencies.length / 1000
         meanFps = 1/meanLatency
-        let fpsScale = Math.min(Math.max((meanFps - minFps) / ((targetFps) - minFps), 0), 1)
         let fpsToAnimateScale = Math.max((meanFps - minFps) / ((targetFps) - minFps), 0)
-        onFpsToAnimateScaleChange(fpsToAnimateScale)
+        
+        if (benchmarking) {
+            $reportPerformance(fpsToAnimateScale)
+        }
+
         let perfDelta = ((fpsToAnimateScale*0.9)+0.1)
         lag = Math.min(lag * perfDelta, 1)
 
@@ -58,10 +62,10 @@
         
         if (benchmarking) {
             if (meanFps <= minFps && !stoppedPerformance) {
-                console.log(`STOPPING LAG ${meanFps} ${minFps}`)
+                //console.log(`STOPPING LAG ${meanFps} ${minFps}`)
                 stoppedPerformance = true
             } else if (meanFps >= restartIfFpsAbove && stoppedPerformance) {
-                console.log("RESTARTING")
+                //console.log("RESTARTING")
                 stoppedPerformance = false
             }
         }
@@ -75,7 +79,7 @@
 </script>
 
 <div
-    class="spinnybg" style={`${stop && "filter: blur(2px)"}; height: ${100+shift}%; transform: translateY(${shift/-2}%); opacity: ${opacity}`}>
+    class="spinnybg" class:fixed={fixed} style={`${stop && "filter: blur(2px)"}; height: ${100+shift}%; transform: translateY(${shift/-2}%); opacity: ${opacity}`}>
     
     {#if fullIntersecting}
         <div class="desc">
@@ -105,24 +109,31 @@
 
 <style lang=sass>
     .indicator
-        z-index: -2
+        z-index: -1
         position: absolute
         top: 0
         left: 0
         width: 100%
-        height: 90%
-        //background-color: transparentize(red, 0.5)
+        height: 100vh
+        // background-color: transparentize(red, 0.5)
 
     .top-indicator
         height: 10px
 
     .bottom-indicator
         height: 5rem
-        top: calc(100% - 5rem)
+        top: calc(100vh - 5rem)
+        // background-color: transparentize(green, 0.5)
+    
+    
+    .spinnybg
+        position: absolute
+
+    .spinnybg.fixed
+        position: fixed
 
     .spinnybg
         z-index: -1
-        position: fixed
         top: 0
         left: 0
         width: 100%

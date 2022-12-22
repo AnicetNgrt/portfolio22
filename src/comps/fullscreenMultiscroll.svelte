@@ -13,7 +13,7 @@
     let fadeProgress = tweened(1)
 
     state.subscribe(state => {
-        console.log(state)
+        //console.log(state)
         if (state == "FADE_IN") {
             fadeProgress.set(1, { duration: 1500, easing: cubicOut })
         }

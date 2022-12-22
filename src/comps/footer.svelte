@@ -2,7 +2,7 @@
 	import SpinnyRolesBg from "./spinnyRolesBg.svelte";
     
     export let lines: number;
-    let size = 64/lines
+    $: size = 64/lines
 </script>
 
 <div class="footer-container">
@@ -32,8 +32,14 @@
 <style lang=sass>
     .footer-container
         position: relative
+        background-color: $c0
+        width: 100%
+        height: 100vh
+        z-index: 1
+        overflow: hidden
 
     .footer
+        z-index: 3
         display: flex
 
         flex-direction: column-reverse
@@ -42,8 +48,10 @@
         align-items: start
         gap: 4rem
 
-        backdrop-filter: blur(10px)
-        -webkit-backdrop-filter: blur(10px)
+        border-top: solid 0.2rem var(--color) 
+
+        backdrop-filter: blur(9px)
+        -webkit-backdrop-filter: blur(9px)
 
         @include for-size(tablet-landscape-up)
             padding: 8rem
@@ -84,5 +92,5 @@
             @include rfs(4rem, line-height)
 
         a:hover
-            color: $c1
+            filter: saturate(6)
 </style>

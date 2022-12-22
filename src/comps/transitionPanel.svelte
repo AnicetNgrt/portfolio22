@@ -1,5 +1,5 @@
 <script lang=ts>
-	import { emojis, pages } from "$lib/content";
+	import { pages } from "$lib/content";
 	import { transitionPanelState } from "$lib/panelsStores";
 	import FullscreenMultiscroll from "./fullscreenMultiscroll.svelte";
 
@@ -11,7 +11,7 @@
     {#if i == 2}
         {#each [...new Array(10)] as _, j}
             <div class="transition-indicator">
-                {j % 2 == 0 ? pages[from] : pages[to]}
+                {j % 2 == 0 ? pages[from].title : pages[to].title}
             </div>
             <div class="arrow">{j % 2 == 0 ? 'to' : 'from'}</div>
         {/each} 
@@ -24,7 +24,7 @@
     {:else}
         {#each [...new Array(7)] as _}
         <div class="loading-emojis">
-            <div>{emojis[to]}</div>
+            <div>{pages[to].emojis}</div>
         </div>
         {/each}
     {/if}

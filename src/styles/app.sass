@@ -33,3 +33,14 @@ h3
     display: flex
     flex-direction: column
     @include rfs(0.5rem, gap)
+
+b
+    padding: 0rem 0.2em
+    border-radius: 0.2rem
+    font-weight: inherit
+    background-color: alpha(var(--color), 0.5)
+    color: $c0
+
+.inverted b
+    background-color: transparentize($c0, 0.5)
+    color: var(--color)

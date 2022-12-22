@@ -7,13 +7,12 @@
     export let externalStop: boolean = false
     export let stoppedPerformance = false
     export let onPerfRecorded: (perf: number) => void = _ => {}
+    export let shift = Math.random()*10;
 
     let wasDestroyed = false;
     let hovering = false;
     let width: number;
     let height: number;
-
-    let shift = Math.random()*10;
 
     $: trullyStopped = hovering || externalStop || stoppedPerformance
     let stopped = false
@@ -90,11 +89,8 @@ on:click={() => stopped = !stopped} -->
         overflow: hidden;
     }
 
-    .stopped .marquee-a {
-        animation-play-state: paused;
-    }
-
     .marquee-a {
+        will-change: transform;
         position: absolute;
         top: 0;
         left: var(--shift);
@@ -108,6 +104,7 @@ on:click={() => stopped = !stopped} -->
     } */
 
     .marquee-b {
+        will-change: transform;
         position: absolute;
         top: 0;
         left: var(--shift);

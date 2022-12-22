@@ -1,5 +1,5 @@
 <script lang=ts>
-    import IntersectionObserver from "svelte-intersection-observer";
+	import { shuffle, wave } from "$lib/math";
 	import Marquee from "./marquee.svelte";
 
     export let size: number
@@ -9,18 +9,7 @@
     export let speed: number
     export let onPerfRecorded: (perf: number) => void
     export let stoppedPerformance: boolean
-
-    // function getRandomArbitrary(min: number, max: number) {
-    //     return Math.random() * (max - min) + min;
-    // }
-
-    function shuffle(array: any[]) {
-        for (let i = array.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-    }
-
+    
     $: distance = (quantity-(index+1))/quantity
     $: inverseDistance = 1 - distance
     $: computedSpeed = (distance-0.5)*0.5
@@ -55,10 +44,6 @@
     ]
     let roles = [...ROLES]
     shuffle(roles)
-
-    function wave(x: number) {
-        return (Math.cos(2*Math.PI*x + Math.PI)/2)+0.5
-    }
 </script>
 
 {#if size}
