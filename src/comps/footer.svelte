@@ -60,7 +60,8 @@
             align-items: center
             gap: 8rem
 
-        color: var(--color)
+        color: $c5
+        font-weight: 500
         z-index: 3
         //background-color: $c0
         height: 100vh
@@ -92,5 +93,5 @@
             @include rfs(4rem, line-height)
 
         a:hover
-            filter: saturate(6)
+            filter: brightness(50%)
 </style>

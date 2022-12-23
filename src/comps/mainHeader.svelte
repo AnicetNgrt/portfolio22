@@ -6,7 +6,7 @@
 <Header>
     <div class="title-container">
         <div class="title">
-            <h1><span class="baguette">🪄</span> Anicet Nougaret<span class="apostroph">'s</span></h1>
+            <h1>ANICET {"⁕"} NOUGARET<span class="apostroph">'s</span></h1>
             <p class="subtitle">2022 Portfolio</p>
         </div>
     </div>
@@ -40,10 +40,10 @@
         padding: 0rem 2rem
         @include for-size(tablet-landscape-up)
             padding: 0rem 3rem
-            margin-left: -3rem
-            margin-bottom: 3rem
+            margin-bottom: 4rem
 
         .apostroph
+            font-weight: 550
             @include font-size(1.5rem)
 
         h1
@@ -70,11 +70,12 @@
                 @include rfs(4.5rem, line-height)
         
         .subtitle
+            font-weight: 550
             align-self: start
             @include font-size(2rem)
             margin-top: -0.4rem
             @include for-size(tablet-landscape-up)
-                align-self: end
+                align-self: center
                 margin-top: -1.5rem
                 @include font-size(1.2rem)
             @include for-size(desktop-up)

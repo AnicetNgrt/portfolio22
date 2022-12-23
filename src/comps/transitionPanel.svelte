@@ -34,7 +34,7 @@
     .transition-decoration
         font-family: $font-mono
         padding: 0em 0.5em
-        opacity: 0.2
+        color: $c5
         font-weight: 700
 
     .transition-indicator
@@ -46,5 +46,5 @@
             font-family: $font-text
             font-size: 1.5em
             font-weight: 600
-            opacity: 0.2
+            color: $c5
 </style>

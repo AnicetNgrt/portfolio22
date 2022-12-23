@@ -73,7 +73,7 @@
                 }
             ]}/> -->
             <div class="text">
-                Hi 👋! I'm <b>Anicet Nougaret</b>, a 21 year old passionate about programming, software engineering, design and art. Currently <b>studying CS engineering</b> at INSA in Lyon, France, <b>working on many side-projects</b>, travelling and <b>learning new things every day</b>. <br><br> <b>Welcome to my portfolio!</b> I hope you will have a nice time discovering my work and passion.
+                Hi 👋! I'm Anicet Nougaret, a 21 year old passionate about programming, software engineering, design and art. Currently studying CS engineering at INSA in Lyon, France, working on many side-projects, travelling and learning new things every day. <br><br> Welcome to my portfolio! I hope you will have a nice time discovering my work and passion.
             </div>
         </div>
 
@@ -123,11 +123,11 @@
         flex-wrap: wrap
         row-gap: 4rem
         column-gap: 8rem
-        color: var(--color)
+        color: $c5
         width: 100%
         justify-content: center
         align-items: center
-        background: radial-gradient(500px at left 20% top 10%, alpha(var(--color), 0.3), transparent), radial-gradient(300px at left 100% top 100%, alpha(var(--color), 0.2), transparent), url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter) saturate(0) contrast(200%) blur(0.5px)' opacity='0.5'/%3E%3C/svg%3E")
+        background: radial-gradient(1500px at left 20% top 10%, alpha(var(--color), 0.3), transparent), radial-gradient(300px at left 100% top 100%, alpha(var(--color), 0.2), transparent), url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter) saturate(0) contrast(200%) blur(0.1px)' opacity='0.1'/%3E%3C/svg%3E")
         backdrop-filter: blur(30px)
         -webkit-backdrop-filter: blur(30px)
 
@@ -138,14 +138,14 @@
             @include for-size(tablet-landscape-up)
                 font-size: 2.5rem
                 line-height: 2.9rem
-            font-weight: 400
+            font-weight: 450
             width: 30ch
 
         .portrait
             width: 30rem
             border-radius: 0.2rem
             padding: 0.2rem
-            border: solid 0.3rem alpha(var(--color), 0.8)
+            border: solid 0.3rem $c5
             @include for-size(tablet-landscape-up)
                 box-shadow: -1rem 1rem 3rem alpha(var(--color), 0.5), -2rem 2rem 0rem alpha(var(--color), 0.3)
 
@@ -166,5 +166,4 @@
         
         width: 100%
         background-color: alpha(var(--color), 0.5) //alpha(var(--color), 0.5)
-        border-bottom: solid 0.2rem var(--color) 
 </style>

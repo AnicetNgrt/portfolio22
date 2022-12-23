@@ -19,5 +19,5 @@
     .content
         width: 100%
         height: 100%
-        border: double 0.5rem var(--color)
+        border: double 0.5rem $c5
 </style>

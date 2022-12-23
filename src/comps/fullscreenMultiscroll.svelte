@@ -67,7 +67,7 @@
         left: 0
         height: 100vh
         width: 100vw
-        background-color: alpha(var(--color), 0.3)
+        background-color: alpha(var(--color), 0.2)
         backdrop-filter: blur(30px)
         -webkit-backdrop-filter: blur(30px)
         z-index: 3
@@ -83,7 +83,7 @@
     .multiscroll
         height: fit-content
         width: 100%
-        background: transparentize($c0, 0.2)
+        background: var(--color)
         padding: 0.5rem 0rem
         display: flex
         align-items: center
@@ -94,8 +94,8 @@
         align-items: center
         margin-left: -0.1em
         padding: 0.1em 0em
-        border: dotted 0.2em alpha(var(--color), 0.2)
+        border: dotted 0.4rem $c5
         border-left: none
         border-right: none
-        color: var(--color)
+        color: $c0
 </style>

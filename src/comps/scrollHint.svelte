@@ -27,13 +27,13 @@
         backdrop-filter: blur(10px)
         padding: 0.4rem 1.25rem 0rem 1.25rem
         border-radius: 3rem 3rem 0rem 0rem
-        border: dotted 0.2rem alpha(var(--color), 0.4)
+        border: dotted 0.2rem $c5
         border-bottom: none
 
         .arrow
             font-size: 2.5rem
             transform: scaleX(1.5)
-            color: alpha(var(--color), 0.4)
+            color: $c5
 
     .scroll-hint
         position: sticky
@@ -54,8 +54,8 @@
             color: $c0
             height: 2.5rem
             padding-right: 0.4rem
-            border-top: solid 2px $c0
-            border-bottom: solid 2px $c0
+            border-top: solid 2px $c5
+            border-bottom: solid 2px $c5
             font-weight: 500
 
             p

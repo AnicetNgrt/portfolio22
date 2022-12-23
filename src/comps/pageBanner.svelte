@@ -26,12 +26,12 @@
 <style lang=sass>
     .banner-container
         width: 100%
-        background-color: alpha(var(--color), 0.8)
+        background-color: var(--color)
         padding: 0.2rem 0rem
 
     .banner-content
         display: flex
-        border: dotted 0.2rem transparentize($c0, 0.4)
+        border: solid 2px $c5
         border-left: none
         border-right: none
         align-items: center
@@ -41,9 +41,9 @@
 
     .banner-text
         margin-right: 0.5ch
-        line-height: 1.1rem
-        font-size: 1rem
-        color: transparentize($c0, 0.4)
+        line-height: 1.4rem
+        font-size: 1.2rem
+        color: $c0
         //opacity: 0.3
         font-weight: 400
         font-family: $font-mono

@@ -48,9 +48,11 @@
             height: calc(calc(100vh - 3rem) / 2)
             border-radius: 0.3rem
 
-        border: double 0.5rem var(--color)
+        border: solid 0.2rem $c0
         max-width: 100%
         overflow: hidden
+        background-color: var(--color)
+        padding: 0.2rem
 
     .section
         position: relative
@@ -64,8 +66,12 @@
         .top, .bottom
             backdrop-filter: blur(3px)
             -webkit-backdrop-filter: blur(3px)
-            background-color: transparentize($c0, 0.3)
+            background-color: transparentize($c5, 0.15)
             color: var(--color)
+            h2
+                color: $c0
+                font-weight: 600
+                
 
         .bottom
             clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)
@@ -84,7 +90,7 @@
                 top: 7%
                 height: 90%
                 width: 100%
-                border: dotted 0.3rem transparentize($c0, 0.5)
+                border: dotted 0.3rem $c5
                 border-left: none
                 border-right: none
 
@@ -161,7 +167,7 @@
                 @include font-size(2.2rem)
 
             font-family: $font-mono
-            opacity: 0.5
+            color: $c5
 
         .cta
             font-family: $font-display
@@ -243,8 +249,9 @@
             background-color: alpha(var(--color), 0.1)
 
         .top-left 
-            background-color: transparentize($c0, 0.5)
-            border-radius: 100%
+            transition: transform 1s
+            background-color: alpha(var(--color), 0.5)
+            transform: rotate(376deg)
             padding: 1.4rem
 
         h2
