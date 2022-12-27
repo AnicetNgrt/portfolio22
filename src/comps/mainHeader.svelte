@@ -7,7 +7,7 @@
     <div class="title-container">
         <div class="title">
             <h1>ANICET {"⁕"} NOUGARET<span class="apostroph">'s</span></h1>
-            <p class="subtitle">2022 Portfolio</p>
+            <p class="subtitle">2023 Portfolio & Blog</p>
         </div>
     </div>
 </Header>
@@ -35,7 +35,7 @@
         display: flex
         flex-direction: column
 
-        margin-bottom: 1rem
+        margin-bottom: 2.5rem
 
         padding: 0rem 2rem
         @include for-size(tablet-landscape-up)

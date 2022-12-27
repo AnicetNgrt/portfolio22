@@ -4,100 +4,103 @@
 	import Page from "../../comps/page.svelte";
 	import PageBodyAndNav from "../../comps/pageBodyAndNav.svelte";
 	import Story from "../../comps/story.svelte";
+	import { tweened } from "svelte/motion";
+	import { expoOut } from "svelte/easing";
+    import { marked } from "marked";
+    import IntersectionObserver from "svelte-intersection-observer";
 
     const route = "/resume"
-
-    // type CareerStep = {
-    //     title: string
-    //     description: string
-    //     type: string
-    //     location: string
-    //     city: string
-    //     logo: string
-    //     pictures: {src: string, alt: string, width: number, height: number}[][]
-    //     startMonth: number
-    //     startYear: number
-    //     endMonth: number
-    //     endYear: number
-    // }
-    // const career: CareerStep[] = [
-    //     {
-    //         title: "Frontend engineering advisor (previously Co-Founder, CTO & Frontend lead engineer)",
-    //         description: `
-    //         After ranking 7th at a hackathon in April 2022, my team of fellow CS students and I, decided to launch a startup aiming to develop a state of the art decentralized exchange for the NEAR blockchain.
-    //         <br>
-    //         Choosing NEAR for its fast growth potential and low energy consumption, this entrepreneurship journey made me go above and beyond my comfort zone. 
-    //         <br>
-    //         For instance, I lead the frontend engineering, design and branding of a MVP for 1 month during the hackathon, with cutting edge technologies such as SvelteKit and Rust. 
-    //         <br>
-    //         Then I did the same thing for the private beta version released 4 months after the hackathon, including many new features, design iterations and redesigning the whole branding and app 2 times of my own.
-    //         <br>
-    //         I also built and designed a landing page that brought 2.5k users to our private beta.
-    //         <br>
-    //         Then, I pitched the project in front of 50+ people during a business trip at NEAR CON 2022 in Lisbon. There, I established some useful & lasting business contacts.
-    //         <br>
-    //         Since November, I voluntarily stepped down from my co-founding and CTO roles, seeking a better work and studies balance. From then on, I'll only be giving expertise to the team and maintaining the Frontend codebase, trying to perfect the user-facing part of the product towards the big public release.
-    //         <br>
-    //         In conclusion: Although I want to use my skills in other fields than web3 and blockchain in the future, I learned so much about business, profesional relationships, team work, blockchain, and of course, software development during this journey.
-    //         `,
-    //         type: "Entrepreneurship",
-    //         location: "theFar (farswap)",
-    //         city: "remote",
-    //         logo: "https://media-exp1.licdn.com/dms/image/D4D0BAQF6Ofy89F8uSQ/company-logo_200_200/0/1666162368958?e=1677110400&v=beta&t=NC_M6E2_b7jabn3Q_Ye2ZPAyIlprY9w_EFvyIj2-tw0",
-    //         pictures: [
-    //             [
-    //                 { src: "/pictures/projects/farswap/screen3.png", alt: "Screenshot of the landing page. Desktop dark design", width: 1918, height: 862},
-    //                 { src: "/pictures/projects/farswap/screen2.png", alt: "Screenshot of private beta app. Desktop light (top-right) and dark (bottom-left) design", width: 1920, height: 866},
-    //                 { src: "/pictures/projects/farswap/screen0.png", alt: "Screenshot of private beta app. Old desktop light design", width: 1920, height: 867},
-    //                 { src: "/pictures/projects/farswap/logoNameLight.png", alt: "Logo for the main product.", width: 2024, height: 1012},
-    //                 { src: "/pictures/projects/farswap/logoNameLight2.png", alt: "Logo for the startup, featuring the mascot I also designed.", width: 1012, height: 506},
-    //             ],
-    //             [
-    //                 { src: "/pictures/projects/farswap/screen5.png", alt: "Screenshot of private beta app. Mobile light design", width: 373, height: 756},
-    //                 { src: "/pictures/projects/farswap/screen4.png", alt: "Screenshot of the landing page. Mobile dark design", width: 356, height: 756},
-    //             ],
-    //             [
-    //                 { src: "/pictures/projects/farswap/lisbon (4).JPG", alt: "Photograph at NEAR CON 2022 in Lisbon.", width: 3000, height: 4000},
-    //                 { src: "/pictures/projects/farswap/lisbon (3).JPG", alt: "Photograph at NEAR CON 2022 in Lisbon.", width: 4000, height: 3000},
-    //                 { src: "/pictures/projects/farswap/lisbon (2).JPG", alt: "Photograph at NEAR CON 2022 in Lisbon.", width: 3000, height: 4000},
-    //                 { src: "/pictures/projects/farswap/lisbon (1).JPG", alt: "Photograph at NEAR CON 2022 in Lisbon.", width: 3000, height: 4000},
-    //                 { src: "/pictures/projects/farswap/lisbon (5).JPG", alt: "Photograph at NEAR CON 2022 in Lisbon.", width: 4000, height: 3000},
-    //             ]
-    //         ],
-    //         startMonth: 4,
-    //         startYear: 22,
-    //         endMonth: -1,
-    //         endYear: -1
-    //     },
-        // {
-        //     title: "Backend developer & volunteer",
-        //     description: `
-        //     <ul><li>Engineered a C# ASP.NET Core API for an accessible & low data consumption audio-based Youtube alternative that empowers both literate and illiterate Togolese people online. Used Agile methodology.</li> 
-        //     <li>Invested myself in humanitarian tasks such as giving daily computer lessons to more than 60 kids and orphans.</li><ul/>
-        //     `,
-        //     type: "Entrepreneurship",
-        //     location: "AJVDEC-Togo",
-        //     city: "Lomé, Togo",
-        //     logo: "https://media-exp1.licdn.com/dms/image/C560BAQEc1MfqjlFawA/company-logo_200_200/0/1519912599922?e=1677110400&v=beta&t=VJCk4perEdVhM6JmcA9NaiMnAvjLzqi1M5fmXdjm6U0",
-        //     pictures: [],
-        //     startMonth: 4,
-        //     startYear: 22,
-        //     endMonth: 11,
-        //     endYear: 22
-        // },
-    // ]
     
+    let selected = -1
+    let collapsed = false
+    let shift = tweened(0, { duration: 250, easing: expoOut })
+
+    let leftIndicator: HTMLElement;
+    let leftIntersecting: boolean = false;
+
+    let rightIndicator: HTMLElement;
+    let rightIntersecting: boolean = false;
+
+    function onRightSwipe() {
+        if (!leftIntersecting && Number.isInteger($shift))
+            shift.set(Math.max($shift-1, 0))
+    }
+
+    function onLeftSwipe() {
+        if (!rightIntersecting && Number.isInteger($shift))
+            shift.set($shift+1)
+    }
+
+    let touchstartX = 0
+    let touchendX = 0
 </script>
 
 <Page>
-    <PageBanner page={pages[route]}/>
+    <PageBanner pageName={pages[route].title} pageSubName={pages[route].fr}/>
     <PageBodyAndNav {route}>
-        <h1>{pages[route].title.toLocaleUpperCase()}</h1>
-        <div class="stories">
-            {#each stories[route] as story, i}
-                <Story {story} index={i}/>
-            {/each}
+        <div 
+        class="stories-nav" 
+        on:touchstart={e => {
+            touchstartX = e.changedTouches[0].screenX
+        }}
+        on:touchend={e => {
+            touchendX = e.changedTouches[0].screenX
+            if (touchendX < touchstartX && Math.abs(touchendX-touchstartX) > 40) onLeftSwipe()
+            if (touchendX > touchstartX && Math.abs(touchendX-touchstartX) > 40) onRightSwipe()
+        }}
+        >
+            <div class="stories-top">
+                <h1>{pages[route].title.toLocaleUpperCase()}</h1>
+                <div class:useless={leftIntersecting && rightIntersecting} class="controls">
+                        <button class:disabled={leftIntersecting} on:click={onRightSwipe}>{"<-"}</button>
+                        <button class:disabled={rightIntersecting} on:click={onLeftSwipe}>{"->"}</button>
+                </div>
+            </div>
+            <div class:collapsed={collapsed} style={`transform: ${collapsed ? `translateX(-${$shift*6.5}rem)` : `translateX(calc(-${$shift} * calc(calc(73vh * calc(9 / 16)) + 1.5rem)))`}`} class="stories">
+                <IntersectionObserver element={leftIndicator} bind:intersecting={leftIntersecting}>
+                    <div class="indicator left" bind:this={leftIndicator}></div>
+                </IntersectionObserver>
+                <IntersectionObserver element={rightIndicator} bind:intersecting={rightIntersecting}>
+                    <div class="indicator right" bind:this={rightIndicator}></div>
+                </IntersectionObserver>
+                {#each stories[route] as story, i}
+                    <Story 
+                        onclick={() => {
+                            if (selected != i) {
+                                if (!collapsed) shift.set(0)
+                                selected = i
+                                collapsed = true
+                            } else {
+                                selected = -1
+                                collapsed = false
+                            }
+                        }} 
+                        selected={selected == i}
+                        {collapsed} 
+                        {story} 
+                        index={i}
+                    />
+                {/each}
+                {#if collapsed}
+                    <button on:click={() => {
+                        collapsed = false
+                        selected = -1
+                    }} class="uncollapse">≡</button>
+                {/if}
+            </div>
         </div>
+        {#if selected != -1}
+            <div class="article-container">
+                <div class="article">
+                    <h1>My experience as a {stories[route][selected].title}</h1>
+                    {#await marked.parse(stories[route][selected].article ?? "", { async: true })}
+                        ...
+                    {:then article} 
+                        {@html article}
+                    {/await}
+                </div>
+            </div>
+        {/if}
     </PageBodyAndNav>
     
     <svelte:fragment slot="bg">
@@ -106,13 +109,98 @@
 </Page>
 
 <style lang=sass>
-    .stories
+    .indicator
+        position: absolute
+        height: 5rem
+        width: 1rem
+
+        &.right
+            left: 100%
+
+    .stories-nav
+        width: 100%
         display: flex
         flex-direction: column
+        gap: 2rem
+        padding: 1.5rem
+        @include for-size(desktop-up)
+            align-items: center
+
+    .article-container
+        width: 100%
+        display: flex
+
+    .stories-top
+        display: flex
+        gap: 3rem
+        align-items: center
+
+        .controls
+            display: flex
+            flex-direction: column
+            @include for-size(tablet-landscape-up)
+                flex-direction: row
+            gap: 0.25rem
+
+            &.useless
+                opacity: 0.25
+                pointer-events: none
+                position: relative
+
+                background-color: var(--color)
+                height: 0.2rem
+                border-radius: 0.5rem
+                    
+
+                button
+                    opacity: 0
+
+        button
+            display: flex
+            justify-content: center
+            align-items: center
+            font-size: 2rem
+            line-height: 1rem
+            padding: 0.5rem 2rem
+            font-family: $font-mono
+            background-color: alpha(var(--color), 0.3)
+            border: solid 0.2rem var(--color)
+            color: $c0
+            border-radius: 2rem
+            cursor: pointer
+
+        button.disabled
+            opacity: 0.3
+            pointer-events: none
+
+    .stories
+        position: relative
+        display: flex
+        align-self: start
+        flex-direction: row
         @include for-size(tablet-landscape-up)
             flex-direction: row
         width: fit-content
         gap: 1.5rem
+
+        .uncollapse
+            display: flex
+            justify-content: center
+            align-items: center
+            font-size: 2.5rem
+            line-height: 1rem
+            width: 5rem
+            height: 5rem
+            font-family: $font-text
+            background-color: alpha(var(--color), 0.3)
+            border: solid 0.2rem var(--color)
+            color: $c0
+            border-radius: 5rem
+            cursor: pointer
+
+    .stories.collapsed
+        @include for-size(desktop-up)
+            align-self: center
 
     h1
         line-height: 2.5rem
@@ -120,18 +208,11 @@
         color: var(--color)
         font-weight: 600
 
-    p
-        font-size: 2rem
-        width: 65ch
-        max-width: 100%
-        font-weight: 450
-        color: $c5
-
     .bg
         width: 100vw
         height: 100vh
         position: fixed
         background-size: contain
-        //background: radial-gradient(900px at top 0% right 20%, #150944b6, transparent), radial-gradient(800px at top 4% left 30%, #14556a55, transparent), radial-gradient(900px at bottom 25% right 10%, rgba(255, 242, 1, 0.163), transparent), radial-gradient(700px at bottom 0% left 20%, #41033b, #030006)
+        // background: radial-gradient(900px at top 0% right 20%, #150944b6, transparent), radial-gradient(800px at top 4% left 30%, #14556a55, transparent), radial-gradient(900px at bottom 25% right 10%, rgba(255, 242, 1, 0.163), transparent), radial-gradient(700px at bottom 0% left 20%, #41033b, #030006)
 </style>
 

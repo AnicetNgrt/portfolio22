@@ -2,12 +2,10 @@
 	import { benchmarking, perf } from "$lib/perfStores";
 	import Footer from "./footer.svelte";
 	import SpinnyRolesBg from "./spinnyRolesBg.svelte";
-
-    let pageElement: HTMLDivElement
 </script>
 
-<div class="content" bind:this={pageElement}>
-    <slot {pageElement}/>
+<div class="content">
+    <slot/>
 
     <div class="bg-container">
         {#if $benchmarking}

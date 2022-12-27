@@ -15,32 +15,32 @@
     $: computedSpeed = (distance-0.5)*0.5
 
     const ROLES = [
-        "and an indie game creator",
+        "indie game creator",
         "currently living in Lyon",
         "with experience in Web3",
         "always exploring multiple paradigms",
-        "and I am a full-stack engineer",
+        "full-stack engineer",
         "who also does UX/UI design",
-        "whom can work in Paris too",
+        "from Paris",
         "currently 21 years old if I don't forget to update this website",
-        "sometimes a private programming tutor",
-        "and an INSA Lyon Computer Science 4th year student",
-        "whom speaks French and English fluently",
-        "knowing some Spanish and Russian as well",
-        "as a significant programming language polyglot",
-        "hobbyist illustrator as well",
-        "and a gamejamer",
-        "also a pixelartist",
+        "private programming tutor",
+        "INSA Lyon Computer Science 4th year student",
+        "speaking French and English fluently",
+        "knowing some Spanish and Russian",
+        "programming language polyglot",
+        "hobbyist illustrator",
+        "occasional gamejamer",
+        "hobbyist pixelartist",
         "spending days optimizing effects like this on mobile",
         "understanding some Rust",
-        "called a front-end ninja by some",
-        "co-founding a tiny DeFi startup",
-        "and I extensively used Vim, honestly use paper instead",
-        "while winning hackathons",
-        "and proficient with software architecture",
-        "totally able to do complex backend tasks as well",
-        "and absolutely doing too many things at once",
-        "and enjoying the creative web as you may have guessed",
+        "trying to become a front-end ninja",
+        "using paper instead of Vim",
+        "occasional hackathon finalist and winner",
+        "proficient with software architecture",
+        "doing complex backend tasks as well",
+        "learning too many things at once",
+        "enjoying the creative web",
+        "consistently happy with bold design choices"
     ]
     let roles = [...ROLES]
     shuffle(roles)
@@ -72,7 +72,7 @@
         font-family: $font-mono
 
         .role
-            letter-spacing: -0.07em
+            letter-spacing: 0em
             min-width: fit-content
             font-weight: 500
             color: var(--color)

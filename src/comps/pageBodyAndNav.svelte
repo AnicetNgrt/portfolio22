@@ -1,50 +1,149 @@
 <script lang=ts>
-	import { sections } from "$lib/content";
+	import { pages, sections } from "$src/lib/content";
 
     export let route: string
+    export let subroute: boolean = false
+    
+    let bg: string = pages[route].bg ?? ""
 
-    let open = true
+    let sortedSections = sections.filter(s => s != pages[route]) 
+    let backSection = subroute ? pages[route] : null
 </script>
 
-<div class="body">
-    <!-- <div class="left-nav">
-        <button class="nav-switch" on:click={() => open = !open}>
-            <div>ME ⁝⁝⁝</div>
-            <div>⁝⁝⁝ NU</div>
-        </button>
-        {#each sections as s, i}
-            <a class:current={s.href == route} href={s.href} style={"" + (s.href != route && `filter: hue-rotate(${Math.random()*100 - 50}deg);`)} class="nav-button">
-                <div class="emoji">{s.topLeft}</div>
+<div class="nav-container">
+    <div class="nav">
+        {#if backSection}
+            <a class="landscape-only subroute nav-link" href={backSection.href}>
+                <div class="nav-link-title">
+                    {"<-"} {backSection.title}
+                </div>
+            </a>
+        {/if}
+        {#each sortedSections as section}
+            <a class="nav-link" href={section.href}>
+                <div class="nav-link-title">
+                    {section.title}
+                </div>
             </a>
         {/each}
-    </div> -->
+        {#if backSection}
+            <a class="portrait-only subroute nav-link" href={backSection.href}>
+                <div class="nav-link-title">
+                    {"<-"} {backSection.title}
+                </div>
+            </a>
+        {/if}
+    </div>
+</div>
+
+<div class="body">
     <div class="content-container">
-        <div class="content">
+        <div class={"content bg-pattern " + bg}>
             <slot/>
         </div>
     </div>
 </div>
 
 <style lang=sass>
+    .nav-container
+        @include for-size(tablet-landscape-up)
+            position: sticky
+            top: 0px
+        width: 100%
+        background-color: $c0
+        border-bottom: solid 0.2rem $c5 //alpha(var(--color), 0.7)
+        @include for-size(tablet-landscape-up)
+            border-bottom: solid 0.2rem $c5 //alpha(var(--color), 0.3)
+            box-shadow: 0rem 0.4rem 1rem transparentize($c5, 0.9) //alpha(var(--color), 0.1)
+            z-index: 2
+
+    .nav
+        display: flex
+        flex-wrap: wrap
+        max-width: 100%
+        width: 100%
+        background-color: transparentize($c5, 0) //alpha(var(--color), 0.2)
+    
+    .nav-link
+        flex-grow: 1
+        text-decoration: none
+        padding: 1rem 1rem
+        @include for-size(tablet-landscape-up)
+            padding: 0.8rem 1.5rem
+        color: transparentize($c0, 0.3)
+        background-color: transparentize($c0, 0.9)
+
+    
+    .nav-link:nth-child(2), .nav-link:nth-child(3), .nav-link:nth-child(6)
+        background-color: transparentize($c0, 0.85)
+
+    @include for-size(desktop-up)
+        .nav-link:nth-child(2n)
+            background-color: transparentize($c0, 0.85)
+
+        .nav-link:nth-child(2n+1)
+            background-color: transparentize($c0, 0.9)
+
+    .nav-link:hover
+        text-decoration: underline
+        text-decoration-thickness: 0.1rem
+        color: $c0
+        text-decoration-color: $c0
+        background-color: var(--color)
+
+    .nav-link.subroute
+        background-color: alpha(var(--color), 0.3)
+        color: var(--color)
+        text-decoration-color: var(--color)
+
+    .nav-link.subroute:hover
+        color: $c0
+        text-decoration-color: $c0
+        background-color: alpha(var(--color), 0.6)
+
+    .nav-link-title
+        line-height: 1.2rem
+        font-size: 1rem
+        width: 40vw
+        @include for-size(desktop-up)
+            line-height: 1.4rem
+            font-size: 1.2rem
+            text-align: center
+            width: 100%
+            min-width: 10ch
+            max-width: 40vw
+        //opacity: 0.3
+        font-weight: 400
+        font-family: $font-mono
+        overflow: hidden
+        white-space: nowrap
+        text-overflow: ellipsis
+        max-height: 1.4rem
+
     .body
-        padding: 0.2rem
+        @include for-size(tablet-landscape-up)
+            padding: 0.2rem
         padding-bottom: 0rem
         width: 100%
         max-width: 100%
         display: flex
-        background: radial-gradient(1500px at left 20% top 10%, alpha(var(--color), 0.3), transparent), radial-gradient(300px at left 100% top 100%, alpha(var(--color), 0.2), transparent), url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter) saturate(0) contrast(200%) blur(0.1px)' opacity='0.1'/%3E%3C/svg%3E")
+        background-color: $c0
         background-attachment: fixed
 
     .content-container
-        border: double 0.5rem $c5
+        @include for-size(tablet-landscape-up)
+            border: solid 0.5rem alpha(var(--color), 0.5)
         border-bottom: none
-        padding: 1rem
+        @include for-size(tablet-landscape-up)
+            padding: 0.2rem
         flex-grow: 1
         max-width: 100%
         min-height: 100vh
+        overflow-x: hidden
     
     .content
-        padding: 1rem
+        padding: 0rem
+        padding-top: 2rem
         @include for-size(tablet-landscape-up)
             padding: 2rem 2.5rem 2.5rem 4rem
         display: flex
@@ -52,8 +151,7 @@
         gap: 2rem
         max-width: 100%
         height: fit-content
-        transform: translateZ(0)
-        transform-style: preserve-3d
+        min-height: 100%
 
     // .nav-button, .nav-switch
     //     display: flex

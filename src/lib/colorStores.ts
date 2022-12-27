@@ -44,9 +44,33 @@ export const newHSL = (hsl: number[]) => {
 //     }
 
 //     return [
-//         340,
+//         newHue,
 //         100,
-//         15
+//         35
+//     ]
+// }
+
+// export const newHSL = (hsl: number[]) => {
+//     let hues = [
+//         225,
+//         150,
+//         325,
+//         25,
+//         200,
+//         350,
+//         275,
+//         150,
+//         275,
+//         40,
+//     ]
+//     let h = hsl[0]
+//     let i = hues.indexOf(h)
+//     let newHue = hues[i != -1 ? (i+1) % hues.length : Math.floor(Math.random()*hues.length)]
+//     console.log(newHue)
+//     return [
+//         newHue,
+//         70,
+//         35
 //     ]
 // }
 

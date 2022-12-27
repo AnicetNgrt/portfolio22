@@ -5,7 +5,7 @@
 	export let i = -1;
 </script>
 
-<a class="section-container" alt={page.title} href={page.href}>
+<a class="section-container" href={page.href}>
 	<div class="section">
 		<div class="top">
 			<div class="icon top-left">{page.topLeft}</div>
@@ -28,7 +28,7 @@
                 {/if}
             </div>
         </div>
-        <div class="bottom-alt">
+        <div class={"bottom-alt " + (page.bg ?? "")}>
             <div class="arrow">{`※`}</div>
             <div class="cta">
                 {page.title.toLocaleUpperCase()}
@@ -64,9 +64,7 @@
         // border: solid 3px $c5
 
         .top, .bottom
-            backdrop-filter: blur(3px)
-            -webkit-backdrop-filter: blur(3px)
-            background-color: transparentize($c5, 0.15)
+            background-color: transparentize($c5, 0.4)
             color: var(--color)
             h2
                 color: $c0
@@ -181,8 +179,6 @@
 
         .top-left
             @include for-size(tablet-landscape-up)
-                border: solid 2px var(--color)
-                border-radius: 1.1rem
                 @include font-size(2rem)
 
             transform: rotate(20deg)
@@ -249,10 +245,9 @@
             background-color: alpha(var(--color), 0.1)
 
         .top-left 
-            transition: transform 1s
-            background-color: alpha(var(--color), 0.5)
-            transform: rotate(376deg)
-            padding: 1.4rem
+            @include for-size(tablet-landscape-up)
+                transition: transform 1s
+                transform: rotate(376deg)
 
         h2
             opacity: 0

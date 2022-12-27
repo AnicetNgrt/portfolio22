@@ -38,7 +38,7 @@
         font-weight: 500
         font-family: $font-display
         font-size: 1em
-        color: $c5
+        color: var(--color)
         padding: 0em 0.2em
 
     .loading-emojis
@@ -64,17 +64,17 @@
 
         .percent
             margin-left: 0.2em
-            color: $c5
+            color: var(--color)
             font-size: 0.6em
 
         .number 
             margin-left: 0.25em
 
             .zeroes
-                color: $c5
+                color: var(--color)
 
     .arrow
         font-weight: 500
         font-family: $font-mono
-        color: $c5
+        color: var(--color)
 </style>

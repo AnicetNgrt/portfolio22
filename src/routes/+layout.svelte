@@ -1,14 +1,13 @@
 <script lang=ts>
+    import "../styles/reset.css"
     import "../styles/app.sass"
     import { transitionPanelState  } from "$lib/panelsStores"
-	import { onMount } from "svelte";
 	import { beforeNavigate, goto } from "$app/navigation";
 	import { page } from "$app/stores";
 	import LoadingPanel from "../comps/loadingPanel.svelte";
 	import TransitionPanel from "../comps/transitionPanel.svelte";
-	import BenchmarkManager from "../hooks/benchmarkManager.svelte";
 	import { hsl, newHSL } from "$lib/colorStores";
-	import { browser } from "$app/environment";
+	import { pages } from "$lib/content";
 
     let from = "/"
     let to = "/"
@@ -16,7 +15,8 @@
 
     page.subscribe(page => {
         if (page.url.pathname == to) {
-            console.log("ARRIVED")
+            console.log(`arrived to ${to}`)
+            hsl.set(newHSL($hsl))
             exiting = false
             setTimeout(() => transitionPanelState.set("FADE_OUT"), 100)
         }
@@ -26,7 +26,9 @@
         if (exiting) return
         
         if (navigation.to?.url.pathname) {
+            if (navigation.to?.url.hostname != $page.url.hostname) return
             to = navigation.to?.url.pathname.slice()
+            if (!pages[to]) return
             console.log(to)
         }
         if (navigation.from?.url.pathname) {
@@ -44,7 +46,7 @@
             const unsub = transitionPanelState.subscribe(state => {
                 if (state == "SHOWING") {
                     exiting = true
-                    console.log(`->>> ${to}`)
+                    console.log(`transitioning to ${to}`)
                     unsub()
                     goto(to)
                 }
@@ -56,9 +58,7 @@
     })
 </script>
 
-<svelte:window on:click={() => hsl.set(newHSL($hsl))}></svelte:window>
-
-<BenchmarkManager />
+<!-- <svelte:window on:click={() => hsl.set(newHSL($hsl))}></svelte:window> -->
 
 <div  class="page" style={`--color-h: ${$hsl[0]}; --color-s:${$hsl[1]}%; --color-l:${$hsl[2]}%; --color: hsl(${$hsl[0]}, ${$hsl[1]}%, ${$hsl[2]}%)`}>
     <LoadingPanel/>

@@ -1,8 +1,12 @@
+import insaXp from "./articles/insa-xp"
+import tutoringXp from "./articles/tutoring-xp"
+
 export const loadingEmojis = "🧙‍♂️🪄⚡🗝️👔📫✨🐦🛣️📡🔗👋🌐🎲🎨🎴🗼"
 
 export interface Page {
     title: string
     href: string
+    bg?: string
     emojis?: string
     cover?: string
     topLeft?: string
@@ -22,68 +26,78 @@ export const pages: {[key: string]: Page} = {
     },
     "/resume": {
         title: "Career & studies",
-        cover: "/pictures/portraits/portrait0.jpg",
+        cover: "/pictures/insa/memories_insa (1).webp",
         topLeft: "👔",
         topRight: "◥",
         botLeft: "◣",
         right: "← ← ← ← ← ← ← ←",
         fr: "Carrière et études",
         href: "/resume",
-        emojis: "🚹👔🎓📜✏️🌁💼🦺📂📌🏢🥼"
+        emojis: "🚹👔🎓📜✏️🌁💼🦺📂📌🏢🥼",
+        bg: "bg-topo"
     },
-    "/frontend": {
-        title: "Front-end development",
-        cover: "/pictures/projects/farswap/screen0.png",
+    "/web": {
+        title: "Fullstack web development",
+        cover: "/pictures/projects/farswap/screen0.webp",
         topLeft: "✨",
         topRight: "◪",
         botLeft: "◩",
         right: "<div>Hello</div>",
-        fr: "Développement front-end",
-        href: "/frontend"
-    },
-    "/backend": {
-        title: "Back-end development",
-        cover: "/pictures/projects/tingo/classes.png",
-        topLeft: "💾",
-        topRight: "◈",
-        botLeft: "◆",
-        right: "HTTP/2 200 OK",
-        fr: "Développement back-end",
-        href: "/backend"
+        fr: "Développement web fullstack",
+        href: "/"
     },
     "/gamedev": {
         title: "Game creation & development",
-        cover: "/pictures/projects/zugzwang/captureOld.png",
+        cover: "/pictures/projects/zugzwang/captureOld.webp",
         topLeft: "🎲",
         topRight: "▨",
         botLeft: "▦",
         right: "« It's dangerous to go alone! Take this. »",
         fr: "Développement de jeux-vidéo",
-        href: "/gamedev"
-    },
-    "/art": {
-        title: "Art gallery",
-        cover: "/pictures/art/skyscrapper_1.jpg",
-        topLeft: "🎨",
-        topRight: "◒",
-        botLeft: "◓",
-        right: "« Le vent se lève, il faut tenter de vivre. »",
-        fr: "Travaux artistiques",
-        href: "/art"
+        href: "/"
     },
     "/branding": {
         title: "Brand identity & design",
-        cover: "/pictures/projects/farswap/banner.png",
+        cover: "/pictures/projects/farswap/banner.webp",
         topLeft: "🎴",
         topRight: "⫸",
         botLeft: "⫷",
         right: "—————————————————————",
         fr: "Identités de marques et design",
-        href: "/branding"
-    }
+        href: "/"
+    },
+    "/art": {
+        title: "Art gallery",
+        cover: "/pictures/art/skyscrapper_1.webp",
+        topLeft: "🎨",
+        topRight: "◒",
+        botLeft: "◓",
+        right: "« Le vent se lève, il faut tenter de vivre. »",
+        fr: "Travaux artistiques",
+        href: "/"
+    },
+    "/blog": {
+        title: "Blog",
+        cover: "/pictures/portraits/portrait0.webp",
+        topLeft: "📓",
+        topRight: "◈",
+        botLeft: "◆",
+        right: "HTTP/2 200 OK",
+        fr: "Blog",
+        href: "/blog",
+        emojis: "✏️📓📂🌍💾💡📙📜📰",
+        bg: "bg-wigle"
+    },
 }
 
 export const sections = Object.values(pages)
+
+export interface Article {
+    title: string
+    cover: string
+    date: string
+    article: string
+}
 
 export interface Story {
     title: string
@@ -92,6 +106,7 @@ export interface Story {
     place?: string
     start?: string
     end?: string
+    article?: string
 }
 
 export const stories: {[key:string]: Story[]} = {
@@ -99,88 +114,116 @@ export const stories: {[key:string]: Story[]} = {
         {
             title: "Computer Science engineering student",
             covers: [
-                "/pictures/insa/memories_insa (3).jpg",
-                "/pictures/insa/memories_insa (4).jpg",
-                "/pictures/insa/memories_insa (2).jpg",
-                "/pictures/insa/memories_insa (1).jpg",
-                "/pictures/insa/mountains.gif"
+                "/pictures/insa/memories_insa (3).webp",
+                "/pictures/insa/memories_insa (4).webp",
+                "/pictures/insa/memories_insa (2).webp",
+                "/pictures/insa/memories_insa (1).webp"
             ],
             institution: "INSA de Lyon",
             place: "Lyon, France",
             start: "09/2021",
-            end: "09/2024"
+            end: "09/2024",
+            article: insaXp.article
+        },
+        {
+            title: "Computer Science & programming private tutor",
+            covers: [
+                "/pictures/tutoring/tutoring%20(5).webp",
+                "/pictures/tutoring/tutoring%20(4).webp",
+                "/pictures/tutoring/tutoring%20(3).webp",
+                "/pictures/tutoring/tutoring%20(2).webp",
+                "/pictures/tutoring/tutoring%20(6).webp"
+            ],
+            place: "Remote",
+            start: "09/2021",
+            end: "now",
+            article: tutoringXp.article
         },
         {
             title: "DeFi startup Co-Founder, lead front-end engineer & branding designer",
             covers: [
-                "/pictures/projects/farswap/lisbon (5).JPG",
-                "/pictures/projects/farswap/screen0.png",
-                "/pictures/projects/farswap/lisbon (1).JPG",
-                "/pictures/projects/farswap/logos cropped (1).png",
-                "/pictures/projects/farswap/lisbon (2).JPG",
-                "/pictures/projects/farswap/screen1.png",
-                "/pictures/projects/farswap/lisbon (3).JPG",
-                "/pictures/projects/farswap/lisbon (4).JPG",
-                "/pictures/projects/farswap/screen2.png",
+                "/pictures/projects/farswap/lisbon (5).webp",
+                "/pictures/projects/farswap/screen0.webp",
+                "/pictures/projects/farswap/lisbon (1).webp",
+                "/pictures/projects/farswap/lisbon (2).webp",
+                "/pictures/projects/farswap/screen1.webp",
+                "/pictures/projects/farswap/lisbon (3).webp",
+                "/pictures/projects/farswap/lisbon (4).webp",
+                "/pictures/projects/farswap/screen2.webp",
             ],
             institution: "farswap",
             place: "Lyon, France & Lisbon, Portugal",
-            start: "04/2022",
-            end: "12/2022"
+            start: "04/2023",
+            end: "12/2023",
+            article: `
+Article coming soon.            
+`
         },
         {
-            title: "Volunteer teacher & back-end developer in a Togolese non-profit",
+            title: "Volunteer teacher & back-end developer for a Togolese non-profit",
             covers: [
-                "/pictures/projects/tingo/photo (1).jpg",
-                "/pictures/projects/tingo/classes.png",
-                "/pictures/projects/tingo/photo (2).jpg",
-                "/pictures/projects/tingo/photo (3).jpg",
-                "/pictures/projects/tingo/photo (4).jpg",
-                "/pictures/projects/tingo/uxdesign.png"
+                "/pictures/projects/tingo/photo (1).webp",
+                "/pictures/projects/tingo/classes.webp",
+                "/pictures/projects/tingo/photo (2).webp",
+                "/pictures/projects/tingo/photo (3).webp",
+                "/pictures/projects/tingo/photo (4).webp",
+                "/pictures/projects/tingo/uxdesign.webp"
             ],
             institution: "AJVDEC-Togo",
             place: "Lomé, Togo",
-            start: "06/2022",
-            end: "08/2022"
+            start: "06/2023",
+            end: "08/2023",
+            article: `
+Article coming soon.            
+`
         },
         {
             title: "Full-stack development intern",
             covers: [
-                "/pictures/paris/paris (2).JPG",
-                "/pictures/projects/freeday/screen3.png",
-                "/pictures/projects/blogc/blogc_desktop_2.PNG",
-                "/pictures/projects/freeday/screen2.png",
-                "/pictures/projects/blogc/blogc_desktop_3.PNG",
-                "/pictures/projects/freeday/screen1.png",
-                "/pictures/projects/blogc/blogc_desktop_1.PNG",
+                "/pictures/paris/paris (2).webp",
+                "/pictures/projects/freeday/screen3.webp",
+                "/pictures/projects/blogc/blogc_desktop_2.webp",
+                "/pictures/projects/freeday/screen2.webp",
+                "/pictures/projects/blogc/blogc_desktop_3.webp",
+                "/pictures/projects/freeday/screen1.webp",
+                "/pictures/projects/blogc/blogc_desktop_1.webp",
             ],
             institution: "Coddity",
             place: "Paris, France",
             start: "04/2021",
-            end: "06/2021"
+            end: "06/2021",
+            article: `
+Article coming soon.            
+`
         },
         {
             title: "Contracted Computer Science freshmen's mentor",
             covers: [
-                "/pictures/paris/paris (3).JPG",
-                "/pictures/paris/paris (1).JPG"
+                "/pictures/paris/paris (3).webp",
+                "/pictures/paris/paris (1).webp"
             ],
-            institution: "Université de Paris Rives de Seine",
+            institution: "IUT de Paris Rives de Seine",
             place: "Paris, France",
             start: "04/2021",
-            end: "06/2021"
+            end: "06/2021",
+            article: `
+Article coming soon.            
+`
         },
         {
             title: "Technical Computer Science university student",
             covers: [
-                "/pictures/iut/400.PNG",
-                "/pictures/iut/me.png",
-                "/pictures/iut/ddcBrette.PNG"
+                "/pictures/iut/400.webp",
+                "/pictures/iut/me.webp",
+                "/pictures/iut/ddcBrette.webp"
             ],
             institution: "IUT de Paris Rives de Seine",
             place: "Paris, France",
             start: "09/2019",
-            end: "07/2021"
+            end: "07/2021",
+            article: `
+Article coming soon.            
+`
         }
     ]
 }

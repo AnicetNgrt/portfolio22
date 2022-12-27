@@ -1,5 +1,5 @@
 <script lang=ts>
-	import SpinnyRolesBg from "./spinnyRolesBg.svelte";
+	import SpinnyRolesBg from "$src/comps/spinnyRolesBg.svelte";
     
     export let lines: number;
     $: size = 64/lines
@@ -15,7 +15,7 @@
                 Tech used: SvelteKit, SASS
             </p>
             <p>
-                All rights reserved @ Anicet Nougaret 2022
+                All rights reserved @ Anicet Nougaret 2023
             </p>
             <div style="height: 1rem"></div>
         </div>
@@ -48,7 +48,7 @@
         align-items: start
         gap: 4rem
 
-        border-top: solid 0.2rem var(--color) 
+        border-top: solid 0.2rem alpha(var(--color), 0.5)
 
         backdrop-filter: blur(9px)
         -webkit-backdrop-filter: blur(9px)

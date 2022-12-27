@@ -1,62 +1,80 @@
 <script lang=ts>
 	import type { Story } from "$lib/content";
+    import IntersectionObserver from "svelte-intersection-observer";
 
     export let story: Story
     export let index: number = 0
+    export let collapsed: boolean = false
+    export let selected: boolean = false
+    export let onclick: () => void
     
+    let intersecting: boolean = false
+    let indicator: HTMLDivElement
+
     let imgIndex = 0
     let nextImgIndex = 0
     let state: "set" | "trans" = "set" 
 
     function runCaroussel() {
-        nextImgIndex = imgIndex+1
-        state = "trans"
-        setTimeout(() => {
-            imgIndex = nextImgIndex
-            state = "set"
+        if (!collapsed && intersecting) {
+            nextImgIndex = imgIndex+1
+            state = "trans"
+            setTimeout(() => {
+                imgIndex = nextImgIndex
+                state = "set"
+                setTimeout(runCaroussel, Math.random()*7000+3000)
+            }, 1000)
+        } else {
             setTimeout(runCaroussel, Math.random()*7000+3000)
-        }, 1000)
+        }
     }
 
     setTimeout(runCaroussel, Math.random()*7000+3000)
 </script>
 
-<div class="story-container">
-    <div class="bg-cover" style={`filter: hue-rotate(${(index*72)}deg)`}></div>
+<button on:click={() => onclick()} class:selected={selected} class:collapsed={collapsed} class="story-container">
+    <IntersectionObserver element={indicator} bind:intersecting={intersecting}>
+        <div class="indicator" bind:this={indicator}></div>
+    </IntersectionObserver>
+    <div class="bg-cover" style={`filter: hue-rotate(${(index*(90))}deg)`}></div>
     <div class="story">
-        <div class="pictures">
+        <div style={`animation-play-state: ${!collapsed && intersecting ? "running" : "paused"}`} class="pictures">
             {#if state == "trans"}
                 <img class="transition" src={story.covers[nextImgIndex % story.covers.length]} alt="">
             {/if}
             <img src={story.covers[imgIndex % story.covers.length]} alt="">
         </div>
-        <h1 class="title">
-            {story.title}
-        </h1>
-        <h3 class="infos">
-            {#if story.institution}
-                📍 {story.institution}
-                <br>
-            {/if}
-            {#if story.place}
-                🌍 {story.place}
-                <br>
-            {/if}
-            {#if story.start}
-                📆 {story.start}
-            {/if}
-            {#if story.end}
-                → {story.end}
-            {/if}
-        </h3>
-        <div class="expand-indicator">click to know more</div>
+        {#if !collapsed}
+            <h1 class="title">
+                {story.title}
+            </h1>
+            <h3 class="infos">
+                {#if story.institution}
+                    📍 {story.institution}
+                    <br>
+                {/if}
+                {#if story.place}
+                    🌍 {story.place}
+                    <br>
+                {/if}
+                {#if story.start}
+                    📆 {story.start}
+                {/if}
+                {#if story.end}
+                    → {story.end}
+                {/if}
+            </h3>
+            <div class="expand-indicator">click to know more</div>
+        {/if}
     </div>
-</div>
+</button>
 
 <style lang=sass>
     .story-container
+        text-align: left
+        z-index: 1
         cursor: pointer
-        aspect-ratio: 9/16
+        width: calc(73vh * calc(9 / 16))
         height: 73vh
         border-radius: 2rem
         border: solid 0.2rem $c5
@@ -64,13 +82,43 @@
         padding: 0.2rem
         position: relative
 
+        .indicator
+            width: 3rem
+            height: 3rem
+            position: absolute
+            top: 1rem
+            left: 1rem
+            //background-color: red
+            z-index: 1
+
         .bg-cover
             position: absolute
             width: calc(100% - 0.4rem)
             height: calc(100% - 0.4rem)
             border-radius: 1.7rem
             background: linear-gradient(150deg, alpha(var(--color), 1), alpha(var(--color), 0.0))
-    
+            transition: border-radius 0.2s
+        
+        transition: width 0.5s, height 0.5s, border-radius 0.2s
+
+    .story-container.collapsed
+        transition: width 0.5s, height 0.5s, border-radius 0.2s linear 0.3s
+        border-radius: 100%
+        width: 5rem
+        height: 5rem
+
+        .bg-cover
+            transition: border-radius 0.2s linear 0.3s
+            border-radius: 100%
+
+        .story
+            transition: border-radius 0.2s linear 0.3s
+            border-radius: 100%
+
+    .story-container.selected
+        border: solid 0.2rem $c0
+        background-color: $c5
+
     .story
         border-radius: 1.7rem
         width: 100%
@@ -80,6 +128,7 @@
         padding: 1.5rem
         display: flex
         flex-direction: column
+        align-items: start
         gap: 1rem
 
         .infos
@@ -109,15 +158,18 @@
             line-height: 2.8rem
             font-weight: 500
             color: $c0
+            transition: line-height 1s, font-size 1s
 
         .pictures
             position: absolute
             top: 50%
             left: 50%
             z-index: -1
-            animation: move 40s linear 0s infinite alternate
+            @include for-size(desktop-up)
+                animation: move 40s linear 0s infinite alternate
             width: 100%
             height: 100%
+            transform: translate(-50%, -50%)
         
         img
             filter: saturate(150%)
@@ -136,11 +188,30 @@
             z-index: -1
             animation: fade-in 1s
             opacity: 1
+
+        transition: border-radius 0.2s
     
     .story-container:hover
         transition: all 0.2s
         transform: translate(0.5rem, -0.5rem)
         box-shadow: -1rem 1rem 0rem alpha(var(--color), 0.4)
+
+        .bg-cover
+            transition: all 0.2s
+
+        .story
+            transition: all 0.2s
+            .expand-indicator
+                background-color: var(--color)
+                opacity: 0.8
+
+            img
+                transition: filter 0.2s
+                filter: saturate(200%) brightness(120%)
+
+    .story-container:hover.collapsed
+        transform: translate(-0.2rem, 0.2rem)
+        box-shadow: -0.3rem 0.3rem 0rem alpha(var(--color), 0.4)
 
         .story
             .expand-indicator

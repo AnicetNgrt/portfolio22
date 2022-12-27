@@ -10,9 +10,11 @@
 	import { tweened } from "svelte/motion";
 	import { linear } from "svelte/easing";
 	import { hsl, newHSL } from "$lib/colorStores";
-	import Caroussel from "../comps/carousselV1.svelte";
-
+	import BenchmarkManager from "../hooks/benchmarkManager.svelte";
+	import { loadingPanelState } from "$lib/panelsStores";
+    
     let targetSpeed = 50
+    loadingPanelState.set("SHOWING")
 
     const newSpeed = (speed: number) => {
         if (Math.abs(speed) < Math.abs(targetSpeed)) return speed * 1.1
@@ -44,34 +46,16 @@
 
 </script>
 
+<BenchmarkManager />
+
 <Page>
     <MainHeader/>
     
     <div class="content">
         <ScrollHint/>
 
-        <div class="presentation">
-            <img class="portrait" src="/pictures/portraits/portrait1_square.jpg" alt='August 22 - Last stair of \"Hotel 2 Février\" in Lomé, Togo.'>
-            <!-- <Caroussel width={450} height={450} pictures={[
-                { 
-                    src: "/pictures/portraits/portrait0_square.jpg", 
-                    alt: "August 22 - Last stair of \"Hotel 2 Février\" in Lomé, Togo.",
-                    width: 476,
-                    height: 466
-                },
-                { 
-                    src: "/pictures/portraits/portrait1_square.jpg", 
-                    alt: "October 22 - Paris, France",
-                    width: 1651,
-                    height: 1668
-                },
-                { 
-                    src: "/pictures/portraits/portrait2_square.jpg", 
-                    alt: "September 22 - \"INSA de Lyon\", Lyon, France",
-                    width: 1893,
-                    height: 1803
-                }
-            ]}/> -->
+        <div class="presentation bg-pattern bg-stars">
+            <img class="portrait" src="/pictures/portraits/portrait1_square.webp" alt='August 22 - Last stair of \"Hotel 2 Février\" in Lomé, Togo.'>
             <div class="text">
                 Hi 👋! I'm Anicet Nougaret, a 21 year old passionate about programming, software engineering, design and art. Currently studying CS engineering at INSA in Lyon, France, working on many side-projects, travelling and learning new things every day. <br><br> Welcome to my portfolio! I hope you will have a nice time discovering my work and passion.
             </div>
@@ -111,11 +95,11 @@
             filter: blur(30px) hue-rotate(180deg)
 
     .presentation
-        background-color: $c0
         padding: 2rem
-        padding-top: 3rem
+        padding-top: 6rem
         padding-bottom: 6rem
-        min-height: 100vh
+        @include for-size(tablet-landscape-up)
+            min-height: 100vh
         @include for-size(tablet-landscape-up)
             padding: 6rem 0rem 8rem 0rem
 
@@ -127,13 +111,10 @@
         width: 100%
         justify-content: center
         align-items: center
-        background: radial-gradient(1500px at left 20% top 10%, alpha(var(--color), 0.3), transparent), radial-gradient(300px at left 100% top 100%, alpha(var(--color), 0.2), transparent), url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter) saturate(0) contrast(200%) blur(0.1px)' opacity='0.1'/%3E%3C/svg%3E")
-        backdrop-filter: blur(30px)
-        -webkit-backdrop-filter: blur(30px)
 
         .text
             font-size: 1.5rem
-            line-height: 2rem 
+            line-height: 1.7rem 
 
             @include for-size(tablet-landscape-up)
                 font-size: 2.5rem
@@ -143,7 +124,9 @@
 
         .portrait
             width: 30rem
-            border-radius: 0.2rem
+            max-width: 100%
+            height: min-content
+            border-radius: 1.5rem
             padding: 0.2rem
             border: solid 0.3rem $c5
             @include for-size(tablet-landscape-up)

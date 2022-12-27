@@ -17,7 +17,18 @@ const config = {
 	}),
 
 	kit: {
-		adapter: adapter()
+		alias: {
+			"$src": "src",
+			"$src/*": "src/*",
+			"$lib": "src/lib",
+			"$lib/*": "src/lib/*"
+		},
+		adapter: adapter(),
+		prerender: {
+			entries: [
+				"/blog/insa-xp"
+			]
+		}
 	}
 };
 
