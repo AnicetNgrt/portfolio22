@@ -45,6 +45,9 @@
             <img src={story.covers[imgIndex % story.covers.length]} alt="">
         </div>
         {#if !collapsed}
+            <h2 class="category">
+                {story.category}
+            </h2>
             <h1 class="title">
                 {story.title}
             </h1>
@@ -96,7 +99,7 @@
             width: calc(100% - 0.4rem)
             height: calc(100% - 0.4rem)
             border-radius: 1.7rem
-            background: linear-gradient(150deg, alpha(var(--color), 1), alpha(var(--color), 0.0))
+            background: linear-gradient(150deg, alpha(var(--color), 1) 5%, alpha(var(--color), 0.0) 120%)
             transition: border-radius 0.2s
         
         transition: width 0.5s, height 0.5s, border-radius 0.2s
@@ -125,16 +128,23 @@
         height: 100%
         position: relative
         overflow: hidden
-        padding: 1.5rem
+        padding: 1rem 1.5rem
         display: flex
         flex-direction: column
         align-items: start
-        gap: 1rem
+        gap: 0.3rem
 
-        .infos
-            font-size: 1rem
+        .category
+            font-size: 1.5rem
             font-weight: 500
             color: $c0
+            
+
+        .infos
+            font-size: 1.1rem
+            font-weight: 500
+            color: $c0
+            margin-top: 1rem
 
         .expand-indicator
             position: absolute
@@ -154,8 +164,8 @@
 
         .title
             z-index: 1
-            font-size: 3rem
-            line-height: 2.8rem
+            font-size: 2.8rem
+            line-height: 2.6rem
             font-weight: 500
             color: $c0
             transition: line-height 1s, font-size 1s

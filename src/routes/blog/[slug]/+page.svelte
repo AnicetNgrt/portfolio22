@@ -19,6 +19,7 @@
             <div class="article-container">
                 <div class="article">
                     <h1>{data.title}</h1>
+                    <p><i>Written by Anicet. Last updated: {data.date}</i></p>
                     {#await marked.parse(data.article ?? "", { async: true })}
                         ...
                     {:then article} 

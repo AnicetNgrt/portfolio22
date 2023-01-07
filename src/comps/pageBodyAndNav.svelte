@@ -12,27 +12,23 @@
 
 <div class="nav-container">
     <div class="nav">
-        {#if backSection}
-            <a class="landscape-only subroute nav-link" href={backSection.href}>
-                <div class="nav-link-title">
-                    {"<-"} {backSection.title}
-                </div>
-            </a>
-        {/if}
+        <a class:hide={!backSection} class="landscape-only subroute nav-link" href={backSection?.href}>
+            <div class="nav-link-title">
+                {"<-"} {backSection?.title}
+            </div>
+        </a>
         {#each sortedSections as section}
-            <a class="nav-link" href={section.href}>
+            <a class="nav-link route" href={section.href}>
                 <div class="nav-link-title">
                     {section.title}
                 </div>
             </a>
         {/each}
-        {#if backSection}
-            <a class="portrait-only subroute nav-link" href={backSection.href}>
-                <div class="nav-link-title">
-                    {"<-"} {backSection.title}
-                </div>
-            </a>
-        {/if}
+        <a class:hide={!backSection} class="portrait-only subroute nav-link" href={backSection?.href}>
+            <div class="nav-link-title">
+                {"<-"} {backSection?.title}
+            </div>
+        </a>
     </div>
 </div>
 
@@ -69,12 +65,11 @@
         text-decoration: none
         padding: 1rem 1rem
         @include for-size(tablet-landscape-up)
-            padding: 0.8rem 1.5rem
+            padding: 0.8rem 0rem
         color: transparentize($c0, 0.3)
         background-color: transparentize($c0, 0.9)
 
-    
-    .nav-link:nth-child(2), .nav-link:nth-child(3), .nav-link:nth-child(6)
+    .nav-link:nth-child(2), .nav-link:nth-child(5), .nav-link:nth-child(6)
         background-color: transparentize($c0, 0.85)
 
     @include for-size(desktop-up)
@@ -111,7 +106,8 @@
             text-align: center
             width: 100%
             min-width: 10ch
-            max-width: 40vw
+        
+        max-width: 40vw
         //opacity: 0.3
         font-weight: 400
         font-family: $font-mono

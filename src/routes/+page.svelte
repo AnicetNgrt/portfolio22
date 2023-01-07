@@ -11,10 +11,8 @@
 	import { linear } from "svelte/easing";
 	import { hsl, newHSL } from "$lib/colorStores";
 	import BenchmarkManager from "../hooks/benchmarkManager.svelte";
-	import { loadingPanelState } from "$lib/panelsStores";
-    
+
     let targetSpeed = 50
-    loadingPanelState.set("SHOWING")
 
     const newSpeed = (speed: number) => {
         if (Math.abs(speed) < Math.abs(targetSpeed)) return speed * 1.1

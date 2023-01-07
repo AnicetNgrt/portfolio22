@@ -6,11 +6,11 @@
 	import type { Writable } from "svelte/store";
 
     export let state: Writable<PanelState>
-
-    let fadeProgress = tweened(1)
+    
+    let fadeProgress = tweened(0.05)
 
     state.subscribe(state => {
-        //console.log(state)
+        console.log(state)
         if (state == "FADE_IN") {
             fadeProgress.set(1, { duration: 1500, easing: cubicOut })
         }
@@ -27,6 +27,7 @@
 
     fadeProgress.subscribe(progress => {
         if (progress >= 1 && $state != "SHOWING") {
+            console.log("-> SHOWING")
             state.set("SHOWING")
         }
         if (progress <= 0 && $state != "HIDDEN") {

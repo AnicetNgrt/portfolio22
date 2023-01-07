@@ -1,7 +1,11 @@
 <script lang=ts>
     import { loadingPanelState } from "$lib/panelsStores"
 	import { benchmarking, loading, perf, reportPerformance } from "$lib/perfStores";
+	import FullscreenPanel from "$src/comps/fullscreenPanel.svelte";
 	import { onMount } from "svelte";
+	import { writable } from "svelte/store";
+
+    let loaded = false
 
     const maxPerf = 24
     const minPerf = 0
@@ -9,6 +13,8 @@
 
     const sampleSize = 20
     $: predictedDeltas = [...new Array(sampleSize)].map(_ => 8)
+
+    loadingPanelState.set("SHOWING")
 
     reportPerformance.set((fpsToAnimateScale: number) => {
         if ($loading < 70) {
@@ -47,6 +53,7 @@
     }
 
     onMount(() => {
+        loaded = true
         let willLoad = true
 
         const benchmarkStr = localStorage.getItem("benchmark")
@@ -69,5 +76,7 @@
         }
     })
 </script>
+
+<FullscreenPanel state={!loaded ? writable("SHOWING") : writable("HIDDEN")}></FullscreenPanel>
 
 <slot/>

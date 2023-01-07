@@ -21,7 +21,7 @@
                         <a class="article-link" href={`/blog/${articleId}`}>
                             <div class="front">
                                 <h3 class="title">{article.title}</h3>
-                                <div class="meta">{article.writtenDate}</div>
+                                <div class="meta">Anicet ⁕ {article.date}</div>
                             </div>
                             <div class="cover" style={`filter: hue-rotate(${(i*(90))}deg)`}></div>
                             <img src={article.cover} alt={article.title}>
@@ -91,7 +91,7 @@
         .front
             display: flex
             flex-direction: column
-            gap: 0.5rem
+            gap: 1rem
 
             .meta
                 font-family: $font-mono
@@ -101,6 +101,7 @@
             line-height: 2.7rem
             font-weight: 500
             max-width: 15ch
+            height: 10.8rem
 
         img
             object-fit: cover

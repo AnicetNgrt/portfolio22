@@ -1,3 +1,4 @@
+import farswapXp from "./articles/farswap-xp"
 import insaXp from "./articles/insa-xp"
 import tutoringXp from "./articles/tutoring-xp"
 
@@ -25,7 +26,7 @@ export const pages: {[key: string]: Page} = {
         emojis: "🌐🪐🌍🧭🌟🌚"
     },
     "/resume": {
-        title: "Career & studies",
+        title: "career & studies",
         cover: "/pictures/insa/memories_insa (1).webp",
         topLeft: "👔",
         topRight: "◥",
@@ -100,6 +101,7 @@ export interface Article {
 }
 
 export interface Story {
+    category: string
     title: string
     covers: string[]
     institution?: string
@@ -112,6 +114,7 @@ export interface Story {
 export const stories: {[key:string]: Story[]} = {
     "/resume": [
         {
+            category: "studies",
             title: "Computer Science engineering student",
             covers: [
                 "/pictures/insa/memories_insa (3).webp",
@@ -126,6 +129,7 @@ export const stories: {[key:string]: Story[]} = {
             article: insaXp.article
         },
         {
+            category: "freelancing",
             title: "Computer Science & programming private tutor",
             covers: [
                 "/pictures/tutoring/tutoring%20(5).webp",
@@ -140,6 +144,7 @@ export const stories: {[key:string]: Story[]} = {
             article: tutoringXp.article
         },
         {
+            category: "entrepreneurship",
             title: "DeFi startup Co-Founder, lead front-end engineer & branding designer",
             covers: [
                 "/pictures/projects/farswap/lisbon (5).webp",
@@ -155,11 +160,10 @@ export const stories: {[key:string]: Story[]} = {
             place: "Lyon, France & Lisbon, Portugal",
             start: "04/2023",
             end: "12/2023",
-            article: `
-Article coming soon.            
-`
+            article: farswapXp.article
         },
         {
+            category: "internship",
             title: "Volunteer teacher & back-end developer for a Togolese non-profit",
             covers: [
                 "/pictures/projects/tingo/photo (1).webp",
@@ -178,6 +182,7 @@ Article coming soon.
 `
         },
         {
+            category: "internship",
             title: "Full-stack development intern",
             covers: [
                 "/pictures/paris/paris (2).webp",
@@ -197,6 +202,7 @@ Article coming soon.
 `
         },
         {
+            category: "job",
             title: "Contracted Computer Science freshmen's mentor",
             covers: [
                 "/pictures/paris/paris (3).webp",
@@ -211,6 +217,7 @@ Article coming soon.
 `
         },
         {
+            category: "studies",
             title: "Technical Computer Science university student",
             covers: [
                 "/pictures/iut/400.webp",

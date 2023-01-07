@@ -1,4 +1,4 @@
-const writtenDate = "25/12/2023"
+const date = "25/12/2022"
 const title = "My experience as a Computer Science & programming private tutor"
 const cover = "/pictures/tutoring/tutoring%20(1).webp"
 const article = `
@@ -51,5 +51,5 @@ export default {
     title,
     cover,
     article,
-    writtenDate
+    date
 }
