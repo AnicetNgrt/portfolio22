@@ -1,5 +1,6 @@
 import farswapXp from "./articles/farswap-xp"
 import insaXp from "./articles/insa-xp"
+import togoXp from "./articles/togo-xp"
 import tutoringXp from "./articles/tutoring-xp"
 
 export const loadingEmojis = "🧙‍♂️🪄⚡🗝️👔📫✨🐦🛣️📡🔗👋🌐🎲🎨🎴🗼"
@@ -177,9 +178,7 @@ export const stories: {[key:string]: Story[]} = {
             place: "Lomé, Togo",
             start: "06/2023",
             end: "08/2023",
-            article: `
-Article coming soon.            
-`
+            article: togoXp.article
         },
         {
             category: "internship",

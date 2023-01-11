@@ -97,11 +97,16 @@
                 font-family: $font-mono
 
         .title
-            font-size: 2.5rem
-            line-height: 2.7rem
+            font-size: 2.2rem
+            line-height: 2.5rem
+            @include for-size(tablet-landscape-up)
+                font-size: 2.5rem
+                line-height: 2.7rem
             font-weight: 500
-            max-width: 15ch
-            height: 10.8rem
+            max-width: 15.1ch
+            height: 12.7rem
+            @include for-size(tablet-landscape-up)
+                height: 10.8rem
 
         img
             object-fit: cover

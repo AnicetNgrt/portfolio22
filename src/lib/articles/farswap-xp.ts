@@ -1,4 +1,4 @@
-const date = "7/01/2023"
+const date = "8/01/2023"
 const title = "A postmortem: My experience as a DeFi startup Co-Founder"
 const cover = "/pictures/projects/farswap/lisbon (5).webp"
 const article = `
@@ -10,7 +10,7 @@ Here is my story, which I hope could help students with little crypto knowledge 
 
 So it all started during a web3-centric one month hackathon during which we had to develop an innovative app or web app using NEAR's blockchain. My partners had selected me for my front-end and rust programming skills they heard about from other students I knew. Although, I only had a broad high-level understanding of blockchain technology and of web3 culture at that time. But since then, I learned quite a bit more about this weird, exciting and controversial use of computers and its societal, cultural and business-related implications.
 
-During the hackathon we made a decentralized exchange (DeX or "swap" in web3 jargon) named "Far Far Away Swap". This app's goal was to let our users exchange coins hosted on the NEAR blockchain using an automated market maker (AMM) algorithm, implemented using NEAR-specific smart contracts written in Rust. My partners wanted to spice it up by implementing a pretty new algorithm that we internally called "mixed swap", which would improve exchange rates by cleverly combining two swapping strategies: liquidity pools (based on the equilibrium of our own publicly-provided funds) and market orders (based on user-generated sell and buy orders). Everything calculated on-chain, which meant without using third-party non-blockchain code. 
+During the hackathon we made a decentralized exchange (DeX or "swap" in web3 jargon) named "Far Far Away Swap". This app's goal was to let our users exchange coins hosted on the NEAR blockchain using an automated market maker (AMM) algorithm, implemented using NEAR-specific smart contracts written in Rust. My partners wanted to spice it up by implementing a pretty new algorithm that we internally called "combined swap", which would improve exchange rates by cleverly combining two swapping strategies: liquidity pools (based on the equilibrium of our own publicly-provided funds) and market orders (based on user-generated sell and buy orders). Everything calculated on-chain, which meant without using third-party non-blockchain code. 
 
 A challenge that required thorough code optimization: on the blockchain, every line of code is transparent, every execution is being securely recorded and tracked, which is key when the code directly manipulates our user's funds. But it comes at a cost: executing code costs money (or "gas fees") and therefore complexity must be kept under reasonable ranges. And also we needed to ensure our code's security and provability, if the code happened to be hijacked or just plain wrong, it could become a money Black Hole with dire economic consequences for its innocent users, and potentially severe legal consequences for its unfortunate creators.
 
