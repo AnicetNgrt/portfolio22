@@ -64,6 +64,7 @@
         width: 100%
         height: 100%
         z-index: -1
+        opacity: 0.3
 
     .fullscreen
         position: fixed

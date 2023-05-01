@@ -60,7 +60,7 @@ export const pages: {[key: string]: Page} = {
         right: "HTTP/2 200 OK",
         fr: "Blog",
         href: "/blog",
-        emojis: "✏️📓📂🌍💾💡📙📜📰",
+        emojis: "~~> ~~> ~~> ~~> ~~> ~~> ~~> ~~>",
         bg: "bg-wigle"
     },
     "/gamedev": {

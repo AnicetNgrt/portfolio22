@@ -50,7 +50,7 @@
         }}
         >
             <div class="stories-top">
-                <h1>{pages[route].title.toLocaleUpperCase()}</h1>
+                <h1>{pages[route].title}</h1>
                 <div class:useless={leftIntersecting && rightIntersecting} class="controls">
                         <button class:disabled={leftIntersecting} on:click={onRightSwipe}>{"<-"}</button>
                         <button class:disabled={rightIntersecting} on:click={onLeftSwipe}>{"->"}</button>
@@ -163,9 +163,11 @@
             line-height: 1rem
             padding: 0.5rem 2rem
             font-family: $font-mono
-            background-color: alpha(var(--color), 0.3)
-            border: solid 0.2rem var(--color)
-            color: $c0
+            // background-color: alpha(var(--color), 0.3)
+            // border: solid 0.2rem var(--color)
+            background-color: transparent
+            border: none
+            color: var(--color)
             border-radius: 2rem
             cursor: pointer
 
@@ -193,7 +195,8 @@
             height: 5rem
             font-family: $font-text
             background-color: alpha(var(--color), 0.3)
-            border: solid 0.2rem var(--color)
+            border: none
+            //border: solid 0.2rem var(--color)
             color: $c0
             border-radius: 5rem
             cursor: pointer

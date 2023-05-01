@@ -6,8 +6,8 @@
 <Header>
     <div class="title-container">
         <div class="title">
-            <h1>ANICET {"⁕"} NOUGARET<span class="apostroph">'s</span></h1>
-            <p class="subtitle">2023 Portfolio & Blog</p>
+            <h1>Anicet {"⁕"} Nougaret<span class="apostroph">'s</span></h1>
+            <p class="subtitle">Portfolio & Blog</p>
         </div>
     </div>
 </Header>
@@ -30,7 +30,7 @@
         max-width: 100%
         width: fit-content
 
-        color: var(--color)
+        color: $c5
 
         display: flex
         flex-direction: column
@@ -51,7 +51,7 @@
             @include rfs(5.5rem, line-height)
             width: max-content
             max-width: 100%
-            font-weight: 800
+            font-weight: 700
 
             // color: transparent
             // background-clip: text

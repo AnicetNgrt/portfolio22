@@ -27,7 +27,7 @@
         </div>
     
     </div>
-    <SpinnyRolesBg {size} lines={Math.round(lines/1.5)} speed={0.5} opacity={0.5} shift={90}/>
+    <!-- <SpinnyRolesBg {size} lines={Math.round(lines/1.5)} speed={0.5} opacity={0.5} shift={90}/> -->
 </div>
 
 <style lang=sass>

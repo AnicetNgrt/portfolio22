@@ -9,9 +9,9 @@
         z-index: -1
         position: sticky
         top: 0
-        height: calc(100vh - 7rem)
+        height: calc(100vh - 0rem)
         @include for-size(tablet-landscape-up)
-            height: calc(100vh - 3rem)
+            height: calc(100vh - 1rem)
         max-width: 100%
         width: 100%
         padding: 0.2rem

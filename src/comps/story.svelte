@@ -79,8 +79,8 @@
         cursor: pointer
         width: calc(73vh * calc(9 / 16))
         height: 73vh
-        border-radius: 2rem
-        border: solid 0.2rem $c5
+        border-radius: 1rem
+        border: none
         box-shadow: -0.5rem 0.5rem 0rem alpha(var(--color), 0.4)
         padding: 0.2rem
         position: relative
@@ -98,8 +98,8 @@
             position: absolute
             width: calc(100% - 0.4rem)
             height: calc(100% - 0.4rem)
-            border-radius: 1.7rem
-            background: linear-gradient(150deg, alpha(var(--color), 1) 5%, alpha(var(--color), 0.0) 120%)
+            border-radius: 0.8rem
+            background: linear-gradient(150deg, alpha(var(--color), 1) 15%, alpha(var(--color), 0.0) 120%)
             transition: border-radius 0.2s
         
         transition: width 0.5s, height 0.5s, border-radius 0.2s
@@ -123,7 +123,7 @@
         background-color: $c5
 
     .story
-        border-radius: 1.7rem
+        border-radius: 0.8rem
         width: 100%
         height: 100%
         position: relative
@@ -133,6 +133,7 @@
         flex-direction: column
         align-items: start
         gap: 0.3rem
+
 
         .category
             font-size: 1.5rem

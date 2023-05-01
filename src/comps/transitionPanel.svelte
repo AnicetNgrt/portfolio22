@@ -32,7 +32,7 @@
         {:else}
             {#each [...new Array(7)] as _}
             <div class="loading-emojis">
-                <div>{pages[to].emojis}</div>
+                <div>{"◑◐◕◔◯◷≜≉≣≢≨≚⊃≵≪≷⊈≼▥▩▤▣▢▨◬◭◆◮◺◈⊤⊫⊯⊥⊧⊨⊩⊦⊭⊮◴◉◵◶◌●"}</div>
             </div>
             {/each}
         {/if}
@@ -40,6 +40,11 @@
 {/if}
 
 <style lang=sass>
+    .loading-emojis
+        color: var(--color)
+        font-family: $font-mono
+        font-weight: 700
+
     .transition-decoration
         font-family: $font-mono
         padding: 0em 0.5em

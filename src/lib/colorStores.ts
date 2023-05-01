@@ -14,9 +14,9 @@ import { randint } from "./math"
 export const newHSL = (hsl: number[]) => {
     let h = hsl[0]
     return [
-        30, // 225, //150,
-        60,
-        60
+        260, // 225, //150,
+        20,
+        50
     ]
 }
 

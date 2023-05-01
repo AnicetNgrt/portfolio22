@@ -47,9 +47,9 @@
             top: 0px
         width: 100%
         background-color: $c0
-        border-bottom: solid 0.2rem $c5 //alpha(var(--color), 0.7)
+        //border-bottom: solid 0.2rem $c5 //alpha(var(--color), 0.7)
         @include for-size(tablet-landscape-up)
-            border-bottom: solid 0.2rem $c5 //alpha(var(--color), 0.3)
+            //border-bottom: solid 0.2rem $c5 //alpha(var(--color), 0.3)
             box-shadow: 0rem 0.4rem 1rem transparentize($c5, 0.9) //alpha(var(--color), 0.1)
             z-index: 2
 
@@ -127,11 +127,11 @@
         background-attachment: fixed
 
     .content-container
-        @include for-size(tablet-landscape-up)
-            border: solid 0.5rem alpha(var(--color), 0.5)
+        // @include for-size(tablet-landscape-up)
+        //     border: solid 0.5rem alpha(var(--color), 0.5)
         border-bottom: none
-        @include for-size(tablet-landscape-up)
-            padding: 0.2rem
+        // @include for-size(tablet-landscape-up)
+        //     padding: 0.2rem
         flex-grow: 1
         max-width: 100%
         min-height: 100vh

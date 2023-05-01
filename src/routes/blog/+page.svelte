@@ -1,6 +1,4 @@
 <script lang=ts>
-	import { pages } from "$lib/content";
-	import PageBanner from "../../comps/pageBanner.svelte";
 	import Page from "../../comps/page.svelte";
 	import PageBodyAndNav from "../../comps/pageBodyAndNav.svelte";
     import type { PageData } from './$types';
@@ -66,7 +64,7 @@
         background-color: $c0
         border-radius: 1rem
         padding: 0.2rem
-        border: solid 0.2rem $c5
+        //border: solid 0.2rem $c5
         box-shadow: -0.5rem 0.5rem 0rem alpha(var(--color), 0.5)
 
     .article-link-container:hover

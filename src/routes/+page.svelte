@@ -34,12 +34,12 @@
         setTimeout(refreshSpeedLoop, 1000)
     }
 
-    setTimeout(refreshSpeedLoop, 1000)
+    // setTimeout(refreshSpeedLoop, 1000)
 
     onMount(() => {
-        window.onclick = () => {
-            setTimeout(() => speed.set(newSpeed($speed)), 500)
-        }
+        // window.onclick = () => {
+        //     setTimeout(() => speed.set(newSpeed($speed)), 500)
+        // }
     })
 
 </script>
@@ -47,17 +47,23 @@
 <BenchmarkManager />
 
 <Page>
-    <MainHeader/>
+    <!-- <MainHeader/> -->
     
     <div class="content">
-        <ScrollHint/>
+        <!-- <ScrollHint/> -->
 
-        <div class="presentation bg-pattern bg-stars">
+        <div class="presentation bg-pattern bg-clouds">
             <div class="portrait-container">
                 <img class="portrait" src="/pictures/portraits/portrait1_square.webp" alt='August 22 - Last stair of \"Hotel 2 Février\" in Lomé, Togo.'>
             </div>
             <div class="text">
-                Hi 👋! I'm Anicet Nougaret, a 21 year old passionate about programming, software engineering, design and art. Currently studying CS engineering at INSA in Lyon, France, working on many side-projects and trying to learn new things every day.
+                Hi 👋! 
+                <br>
+                <br>
+                I'm Anicet Nougaret, a 21 year old passionate about programming, software engineering, design and art. Currently studying CS engineering at INSA in Lyon, France.
+                <br>
+                <br>
+                Welcome to my porfolio and blog!
             </div>
         </div>
 
@@ -68,9 +74,9 @@
         </div>
     </div>
 
-    <svelte:fragment slot="bg">
+    <!-- <svelte:fragment slot="bg">
         <SpinnyRolesBg fixed benchmarking={true} lines={$perf+8} size={32/($perf+8)} speed={Number($speed.toFixed(3))} opacity={1} shift={37}/>
-    </svelte:fragment>
+    </svelte:fragment> -->
 </Page>
 
 

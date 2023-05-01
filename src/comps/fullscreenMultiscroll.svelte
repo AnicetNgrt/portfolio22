@@ -24,6 +24,7 @@
 
 <style lang=sass>
     .multiscroll
+        opacity: 0.8
         height: fit-content
         width: 100%
         background-color: transparentize($c5, 0.2) //alpha(var(--color), 0.8)

@@ -15,32 +15,58 @@
     $: computedSpeed = (distance-0.5)*0.5
 
     const ROLES = [
-        "indie game creator",
-        "currently living in Lyon",
-        "with experience in Web3",
-        "always exploring multiple paradigms",
-        "full-stack engineer",
-        "who also does UX/UI design",
-        "from Paris",
-        "currently 21 years old if I don't forget to update this website",
-        "private programming tutor",
-        "INSA Lyon Computer Science 4th year student",
-        "speaking French and English fluently",
-        "knowing some Spanish and Russian",
-        "programming language polyglot",
-        "hobbyist illustrator",
-        "occasional gamejamer",
-        "hobbyist pixelartist",
-        "spending days optimizing effects like this on mobile",
-        "understanding some Rust",
-        "trying to become a front-end ninja",
-        "using paper instead of Vim",
-        "occasional hackathon finalist and winner",
-        "proficient with software architecture",
-        "doing complex backend tasks as well",
-        "learning too many things at once",
-        "enjoying the creative web",
-        "consistently happy with bold design choices"
+        "⇆⇇⇉⇆⇇⇉",
+        "⇝⇦⇨⇝⇦⇨",
+        "○◍◓◎◉◒",
+        "◑◐◕◔◯◷",
+        "◴◉◵◶◌●",
+        "∑ↇ∇∏∞∁∅ↀ",
+        "≜≉≣≢≨≚⊃≵≪≷⊈≼",
+        "▥▩▤▣▢▨",
+        "⨝⨉⨁⨀⨞⨠⨳",
+        "◬◭◆◮◺◈",
+        "⊤⊫⊯⊥⊧⊨⊩⊦⊭⊮",
+        "⋽⋺⋹⋸⋻⋼⋴⋶⋵⋐",
+        "⨌⨎⨒⨘⨏⨕⨙⨔⨜",
+        "⇆⇇⇉⇆⇇⇉",
+        "⇝⇦⇨⇝⇦⇨",
+        "○◍◓◎◉◒",
+        "◑◐◕◔◯◷",
+        "◴◉◵◶◌●",
+        "∑ↇ∇∏∞∁∅ↀ",
+        "≜≉≣≢≨≚⊃≵≪≷⊈≼",
+        "▥▩▤▣▢▨",
+        "⨝⨉⨁⨀⨞⨠⨳",
+        "◬◭◆◮◺◈",
+        "⊤⊫⊯⊥⊧⊨⊩⊦⊭⊮",
+        "⋽⋺⋹⋸⋻⋼⋴⋶⋵⋐",
+        "⨌⨎⨒⨘⨏⨕⨙⨔⨜",
+        // "indie game creator",
+        // "currently living in Lyon",
+        // "with experience in Web3",
+        // "always exploring multiple paradigms",
+        // "full-stack engineer",
+        // "who also does UX/UI design",
+        // "from Paris",
+        // "currently 21 years old if I don't forget to update this website",
+        // "private programming tutor",
+        // "INSA Lyon Computer Science 4th year student",
+        // "speaking French and English fluently",
+        // "knowing some Spanish and Russian",
+        // "programming language polyglot",
+        // "hobbyist illustrator",
+        // "occasional gamejamer",
+        // "hobbyist pixelartist",
+        // "spending days optimizing effects like this on mobile",
+        // "understanding some Rust",
+        // "trying to become a front-end ninja",
+        // "using paper instead of Vim",
+        // "occasional hackathon finalist and winner",
+        // "proficient with software architecture",
+        // "doing complex backend tasks as well",
+        // "learning too many things at once",
+        // "enjoying the creative web",
+        // "consistently happy with bold design choices"
     ]
     let roles = [...ROLES]
     shuffle(roles)
@@ -51,7 +77,7 @@
         <Marquee {stoppedPerformance} {onPerfRecorded} externalStop={stop} speed={computedSpeed} speedMultiplier={speed}>
             <div class="marquee-content">
                 {#each roles as role, i}
-                    <div class="role" style={`opacity: ${wave(distance)+0.2}; filter: blur(${(1-(wave(distance)))*10}px) hue-rotate(${(inverseDistance*(ROLES.indexOf(role)/ROLES.length))*380}deg); line-height: ${(0.4+inverseDistance*size)*1.5}rem; font-size: ${0.4+inverseDistance*size}rem`}>
+                    <div class="role" style={`opacity: ${(wave(distance)*0.5)+0.2}; filter: blur(${(1-(wave(distance)))*10}px) hue-rotate(${(ROLES.indexOf(role)/ROLES.length)*1800-900}deg); line-height: ${(0.4+inverseDistance*size)*1.5}rem; font-size: ${0.4+inverseDistance*size}rem`}>
                         {role}
                     </div>
                 {/each}
@@ -68,7 +94,7 @@
     .marquee-content
         @include font-size(1rem)
         display: flex
-        gap: 1em
+        gap: 0.15em
         font-family: $font-mono
 
         .role
