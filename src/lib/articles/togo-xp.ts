@@ -1,6 +1,6 @@
 const date = "1/05/2023"
 const title = "My experience as a Volunteer teacher & back-end developer for a Togolese non-profit"
-const cover = "/pictures/projects/tingo/photo (1).webp"
+const cover = "/pictures/projects/tingo/photo1.webp"
 const keywords= ["Togo", "education", "internship", "volunteering", "computer science", "insa", "tingo", "AJVDEC", "Lome"]
 const article = `
 From mid-June to mid-August 2022 I traveled to Togo for my first industry internship as a Computer Science engineering student at INSA de Lyon.

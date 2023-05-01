@@ -8,7 +8,19 @@
 
     let sortedSections = sections.filter(s => s != pages[route]) 
     let backSection = subroute ? pages[route] : null
+    
+    const thumbnail = "anicetnougaret.fr/" + pages[route].cover;
 </script>
+
+<svelte:head>
+    {#if !subroute}
+        <meta property="og:image" content="http://{thumbnail}" />
+        <meta property="og:image:secure_url" content="https://{thumbnail}" /> 
+        <meta property="og:image:type" content="image/jpeg" /> 
+        <meta property="og:image:width" content="2859" /> 
+        <meta property="og:image:height" content="2144" />
+    {/if}
+</svelte:head>
 
 <div class="nav-container">
     <div class="nav">

@@ -42,7 +42,14 @@
         // }
     })
 
+    const thumbnail = "anicetnougaret.fr/pictures/art/skyscrapper_1.jpg";
 </script>
+
+<meta property="og:image" content="http://{thumbnail}" />
+<meta property="og:image:secure_url" content="https://{thumbnail}" /> 
+<meta property="og:image:type" content="image/jpeg" /> 
+<meta property="og:image:width" content="2859" /> 
+<meta property="og:image:height" content="2144" />
 
 <BenchmarkManager />
 

@@ -30,7 +30,7 @@ export const pages: {[key: string]: Page} = {
     "/resume": {
         title: "Resume",
         desc: "Timeline of my studies in Computer Science and my profesionnal experience in tech and education.",
-        cover: "/pictures/projects/tingo/photo (1).webp",
+        cover: "/pictures/projects/tingo/photo1.webp",
         topLeft: "👔",
         topRight: "◥",
         botLeft: "◣",
@@ -156,7 +156,7 @@ export const stories: {[key:string]: Story[]} = {
             category: "entrepreneurship",
             title: "DeFi startup Co-Founder, lead front-end engineer & branding designer",
             covers: [
-                "/pictures/projects/farswap/lisbon (5).webp",
+                "/pictures/projects/farswap/lisbon5.webp",
                 "/pictures/projects/farswap/screen0.webp",
                 "/pictures/projects/farswap/lisbon (1).webp",
                 "/pictures/projects/farswap/lisbon (2).webp",
@@ -175,7 +175,7 @@ export const stories: {[key:string]: Story[]} = {
             category: "internship",
             title: "Volunteer teacher & back-end developer for a Togolese non-profit",
             covers: [
-                "/pictures/projects/tingo/photo (1).webp",
+                "/pictures/projects/tingo/photo1.webp",
                 "/pictures/projects/tingo/classes.webp",
                 "/pictures/projects/tingo/photo (2).webp",
                 "/pictures/projects/tingo/photo (3).webp",
