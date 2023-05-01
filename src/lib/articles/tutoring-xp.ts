@@ -1,6 +1,6 @@
 const date = "25/12/2022"
 const title = "My experience as a Computer Science & programming private tutor"
-const cover = "/pictures/tutoring/tutoring%20(1).webp"
+const cover = "/pictures/tutoring/tutoring%20(1).png"
 const keywords = ["tutoring", "computer science", "student", "teaching", "programming"]
 const article = `
 Since September 2021 I've been giving weekly private tutoring lessons, mostly programming and Computer Science related courses, to six students aged 12 to 21.

@@ -13,6 +13,9 @@
     const application_name = "Anicet Nougaret's portfolio & blog.";
     const keywords = data.keywords?.join(" ") ?? "RUST, MACHINE_LEARNING, ELIXIR, SVELTE, DEV, FRANCE, PARIS, LYON, INSA, IUT, INFORMATIQUE, JAVASCRIPT, TYPESCRIPT, REACT, NODE, EUROPE, STUDENT, TOGO"
     const thumbnail = "anicetnougaret.fr" + data.cover ?? "/pictures/art/skyscrapper_1.jpg";
+
+    // check whether thumbnail finishes with jpg, JPG or png and generate the correct og:image:type
+    const thumbnail_type = thumbnail.slice(-3) == "jpg" || thumbnail.slice(-3) == "JPG" ? "image/jpeg" : "image/png";
 </script>
 
 <svelte:head>
@@ -28,7 +31,7 @@
     <meta property="og:description" content={description} />
     <meta property="og:image" content="http://{thumbnail}" />
     <meta property="og:image:secure_url" content="https://{thumbnail}" /> 
-    <meta property="og:image:type" content="image/jpeg" /> 
+    <meta property="og:image:type" content={thumbnail_type} /> 
     <meta property="og:image:width" content="710" /> 
     <meta property="og:image:height" content="527" />
 </svelte:head>
