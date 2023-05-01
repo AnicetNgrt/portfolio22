@@ -68,7 +68,32 @@
     //     }
 
     // })
+
+    const description = "Anicet Nougaret's portfolio. Computer Science student, Full-Stack and Machine Learning developer, indie games creator. Come and discover my programming projects and artistic works.";
+    const title = "Anicet Nougaret's portfolio & blog.";
+    const application_name = "Anicet Nougaret's portfolio & blog.";
+    const keywords = "RUST, MACHINE_LEARNING, ELIXIR, SVELTE, DEV, FRANCE, PARIS, LYON, INSA, IUT, INFORMATIQUE, JAVASCRIPT, TYPESCRIPT, REACT, NODE, EUROPE, STUDENT, TOGO"
+    const thumbnail = "anicetnougaret.fr/pictures/art/skyscrapper_1.jpg";
 </script>
+
+<svelte:head>
+    <meta name="application-name" content={application_name}/>
+    <meta name="keywords" content={keywords}/>
+    <title>{title}</title>
+    <meta name="description" content={description}/>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@AniC_dev" />
+    <meta name="twitter:creator" content="@AniC_dev" />
+    <meta property="og:url" content="https://anicetnougaret.fr" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="http://{thumbnail}" />
+    <meta property="og:image:secure_url" content="https://{thumbnail}" /> 
+    <meta property="og:image:type" content="image/jpeg" /> 
+    <meta property="og:image:width" content="2859" /> 
+    <meta property="og:image:height" content="2144" />
+</svelte:head>
+
 
 <!-- <svelte:window on:click={() => hsl.set(newHSL($hsl))}></svelte:window> -->
 
