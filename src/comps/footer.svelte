@@ -16,7 +16,7 @@
             </p>
             <br>
             <p>
-                All rights reserved @ Anicet Nougaret 2023
+                All rights reserved © Anicet Nougaret 2023
             </p>
             <div style="height: 1rem"></div>
         </div>

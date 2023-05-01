@@ -24,7 +24,7 @@ The courses are interesting, deepening the scope of what I studied in my technic
         <div class="caption">Back-end architecture lecture</div>
     </div>
     <div class="picture">
-        <img src="/pictures/projects/tingo/photo%20(1).webp">
+        <img src="/pictures/projects/tingo/photo1.webp">
         <div class="caption">Teaching LibreOffice to young girls in Lomé, Togo</div>
     </div>
 </div>

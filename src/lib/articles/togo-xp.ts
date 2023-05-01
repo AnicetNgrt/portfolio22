@@ -21,7 +21,7 @@ It is not an over-exaggeration to say that it was quite an unreal trip for a clu
 Aside from the eye-opening discovery of Togolese culture, society, landscapes and very welcoming people, I got to experience an interesting technical internship, volunteering as a computer teacher in a middle school and later as a back-end developer with two of my fellow students from INSA de Lyon.
  
 <div class="picture">
-    <img src="/pictures/projects/tingo/photo%20(1).webp">
+    <img src="/pictures/projects/tingo/photo1.webp">
     <div class="caption">Teaching a young Togolese girl how to use the trackpad</div>
 </div>
 

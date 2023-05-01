@@ -145,7 +145,7 @@
         .portrait
             width: 30rem
             max-width: 100%
-            height: min-content
+            height: auto
             background-color: transparentize($c0, 0.2)
             @include for-size(tablet-landscape-up)
                 box-shadow: inset -0.4rem 0.2rem 0rem alpha(var(--color), 0.8)
