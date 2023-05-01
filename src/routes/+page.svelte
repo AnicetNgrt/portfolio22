@@ -72,6 +72,7 @@
                 <br>
                 Welcome to my porfolio and blog!
             </div>
+            <div class="scroll-arrow"><p>{"->"}</p></div>
         </div>
 
         <div class="sections">
@@ -93,6 +94,21 @@
         z-index: 1
         width: 100%
         background-color: $c0
+
+    .scroll-arrow
+        width: 100%
+        text-align: center
+        height: 3rem
+
+        p
+            font-family: $font-mono
+            font-size: 1.5rem
+            @include for-size(tablet-landscape-up)
+                height: 0rem
+                font-size: 2.5rem
+            color: var(--color)
+            font-weight: 500
+            transform: rotate(90deg)
 
     @keyframes hue-cycle
         0%

@@ -22,7 +22,7 @@
         </div>
         <div class="links">
             <a href="https://github.com/AnicetNgrt/portfolio22">⁕ Source code</a>
-            <a href="https://www.linkedin.com/in/anicet-nougaret-b7846b174/">⁕ Linkedin</a>
+            <a href="https://www.linkedin.com/in/anicet-nougaret-b7846b174/">⁕ LinkedIn</a>
             <a href="https://twitter.com/AniC_dev">⁕ Twitter</a>
         </div>
     
