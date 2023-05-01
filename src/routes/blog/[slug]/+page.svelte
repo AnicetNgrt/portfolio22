@@ -12,7 +12,7 @@
     const title = data.title ?? "Anicet Nougaret's portfolio & blog.";
     const application_name = "Anicet Nougaret's portfolio & blog.";
     const keywords = data.keywords?.join(" ") ?? "RUST, MACHINE_LEARNING, ELIXIR, SVELTE, DEV, FRANCE, PARIS, LYON, INSA, IUT, INFORMATIQUE, JAVASCRIPT, TYPESCRIPT, REACT, NODE, EUROPE, STUDENT, TOGO"
-    const thumbnail = "anicetnougaret.fr/" + data.cover ?? "/pictures/art/skyscrapper_1.jpg";
+    const thumbnail = "anicetnougaret.fr" + data.cover ?? "/pictures/art/skyscrapper_1.jpg";
 </script>
 
 <svelte:head>

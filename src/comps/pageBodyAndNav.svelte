@@ -9,7 +9,7 @@
     let sortedSections = sections.filter(s => s != pages[route]) 
     let backSection = subroute ? pages[route] : null
     
-    const thumbnail = "anicetnougaret.fr/" + pages[route].cover;
+    const thumbnail = "anicetnougaret.fr" + pages[route].cover;
 </script>
 
 <svelte:head>
