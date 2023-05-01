@@ -83,7 +83,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@AniC_dev" />
     <meta name="twitter:creator" content="@AniC_dev" />
-    <meta property="og:url" content="https://anicetnougaret.fr" />
+    <meta property="og:url" content={$page.url.toString()} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
 </svelte:head>
