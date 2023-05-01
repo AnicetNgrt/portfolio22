@@ -29,7 +29,7 @@ export const pages: {[key: string]: Page} = {
     },
     "/resume": {
         title: "Resume",
-        desc: "Timeline of my studies in Computer Science at INSA de Lyon and Université de Paris and my profesionnal experience in tech and education.",
+        desc: "Timeline of my studies in Computer Science and my profesionnal experience in tech and education.",
         cover: "/pictures/projects/tingo/photo (1).webp",
         topLeft: "👔",
         topRight: "◥",
@@ -65,7 +65,7 @@ export const pages: {[key: string]: Page} = {
     },
     "/gamedev": {
         title: "Game creation",
-        desc: "My game design and development porfolio. Small innovative games cumulating thousands of browser plays and hundreds of downloads.",
+        desc: "Small innovative games I've worked on, cumulating thousands of browser plays and hundreds of downloads.",
         cover: "/pictures/projects/zugzwang/captureOld.webp",
         topLeft: "🎲",
         topRight: "▨",

@@ -13,7 +13,6 @@
 </script>
 
 <Page>
-    <PageBanner/>
     <PageBodyAndNav subroute {route}>
         {#if data}
             <div class="article-container">

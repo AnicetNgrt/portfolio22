@@ -6,7 +6,7 @@
     <div class="languette">
         <div class="arrow">⬇</div>
     </div>
-    <Marquee speed={0.}>
+    <!-- <Marquee speed={0.2}>
         <div class="content">
             {#each [...new Array(2)] as _}
                 <p>
@@ -14,7 +14,7 @@
                 </p>
             {/each}
         </div>
-    </Marquee>
+    </Marquee> -->
 </div>
 
 <style lang=sass>
@@ -39,7 +39,7 @@
         position: sticky
         top: 0
         z-index: 2
-        height: 3rem
+        height: 0.25rem
         width: 100%
         display: flex
         justify-content: center

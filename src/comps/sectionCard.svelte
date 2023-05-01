@@ -53,6 +53,7 @@
 
 <style lang="sass">
     .title
+        z-index: 1
         display: flex
         flex-direction: column
         gap: 0.5rem

@@ -57,7 +57,7 @@
                 <img class="portrait" src="/pictures/portraits/portrait1_square.webp" alt='August 22 - Last stair of \"Hotel 2 Février\" in Lomé, Togo.'>
             </div>
             <div class="text">
-                Hi 👋! I'm Anicet Nougaret, a 21 year old passionate about programming, software engineering, design and art. Currently studying CS engineering at INSA in Lyon, France, working on many side-projects, travelling and learning new things every day. <br><br> Welcome to my portfolio! I hope you will have a nice time discovering my work and passion.
+                Hi 👋! I'm Anicet Nougaret, a 21 year old passionate about programming, software engineering, design and art. Currently studying CS engineering at INSA in Lyon, France, working on many side-projects and trying to learn new things every day.
             </div>
         </div>
 
@@ -80,7 +80,7 @@
         z-index: 1
         width: 100%
         background-color: $c0
-    
+
     @keyframes hue-cycle
         0%
             filter: blur(30px) hue-rotate(180deg)
@@ -97,11 +97,11 @@
     .presentation
         padding: 2rem
         padding-top: 6rem
-        padding-bottom: 6rem
+        padding-bottom: 3rem
         @include for-size(tablet-landscape-up)
             min-height: 100vh
         @include for-size(tablet-landscape-up)
-            padding: 6rem 0rem 8rem 0rem
+            padding: 6rem 0rem 5rem 0rem
 
         display: flex
         flex-wrap: wrap
