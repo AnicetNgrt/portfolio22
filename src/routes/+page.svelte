@@ -60,7 +60,7 @@
                 Hi 👋! 
                 <br>
                 <br>
-                I'm Anicet Nougaret, a 21 year old passionate about programming, software engineering, design and art. Currently studying CS engineering at INSA in Lyon, France.
+                I'm Anicet Nougaret, a 21 year old passionate about programming, software engineering, design and art. Currently studying CS engineering at INSA Lyon, France.
                 <br>
                 <br>
                 Welcome to my porfolio and blog!
