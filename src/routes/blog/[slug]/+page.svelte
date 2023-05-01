@@ -1,6 +1,4 @@
 <script lang=ts>
-	import { pages } from "$lib/content";
-	import PageBanner from "../../../comps/pageBanner.svelte";
 	import Page from "../../../comps/page.svelte";
 	import PageBodyAndNav from "../../../comps/pageBodyAndNav.svelte";
     import { marked } from "marked";

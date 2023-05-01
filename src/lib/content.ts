@@ -106,6 +106,7 @@ export interface Article {
     cover: string
     date: string
     article: string
+    keywords: string[]
 }
 
 export interface Story {

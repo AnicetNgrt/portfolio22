@@ -1,6 +1,7 @@
 const date = "1/05/2023"
 const title = "My experience as a Computer Science engineering student at INSA de Lyon"
 const cover = "/pictures/insa/memories_insa%20(4).webp"
+const keywords = ["INSA", "Lyon", "informatique", "avis", "exchange", "computer science"]
 const article = `
 After graduating from my two years technical Computer Science degree at Université de Paris Rives de Seine, I got admited to INSA de Lyon in Computer Science engineering, based on my curriculum.
 
@@ -63,5 +64,6 @@ export default {
     title,
     cover,
     article,
-    date
+    date,
+    keywords
 }

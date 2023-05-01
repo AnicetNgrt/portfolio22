@@ -1,6 +1,7 @@
 const date = "8/01/2023"
 const title = "A postmortem: My experience as a DeFi startup Co-Founder"
 const cover = "/pictures/projects/farswap/lisbon (5).webp"
+const keywords = ["Crypto", "DeFI", "startup", "postmortem", "entrepreneurship", "career", "Near", "Farswap", "College", "student"]
 const article = `
 In early 2022 I got to participate in a online worldwide hackathon with students from my college. All of them I didn't know before. Which lead me to co-founding my first startup (kind of), building a web3 product, pitching it in public at a big event in Lisbon, and leaving the team because I didn't align that much with web3 culture and also because I realized the project was not happening at the right time in my career for me to carry it towards success. Thankfully, my former co-founders are doing a great job even without my help. I believe in their ability to carry the project forward in the right direction, and at the fast required pace in the world of crypto startups.
 
@@ -79,5 +80,6 @@ export default {
     title,
     cover,
     article,
-    date
+    date,
+    keywords
 }
