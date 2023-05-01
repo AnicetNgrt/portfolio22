@@ -1,10 +1,4 @@
 <script lang=ts>
-	import Marquee from "./marquee.svelte";
-    import type { Page } from "../lib/content"
-
-    export let pageName: string
-    export let pageSubName: string = "-------------"
-
 </script>
 
 <a href="/" class="banner-container">
@@ -13,20 +7,11 @@
             {"->"} Back to main page
         </div>
     </div>
-    <Marquee speed={0.3}>
-        <div class="banner-content">
-            {#each [...new Array(3)] as _}
-                {#each [pageName, pageSubName, "Anicet Nougaret's 2023 Portfolio & Blog"] as text}
-                    <div class="banner-text">
-                        {text}
-                    </div>
-                    <div class="banner-text">
-                        {"⁕"}
-                    </div>
-                {/each}
-            {/each}
+    <div class="banner-content">
+        <div class="banner-text">
+            Anicet Nougaret's 2023 Portfolio & Blog
         </div>
-    </Marquee>
+    </div>
 </a>
 
 <style lang=sass>
@@ -51,6 +36,7 @@
         background-color: var(--color)
         padding: 0.2rem 0rem
         position: relative
+        text-decoration: none
 
     .banner-container:hover .indicator
         display: flex
@@ -61,6 +47,7 @@
         border-left: none
         border-right: none
         align-items: center
+        justify-content: center
         gap: 1rem
         padding: 0.2rem 0rem
         padding-right: 1rem

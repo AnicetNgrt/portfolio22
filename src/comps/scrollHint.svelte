@@ -6,7 +6,7 @@
     <div class="languette">
         <div class="arrow">⬇</div>
     </div>
-    <Marquee speed={0.15}>
+    <Marquee speed={0.}>
         <div class="content">
             {#each [...new Array(2)] as _}
                 <p>

@@ -36,7 +36,7 @@
 </script>
 
 <Page>
-    <PageBanner pageName={pages[route].title} pageSubName={pages[route].fr}/>
+    <PageBanner/>
     <PageBodyAndNav {route}>
         <div 
         class="stories-nav" 

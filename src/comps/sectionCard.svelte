@@ -8,19 +8,28 @@
 <a class="section-container" href={page.href}>
 	<div class="section">
 		<div class="top">
-			<div class="icon top-left">{page.topLeft}</div>
+			<div class="icon top-left">
+                <!-- {page.topLeft} -->
+            </div>
 			<div />
-			<div class="icon">{page.topRight}</div>
+			<div class="icon">
+                {page.topRight}
+            </div>
 			<div />
-			<h2>{@html page.title}</h2>
+            <div class="title">
+                <h2>{@html page.title}</h2>
+                <h4>{@html page.desc ?? ""}</h4>
+            </div>
 			<div class="right">
-				<div>{page.right}</div>
+				<!-- <div>{page.right}</div> -->
 			</div>
 		</div>
         <div class="bottom">
-            <div class="icon">{page.botLeft}</div>
+            <div class="icon">
+                <!-- {page.botLeft} -->
+            </div>
             <div class="description">
-                {@html page.fr}
+                <!-- {@html page.fr} -->
             </div>
             <div class="number">
                 {#if i > -1}
@@ -29,9 +38,11 @@
             </div>
         </div>
         <div class={"bottom-alt " + (page.bg ?? "")}>
-            <div class="arrow">{`※`}</div>
+            <div class="arrow">
+                <!-- {`※`} -->
+            </div>
             <div class="cta">
-                {page.title.toLocaleUpperCase()}
+                {page.title}
                 <!-- {emojis[href]} -->
             </div>
             <div class="arrow">{`->`}</div>
@@ -41,6 +52,18 @@
 </a>
 
 <style lang="sass">
+    .title
+        display: flex
+        flex-direction: column
+        gap: 0.5rem
+        h2
+            color: $c0
+            font-weight: 600
+        h4
+            max-width: 50ch
+            color: $c0
+            font-weight: 400
+
     .section-container
         width: 100%
         height: calc(calc(100vh - 3rem) / 3)
@@ -65,21 +88,17 @@
 
         .top, .bottom
             background-color: transparentize($c5, 0.4)
-            color: var(--color)
-            h2
-                color: $c0
-                font-weight: 600
-                
+            color: var(--color)        
 
         .bottom
             clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)
 
         .bottom-alt
             position: relative
-            backdrop-filter: blur(3px)
-            -webkit-backdrop-filter: blur(3px)
-            background-color: var(--color)
-            color: $c0
+            backdrop-filter: blur(30px)
+            -webkit-backdrop-filter: blur(30px)
+            background-color: alpha(var(--color), 0.7)
+            color: transparentize($c0, 0.5)
             clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)
 
             &::after
@@ -88,7 +107,7 @@
                 top: 7%
                 height: 90%
                 width: 100%
-                border: dotted 0.3rem $c5
+                // border: dotted 0.3rem $c5
                 border-left: none
                 border-right: none
 
@@ -106,8 +125,9 @@
                 display: flex
                 font-family: $font-mono
 
-            h2
-                font-family: $font-display
+            .title
+                h2
+                    font-family: $font-display
             
             transition: clip-path 0.1s
 
@@ -170,6 +190,7 @@
         .cta
             font-family: $font-display
             font-weight: 500
+            color: $c0
             @include for-size(tablet-landscape-up)
                 @include font-size(2.2rem)
 
@@ -214,15 +235,16 @@
             .num
                 opacity: 0.5
 
-        h2
-            font-family: $font-display
-            @include font-size(4.8rem)
-            @include rfs(4.8rem, line-height)
-            font-weight: 800
-            @include for-size(tablet-landscape-up)
-                @include font-size(5rem)
-                @include rfs(5rem, line-height)
-                max-width: 90%  
+        .title
+            h2
+                font-family: $font-display
+                @include font-size(4.8rem)
+                @include rfs(4.8rem, line-height)
+                font-weight: 800
+                @include for-size(tablet-landscape-up)
+                    @include font-size(5rem)
+                    @include rfs(5rem, line-height)
+                    max-width: 90%  
 
         img
             width: 100%
@@ -249,6 +271,6 @@
                 transition: transform 1s
                 transform: rotate(376deg)
 
-        h2
+        .title
             opacity: 0
 </style>

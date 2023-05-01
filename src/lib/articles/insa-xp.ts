@@ -1,4 +1,4 @@
-const date = "8/01/2023"
+const date = "1/05/2023"
 const title = "My experience as a Computer Science engineering student at INSA de Lyon"
 const cover = "/pictures/insa/memories_insa%20(4).webp"
 const article = `
@@ -6,16 +6,16 @@ After graduating from my two years technical Computer Science degree at Universi
 
 INSA de Lyon is amongst the largest and top engineering schools in France. It is located near the beautiful city of Lyon, not far from where I now live.
 
-There I got the chance to study Computer Science engineering from top researchers in the field, broadening my understanding and my network.
+There I got the chance to study a more theoretical and broader approach to Computer Science engineering than during my technical degree. And also meet incredible people.
 
 <div class="picture">
     <img src="/pictures/insa/memories_insa%20(5).webp">
     <div class="caption">Me at INSA de Lyon's Computer Science department</div>
 </div>
 
-I would advice anyone wanting to study CS in France to go studying there. The campus life is very mature and active, something quite rare, almost unique, amongst French Computer Science engineering schools according to the various testimonies I have from people studying elsewhere. 
+I would advice anyone wanting to study CS in France to go studying there. The campus life is surprisingly developed and active, something quite rare, almost unique, amongst French Computer Science engineering schools, according to the various testimonies I have from CS students studying in other schools. Arts, theater, sports, music, and many other clubs are available. I personally joined the books reading and rock dancing club, with absolutely no regrets.
 
-The courses are good, broadening the scope and the scale of what I studied in my technical college before, while not being overwhelming (in some departments at least, including the Computer Science one, according to my fellow students from other departments).  
+The courses are interesting, deepening the scope of what I studied in my technical college before, while not being overwhelming (in the Computer Science departement at least). I was able to get back to real maths and not struggle too much despite how little I studied math previously compared to other students.
 
 <div class="caroussel">
     <div class="picture">
@@ -28,9 +28,9 @@ The courses are good, broadening the scope and the scale of what I studied in my
     </div>
 </div>
 
-Opportunities to learn new things, live new experiences, get cool worldwide internship and exchanges, and meet talented young folks are plenty. And since the school is public, it's not so expensive. (For now at least...) Anyone that had top grades in highschool (I did not) or during his previous studies (I did), can probably get accepted.
+Opportunities to learn new things, experience worldwide exchanges, and meet talented young folks are plenty. And since the school is public, it's not so expensive. Anyone that had top grades in highschool (I did not) or during his previous studies (I did), has a chance to get accepted.
 
-Furthermore, every year at INSA I have an opportunity for an internship. Last year was in Lomé, Togo, teaching orphans how to use computers and doing mobile back-end development for a local non-profit. In 2023, I will go to Paris at OnePoint for a Data-Science project (tbd).
+Furthermore, every year at INSA I have an opportunity for an internship. Last year was in Lomé, Togo, teaching orphans how to use computers and doing mobile back-end development for a local non-profit. In 2023, I will go to Paris at OnePoint for a Data-Science related project (tbd).
 
 <div class="caroussel">
     <div class="picture">

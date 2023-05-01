@@ -11,10 +11,9 @@
 </script>
 
 <Page>
-    <PageBanner pageName={pages[route].title} pageSubName="All my blog articles"/>
     <PageBodyAndNav {route}>
         <div class="body">
-            <h1>Anicet's blog articles</h1>
+            <h1>Anicet's blog</h1>
             <div class="articles">
                 {#each Object.entries(data) as [articleId, article], i}
                     <div class="article-link-container">
@@ -37,7 +36,7 @@
     .body
         display: flex
         flex-direction: column
-        gap: 1.5rem
+        gap: 3rem
         @include for-size(tablet-landscape-up)
             gap: 3rem
         align-items: center
@@ -79,7 +78,9 @@
         position: relative
         width: 100%
         height: fit-content
-        padding: 2rem 2.5rem
+        padding: 1rem 1.25rem
+        @include for-size(tablet-landscape-up)
+            padding: 2rem 2.5rem
         overflow: hidden
         z-index: 1
         text-decoration: none
@@ -97,14 +98,14 @@
                 font-family: $font-mono
 
         .title
-            font-size: 2.2rem
-            line-height: 2.5rem
+            font-size: 1.8rem
+            line-height: 2.1rem
             @include for-size(tablet-landscape-up)
-                font-size: 2.5rem
-                line-height: 2.7rem
+                font-size: 2.2rem
+                line-height: 2.5rem
             font-weight: 500
-            max-width: 15.1ch
-            height: 12.7rem
+            max-width: 17.5ch
+            height: 8.7rem
             @include for-size(tablet-landscape-up)
                 height: 10.8rem
 

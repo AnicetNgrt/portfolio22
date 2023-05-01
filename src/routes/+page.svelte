@@ -53,7 +53,9 @@
         <ScrollHint/>
 
         <div class="presentation bg-pattern bg-stars">
-            <img class="portrait" src="/pictures/portraits/portrait1_square.webp" alt='August 22 - Last stair of \"Hotel 2 Février\" in Lomé, Togo.'>
+            <div class="portrait-container">
+                <img class="portrait" src="/pictures/portraits/portrait1_square.webp" alt='August 22 - Last stair of \"Hotel 2 Février\" in Lomé, Togo.'>
+            </div>
             <div class="text">
                 Hi 👋! I'm Anicet Nougaret, a 21 year old passionate about programming, software engineering, design and art. Currently studying CS engineering at INSA in Lyon, France, working on many side-projects, travelling and learning new things every day. <br><br> Welcome to my portfolio! I hope you will have a nice time discovering my work and passion.
             </div>
@@ -120,15 +122,24 @@
             font-weight: 450
             width: 30ch
 
+        .portrait-container
+            border-radius: 0.2rem
+            overflow: hidden
+            @include for-size(tablet-landscape-up)
+                transform: perspective(800px) rotateY(20deg) rotateX(8deg)
+                box-shadow: -0.6rem 0.3rem 0rem alpha(var(--color), 0.8), -0.5rem 0.25rem 0rem alpha(var(--color), 0.8), -0.4rem 0.2rem 0rem alpha(var(--color), 0.8), -0.3rem 0.15rem 0rem alpha(var(--color), 0.8),-0.2rem 0.1rem 0rem alpha(var(--color), 0.8) ,-0.1rem 0.05rem 0rem alpha(var(--color), 0.8)
+
         .portrait
             width: 30rem
             max-width: 100%
             height: min-content
-            border-radius: 1.5rem
-            padding: 0.2rem
-            border: solid 0.3rem $c5
+            background-color: transparentize($c0, 0.2)
             @include for-size(tablet-landscape-up)
-                box-shadow: -1rem 1rem 3rem alpha(var(--color), 0.5), -2rem 2rem 0rem alpha(var(--color), 0.3)
+                box-shadow: inset -0.4rem 0.2rem 0rem alpha(var(--color), 0.8)
+            padding: 1.3rem 1.7rem 1.3rem 1.3rem
+            border: solid 0.8rem alpha(var(--color), 0.5)//transparentize($c5, 0.1)
+            // @include for-size(tablet-landscape-up)
+            //     box-shadow: -1rem 1rem 3rem alpha(var(--color), 0.5), -2rem 2rem 0rem alpha(var(--color), 0.3)
 
     .sections
         display: grid

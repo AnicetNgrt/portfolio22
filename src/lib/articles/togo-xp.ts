@@ -1,21 +1,23 @@
-const date = "9/01/2023"
+const date = "1/05/2023"
 const title = "My experience as a Volunteer teacher & back-end developer for a Togolese non-profit"
 const cover = "/pictures/projects/tingo/photo (1).webp"
 const article = `
 From mid-June to mid-August 2022 I traveled to Togo for my first industry internship as a Computer Science engineering student at INSA de Lyon.
  
-For about two and half months I got the great pleasure to go way beyond my comfort zone, traveling abroad for work for the first time, in an area of the world I knew very little about. With my only experience of that part of the world's culture being from television and Sub Saharan African migrants in France. To put it simply, now that I experienced it for real, I have to admit that it was an incredible voyage, giving birth to personal experiences and discoveries about which I couldn't have had any clue before.
+For about two and a half months, I got to go way beyond my comfort zone. Traveling abroad for work for the first time, in an area of the world I knew very little about. With only television and the few second generation Sub Saharan African migrants I knew, as a shaky basis for understanding Togo. 
+
+I have to admit that it was an incredible journey, giving birth to personal experiences and discoveries that I couldn't ever have anticipated, despite my best efforts to not be going there blindly.
 
 <div class="picture">
     <img src="/pictures/projects/tingo/photo%20(2).webp">
     <div class="caption">A market in Lome</div>
 </div>
 
-Togo, for those of you who never heard about it, as I shamefully did previously, is a coastal Sub Saharan Country located in the middle-western part of the African continent, between Ghana and Benin. It is a fairly small country and a former French colony, with a population of around 8 millions, speaking mostly French, Arabic, a native language called "Ewe" around the south of the country where I stayed, and many others in different parts of the country. The population was composed of many ethnic groups whose borders were not really well taken into account during European colonization, as you may know. It has a human development index of 0.515, being the 167th country on that list. 
+Togo, for those of you who never heard about it, as I shamefully did previously, is a coastal Sub Saharan Country located in the middle-western part of the African continent, between Ghana and Benin. It is a fairly small country and a former French colony, with a population of around 8 millions, speaking mostly French, Arabic, a native language called "Ewe" around the south of the country where I stayed, and many others in different parts of the country. The population was composed of many ethnic groups whose borders were not really well taken into account during European colonization, as expected. It has a human development index of 0.515, being the 167th country on that list. 
 
 It is not an over-exaggeration to say that it was quite an unreal trip for a clueless French Parisian like me. As I got the chance to live with the locals in a mostly authentic average income suburb of Lomé, the capital, and also travel to even humbler places such as small cities and villages.
 
-Aside from the eye-opening discovery of Togolese culture, society, landscapes and very welcoming people, I got to experience an interesting internship, volunteering as a computer teacher in a middle school and later as a back-end developer with two of my fellow students from INSA de Lyon.
+Aside from the eye-opening discovery of Togolese culture, society, landscapes and very welcoming people, I got to experience an interesting technical internship, volunteering as a computer teacher in a middle school and later as a back-end developer with two of my fellow students from INSA de Lyon.
  
 <div class="picture">
     <img src="/pictures/projects/tingo/photo%20(1).webp">
@@ -42,7 +44,7 @@ We were being tutored by a volunteer programmer working for Togo's main mobile n
 
 <div class="picture">
     <img src="/pictures/portraits/portrait0.webp">
-    <div class="caption">Visiting Lome's only skyscrapper and luxury hotel with the entrepreneur. This tower is symbolic of Togo's huge inequalities.</div>
+    <div class="caption">Visiting Lome's only skyscrapper and luxury hotel with the entrepreneur. What looks like a typical lounge to me is very out of place in comparison with the rest.</div>
 </div>
 
 `

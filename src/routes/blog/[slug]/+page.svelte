@@ -13,7 +13,7 @@
 </script>
 
 <Page>
-    <PageBanner pageName={pages[route].title} pageSubName={data.title}/>
+    <PageBanner/>
     <PageBodyAndNav subroute {route}>
         {#if data}
             <div class="article-container">

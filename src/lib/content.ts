@@ -8,6 +8,7 @@ export const loadingEmojis = "🧙‍♂️🪄⚡🗝️👔📫✨🐦🛣️�
 export interface Page {
     title: string
     href: string
+    desc?: string
     bg?: string
     emojis?: string
     cover?: string
@@ -27,8 +28,9 @@ export const pages: {[key: string]: Page} = {
         emojis: "🌐🪐🌍🧭🌟🌚"
     },
     "/resume": {
-        title: "career & studies",
-        cover: "/pictures/insa/memories_insa (1).webp",
+        title: "Resume",
+        desc: "Timeline of my studies in Computer Science at INSA de Lyon and Université de Paris and my profesionnal experience in tech and education.",
+        cover: "/pictures/projects/tingo/photo (1).webp",
         topLeft: "👔",
         topRight: "◥",
         botLeft: "◣",
@@ -38,49 +40,20 @@ export const pages: {[key: string]: Page} = {
         emojis: "🚹👔🎓📜✏️🌁💼🦺📂📌🏢🥼",
         bg: "bg-topo"
     },
-    "/web": {
-        title: "Fullstack web development",
-        cover: "/pictures/projects/farswap/screen0.webp",
-        topLeft: "✨",
-        topRight: "◪",
-        botLeft: "◩",
-        right: "<div>Hello</div>",
-        fr: "Développement web fullstack",
-        href: "/"
-    },
-    "/gamedev": {
-        title: "Game creation & development",
-        cover: "/pictures/projects/zugzwang/captureOld.webp",
-        topLeft: "🎲",
-        topRight: "▨",
-        botLeft: "▦",
-        right: "« It's dangerous to go alone! Take this. »",
-        fr: "Développement de jeux-vidéo",
-        href: "/"
-    },
-    "/branding": {
-        title: "Brand identity & design",
-        cover: "/pictures/projects/farswap/banner.webp",
-        topLeft: "🎴",
-        topRight: "⫸",
-        botLeft: "⫷",
-        right: "—————————————————————",
-        fr: "Identités de marques et design",
-        href: "/"
-    },
-    "/art": {
-        title: "Art gallery",
-        cover: "/pictures/art/skyscrapper_1.webp",
-        topLeft: "🎨",
-        topRight: "◒",
-        botLeft: "◓",
-        right: "« Le vent se lève, il faut tenter de vivre. »",
-        fr: "Travaux artistiques",
-        href: "/"
-    },
+    // "/web": {
+    //     title: "Fullstack web development",
+    //     cover: "/pictures/projects/farswap/screen0.webp",
+    //     topLeft: "✨",
+    //     topRight: "◪",
+    //     botLeft: "◩",
+    //     right: "<div>Hello</div>",
+    //     fr: "Développement web fullstack",
+    //     href: "/"
+    // },
     "/blog": {
         title: "Blog",
-        cover: "/pictures/portraits/portrait0.webp",
+        desc: "Technical (Programming, Machine Learning) and non-technical (Entrepreneurship, Education, Ideas)",
+        cover: "/pictures/art/skyscrapper_1.webp",
         topLeft: "📓",
         topRight: "◈",
         botLeft: "◆",
@@ -90,6 +63,40 @@ export const pages: {[key: string]: Page} = {
         emojis: "✏️📓📂🌍💾💡📙📜📰",
         bg: "bg-wigle"
     },
+    "/gamedev": {
+        title: "Game creation",
+        desc: "My game design and development porfolio. Small innovative games cumulating thousands of browser plays and hundreds of downloads.",
+        cover: "/pictures/projects/zugzwang/captureOld.webp",
+        topLeft: "🎲",
+        topRight: "▨",
+        botLeft: "▦",
+        right: "« It's dangerous to go alone! Take this. »",
+        fr: "Développement de jeux-vidéo",
+        href: "https://anicetngrt.itch.io/",
+        bg: "bg-stars"
+    },
+    // "/branding": {
+    //     title: "Brand identity & design",
+    //     cover: "/pictures/projects/farswap/banner.webp",
+    //     topLeft: "🎴",
+    //     topRight: "⫸",
+    //     botLeft: "⫷",
+    //     right: "—————————————————————",
+    //     fr: "Identités de marques et design",
+    //     href: "/"
+    // },
+    "/opensource": {
+        title: "Open-source",
+        desc: "Code projects across various fields: Full-stack, Machine Learning, Game development, tooling...",
+        cover: "/pictures/insa/memories_insa (1).webp",
+        topLeft: "🧑‍💻",
+        topRight: "◒",
+        botLeft: "◓",
+        right: "git clone",
+        fr: "Open-source",
+        href: "https://github.com/AnicetNgrt",
+        bg: "bg-clouds"
+    }
 }
 
 export const sections = Object.values(pages)
