@@ -30,7 +30,7 @@ export const pages: {[key: string]: Page} = {
     "/resume": {
         title: "Resume",
         desc: "Timeline of my studies in Computer Science and my profesionnal experience in tech and education.",
-        cover: "/pictures/projects/tingo/photo1.webp",
+        cover: "/pictures/projects/tingo/photo1.png",
         topLeft: "👔",
         topRight: "◥",
         botLeft: "◣",
@@ -53,7 +53,7 @@ export const pages: {[key: string]: Page} = {
     "/blog": {
         title: "Blog",
         desc: "Technical (Programming, Machine Learning) and non-technical (Entrepreneurship, Education, Ideas)",
-        cover: "/pictures/art/skyscrapper_1.webp",
+        cover: "/pictures/art/skyscrapper_1.jpg",
         topLeft: "📓",
         topRight: "◈",
         botLeft: "◆",
@@ -66,7 +66,7 @@ export const pages: {[key: string]: Page} = {
     "/gamedev": {
         title: "Game creation",
         desc: "Small innovative games I've worked on, cumulating thousands of browser plays and hundreds of downloads.",
-        cover: "/pictures/projects/zugzwang/captureOld.webp",
+        cover: "/pictures/projects/zugzwang/captureOld.png",
         topLeft: "🎲",
         topRight: "▨",
         botLeft: "▦",
@@ -88,7 +88,7 @@ export const pages: {[key: string]: Page} = {
     "/opensource": {
         title: "Open-source",
         desc: "Code projects across various fields: Full-stack, Machine Learning, Game development, tooling...",
-        cover: "/pictures/insa/memories_insa (1).webp",
+        cover: "/pictures/insa/memories_insa (1).jpg",
         topLeft: "🧑‍💻",
         topRight: "◒",
         botLeft: "◓",

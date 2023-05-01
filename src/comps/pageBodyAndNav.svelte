@@ -10,13 +10,14 @@
     let backSection = subroute ? pages[route] : null
     
     const thumbnail = "anicetnougaret.fr" + pages[route].cover;
+    const thumbnail_type = thumbnail.slice(-3) == "jpg" || thumbnail.slice(-3) == "JPG" ? "image/jpeg" : "image/png";
 </script>
 
 <svelte:head>
     {#if !subroute}
         <meta property="og:image" content="http://{thumbnail}" />
         <meta property="og:image:secure_url" content="https://{thumbnail}" /> 
-        <meta property="og:image:type" content="image/jpeg" /> 
+        <meta property="og:image:type" content={thumbnail_type} /> 
         <meta property="og:image:width" content="2859" /> 
         <meta property="og:image:height" content="2144" />
     {/if}
