@@ -30,7 +30,7 @@ export const pages: {[key: string]: Page} = {
     "/resume": {
         title: "Resume",
         desc: "Timeline of my studies in Computer Science and my profesionnal experience in tech and education.",
-        cover: "/pictures/projects/tingo/photo1.png",
+        cover: "/pictures/projects/tingo/photo1.jpg",
         topLeft: "👔",
         topRight: "◥",
         botLeft: "◣",
