@@ -27,3 +27,5 @@
     <meta property="og:image:width" content="710" /> 
     <meta property="og:image:height" content="527" />
 </svelte:head>
+
+<slot/>
