@@ -74,6 +74,7 @@
 
 <style lang=sass>
     .story-container
+        will-change: transform, width, opacity, border-radius, height
         text-align: left
         z-index: 1
         cursor: pointer
@@ -176,8 +177,7 @@
             top: 50%
             left: 50%
             z-index: -1
-            @include for-size(desktop-up)
-                animation: move 40s linear 0s infinite alternate
+
             width: 100%
             height: 100%
             transform: translate(-50%, -50%)
@@ -238,20 +238,4 @@
             opacity: 0
         100%
             opacity: 1
-
-    @keyframes move
-        0%
-            transform: translate(-50%, -50%) scale(1)
-
-        25%
-            transform: translate(-60%, -55%) scale(1.1)
-
-        50%
-            transform: translate(-75%, -45%) scale(1.2)
-
-        75%
-            transform: translate(-35%, -50%) scale(1.2)
-
-        100%
-            transform: translate(-50%, -50%) scale(1)
 </style>

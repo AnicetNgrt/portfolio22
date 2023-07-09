@@ -68,7 +68,16 @@
     .section-container
         width: 100%
         height: calc(calc(100vh - 3rem) / 3)
+        @include for-size(tablet-portrait-up)
+            height: calc(calc(100vh - 3rem) / 2)
+            border-radius: 0.3rem
         @include for-size(tablet-landscape-up)
+            height: calc(calc(100vh - 3rem) / 1.3)
+            border-radius: 0.3rem
+        @include for-size(desktop-up)
+            height: calc(calc(100vh - 3rem) / 1.5)
+            border-radius: 0.3rem
+        @include for-size(big-desktop-up)
             height: calc(calc(100vh - 3rem) / 2)
             border-radius: 0.3rem
 
