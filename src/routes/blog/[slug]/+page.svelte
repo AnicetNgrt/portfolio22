@@ -2,7 +2,19 @@
 	import Page from "../../../comps/page.svelte";
 	import PageBodyAndNav from "../../../comps/pageBodyAndNav.svelte";
     import { marked } from "marked";
+    import {markedHighlight} from "marked-highlight";
+    import hljs from 'highlight.js';
+    import 'highlight.js/styles/stackoverflow-light.css';
     import type { PageData } from './$types';
+
+    marked.use(markedHighlight({
+        langPrefix: 'hljs language-',
+        async: true,
+        highlight(code, lang) {
+            const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+            return hljs.highlight(code, { language }).value;
+        }
+    }));
 
     export let data: PageData;
 

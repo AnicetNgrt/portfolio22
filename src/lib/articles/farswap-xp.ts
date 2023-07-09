@@ -67,7 +67,7 @@ Not long after I got back from Lisbon, I decided to leave the team. They took it
 > Financially speaking, this is not good, but psychologically and morally we are satisfied.
 > Our service is ok, the customers who do business with us (mostly Europeans) are satisfied.
 > 
-> With a little bit of lying and data manipulation, we could be in the top 20 exchanges on coinchecko or coinmarketcap. We could manipulate data, just like others do, we could allow suspicious transactions, money laundering...but we decided not to.
+> With a little bit of lying and data manipulation, we could be in the top 20 exchanges on coingecko or coinmarketcap. We could manipulate data, just like others do, we could allow suspicious transactions, money laundering...but we decided not to.
 > 
 > Ever since I've been in this "business", I've noticed that if you work transparently and within the framework of legislation like we do - you can't succeed in the short term.
 > 

@@ -37,7 +37,9 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"highlight.js": "^11.8.0",
 		"marked": "^4.2.5",
+		"marked-highlight": "^2.0.1",
 		"marked-images": "^3.0.1",
 		"svelte-icons": "^2.1.0"
 	}
