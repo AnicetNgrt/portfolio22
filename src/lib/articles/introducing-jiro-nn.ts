@@ -3,12 +3,11 @@ const title = "JIRO: a low-friction, high-detail, deep learning framework for Ru
 const cover = "/pictures/projects/jironn/introducing_jiro_cover.png"
 const keywords = ["Deep Learning", "Machine Learning", "Rust", "Neural Networks"]
 const article = `
+For the past few months, I have been building a Deep Learning and data preprocessing framework in Rust. The initial goal was only to learn how these tools and algorithms work. But as it kept growing, it progressively became the perfect opportunity to put something out in the world that would be useful to the community.
 
 <div class="picture">
     <img src="/pictures/projects/jironn/jiro_logo_bg.webp">
 </div>
-
-For the past few months, I have been building a Deep Learning and data preprocessing framework in Rust. The initial goal was only to learn how these tools and algorithms work. But as it kept growing, it progressively became the perfect opportunity to put something out in the world that would be useful to the community.
 
 It is currently a work in progress framework with a focus on crafting APIs which make it Python-level easy to build small to medium-sized Deep Learning workflows in Rust. While still allowing plenty customization via hopefully simple enough and well-documented APIs, and of course leveraging compile-time features whenever possible. Because, sure, everyone loves Rust and compile-time guarantees, and everyone hates ambiguity and run-time shapes mismatch. But I simply can't keep my sanity with stuff like \`SizedMatrix<Rank6<A, B, Dyn, Dyn, Dyn, Dyn>, f64, Backend=Cuda>\` that requires \`impl<'a, const A:usize, const B:usize, T: Scalar, M: MatrixCore<A, B, T>> DotProductTrait<'a, A, B, T, M>\`.
 
