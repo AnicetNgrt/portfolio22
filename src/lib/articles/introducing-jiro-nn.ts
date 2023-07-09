@@ -83,13 +83,13 @@ pub fn main() {
 }
 \`\`\`
 
-Here you go, preprocessing, model building, training, with extensive customization in just 60 lines. Yeah, I mean, it's Rust, what did you expect? Don't you have any idea how many lines I saved you? It's in the hundreds, even if you were using other Rust libraries, which are good in their own rights that said.
+Here you go, preprocessing, model building, training, with extensive customization in just 60 lines. Yeah, I mean, it's Rust, what did you expect? Sadly I can't do magic but I've probably saved you hundreds of lines, even if you were using other Rust Deep Learning frameworks, which are good at what they do, but don't go the extra mile to make preprocessing easy too.
 
 It is probably not the fastest nor the most compliant framework ever, but it is enough to toy with. My goal with it for now is to improve it and learn a ton in the process while giving good ideas and inspiration to the Rust community.
 
 Check out [\`jiro-nn\`](https://github.com/AnicetNgrt/jiro-nn) and tell me what you think!
 
-For more details, a long article sprinkled with insights and friendly sarcasm about this weird world of Rust awaits you below:
+For more details, a long article sprinkled with insights and friendly hot takes about this weird world of Rust awaits you below:
 
 ### Table of contents:
 
