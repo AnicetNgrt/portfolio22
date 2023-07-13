@@ -99,7 +99,7 @@ TM::start_monitoring();
 // steps in some cases.
 let mut pipeline = Pipeline::basic_single_pass();
 let (dataset_config, data) = pipeline
-    .load_data("dataset/kc_house_data.csv", Some(&dataset_config))
+    .load_data("kc_house_data.csv", Some(&dataset_config))
     .run();
 \`\`\`
 
@@ -109,7 +109,7 @@ let (dataset_config, data) = pipeline
 let hidden_neurons = 22;
 let output_size = 1; // only the price is predicted
 
-let mut nn = ModelBuilder::new(dataset_config)
+let mut model = ModelBuilder::new(dataset_config)
     .neural_network();
         // We declare our layers and add customization calls like 
         // .relu() or .momentum().
