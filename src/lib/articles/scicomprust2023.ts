@@ -11,7 +11,7 @@ const article = `
   </iframe>
 </div>
 
-*tl;dr: Presenting is stressful, Rust community is great, I now have load of ideas, this framework could be onto something after some more work (AMD support, portability, ease of use), I need to do a PhD on it or something to invest at least part-time on it.*
+*tl;dr: Presenting is stressful, Rust community is great, I now have loads of ideas, this framework could be onto something after some more work (AMD support, portability, ease of use), I need to do a PhD on it or something to invest at least part-time on it.*
 
 --- 
 
