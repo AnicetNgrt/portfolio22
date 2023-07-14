@@ -1,7 +1,7 @@
 const date = "10/07/2023"
 const title = "Predict the price of a house in Rust thanks to JIRO Neural Networks"
 const cover = "/pictures/projects/jironn/jiro_kc_cover.png"
-const keywords = ["Deep Learning", "Regression", "Example", "Machine Learning", "Rust", "Neural Networks"]
+const keywords = ["Deep Learning", "JIRO", "Regression", "Example", "Machine Learning", "Rust", "Neural Networks"]
 const article = `
 Hi! I'm Anicet, a Master CS student at INSA Lyon in France, and for the past few months, I have been building a Deep Learning and data preprocessing framework in Rust. I talk about it more in depth [in another article](/blog/introducing-jiro-nn). Here, it will all be about a concrete regression problem example.
 

@@ -1,7 +1,7 @@
 const date = "9/07/2023"
 const title = "I'm building a low-friction, high-detail, deep learning framework for Rust"
 const cover = "/pictures/projects/jironn/introducing_jiro_cover.png"
-const keywords = ["Deep Learning", "Machine Learning", "Rust", "Neural Networks"]
+const keywords = ["Deep Learning", "JIRO", "Machine Learning", "Rust", "Neural Networks"]
 const article = `
 For the past few months, I have been building a Deep Learning and data preprocessing framework in Rust. The initial goal was only to learn how these tools and algorithms work. But as it kept growing, it progressively became the perfect opportunity to put something out in the world that would be useful to the community.
 
