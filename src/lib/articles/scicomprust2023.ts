@@ -11,13 +11,13 @@ const article = `
   </iframe>
 </div>
 
-*tl;dr: Presenting is stressful, Rust community is great, I now have load of ideas, this framework could be onto something after some more work (AMD support, portability, ease of use), I need to do a PhD on it or something, contact me for opportunities.*
+*tl;dr: Presenting is stressful, Rust community is great, I now have load of ideas, this framework could be onto something after some more work (AMD support, portability, ease of use), I need to do a PhD on it or something to invest at least part-time on it.*
 
 --- 
 
-I got the great opportunity to present [\`jiro-nn\`](https://github.com/AnicetNgrt/jiro-nn), my Deep Learning framework for Rust, during a 7 minutes talk at the [Scientific Computing in Rust 2023](https://scientificcomputing.rs/) online workshop (you'd call it a conference but the organizers prefered the more relaxed term "workshop") organized by postdocs and professors from University College of London and also members of the currently blooming scientific computing in Rust community.
+I got the great opportunity to present [\`jiro-nn\`](https://github.com/AnicetNgrt/jiro-nn), my Deep Learning framework for Rust, during a 7 minutes talk at the [Scientific Computing in Rust 2023](https://scientificcomputing.rs/) online workshop (you'd call it a conference but the organizers prefered the more relaxed term "workshop") organized by post-docs and professors from University College of London and also members of the currently blooming scientific computing in Rust community.
 
-It was my first public talk, and the first time I shared a piece of work I so deeply (no pun intended) invested myself into, so it was a bit stressful. Also, considering I was also presenting my humble work as a master student live in front of around 140 post-docs, industry veterans, professors and other enthusiasts. But it went well and it sparked a lot of interesting discussions afterwards. People felt welcoming and curious, and even though my experience was smaller than theirs to say the least, they were interested in my work and my ideas.
+It was my first public talk, and the first time I shared a piece of work I so deeply (no pun intended) invested myself into. It was therefore a bit stressful, and more so as I was presenting my humble work as a master student live in front of around 140 post-docs, industry veterans, professors and other enthusiasts. But it went well and it sparked a lot of interesting discussions afterwards. People felt welcoming and curious, and even though my experience was smaller than theirs to say the least, they were interested in my work and my ideas.
 
 So after discussing in great length with the audience during the following networking session, I am now sure of a few things:
 
