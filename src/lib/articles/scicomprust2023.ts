@@ -11,6 +11,10 @@ const article = `
   </iframe>
 </div>
 
+[Watch the recording of the talk on Youtube.](https://youtu.be/GjUM8ejy6kE)
+
+---
+
 *tl;dr: Presenting is stressful, Rust community is great, I now have loads of ideas, this framework could be onto something after some more work (AMD support, portability, ease of use), I need to do a PhD on it or something to invest at least part-time on it.*
 
 --- 
