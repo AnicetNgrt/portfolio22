@@ -1,8 +1,16 @@
-const date = "14/07/2023"
+const date = "15/07/2023"
 const title = "Talking about jiro-nn at Scientific Computing in Rust 2023 by University College of London"
 const cover = "/pictures/projects/jironn/scicomprust2023_cover.png"
 const keywords = ["Deep Learning", "JIRO", "UCL", "Scientific Computing", "Regression", "Example", "Machine Learning", "Rust", "Neural Networks"]
 const article = `
+### The recording of my 7 minutes talk
+
+<div style="position: relative; width: 100%; height: 315px;">
+  <iframe style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;" src="https://www.youtube-nocookie.com/embed/GjUM8ejy6kE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
+### The slides featuring complementary information
+
 <div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%;
  padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0em; margin-bottom: 0.9em; overflow: hidden;
  border-radius: 8px; will-change: transform;">
@@ -11,11 +19,9 @@ const article = `
   </iframe>
 </div>
 
-[Watch the recording of the talk on Youtube.](https://youtu.be/GjUM8ejy6kE)
+### Afterthoughts, new goals and new ideas
 
----
-
-*tl;dr: Presenting is stressful, Rust community is great, I now have loads of ideas, this framework could be onto something after some more work (AMD support, portability, ease of use), I need to do a PhD on it or something to invest at least part-time on it.*
+*tl;dr: Presenting is stressful, Rust community is great, I now have loads of ideas, this framework could be onto something after some more work (AMD support, portability, ease of use), I have one year to find a way to work on it at least 15 hours a week (PhD, R&D job, contact me if you know).*
 
 --- 
 
@@ -26,7 +32,7 @@ It was my first public talk, and the first time I shared a piece of work I so de
 So after discussing in great length with the audience during the following networking session, I am now sure of a few things:
 
 - Supporting universal formats like ONNX will be a challenge but would instantly make it a way more useful tool to the community.
-- If I can make it work on AMD GPUs through RISC-V support via Rust native compute shaders using \`wgpu\` I'll really get onto something. I'll have to improve a lot upon my rather graphics-focused understanding of shaders and GPU computing to get there, but it would trully unlock single-executable cross-platform Deep Learning on the GPU, and in Rust, which is barely partially a thing today, even in the Python world.
+- If I can make it work on AMD GPUs through SPIR-V support via Rust native compute shaders using \`wgpu\` I'll really get onto something interesting. I'll have to improve a lot upon my rather graphics-focused understanding of shaders and GPU computing to get there, but it would trully unlock single-executable cross-platform Deep Learning on the GPU, and fully in Rust, which is barely partially a thing today, even in the Python world.
 - Rust has no good notebooks support so it's the right place to be innovative by first identifying what working with notebooks really brings to the table and then inventing something different in term of Developer Experience and UX, trully tailored for Rust. That would give us the best of both worlds, and I feel that I'm at a rare spot were I have both Deep Learning, Rust and UX experience and I need to harness that.
 - The API design choices I made are quite unique and ergonomic and thankfully appreciated for that.
 - I don't have much time to make it right because I'll soon finish my engineering studies, so I really must invest the next year on this project until I'm sure I can work on it during possibly a PhD or a R&D job (whichever will be the most interesting or available to me at that time. If you have opportunities, please contact me!)
