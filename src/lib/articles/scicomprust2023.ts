@@ -34,12 +34,11 @@ So after discussing in great length with the audience during the following netwo
 - Supporting universal formats like ONNX will be a challenge but would instantly make it a way more useful tool to the community.
 - If I can make it work on AMD GPUs through SPIR-V support via Rust native compute shaders using \`wgpu\` I'll really get onto something interesting. I'll have to improve a lot upon my rather graphics-focused understanding of shaders and GPU computing to get there, but it would trully unlock single-executable cross-platform Deep Learning on the GPU, and fully in Rust, which is barely partially a thing today, even in the Python world.
 - Rust has no good notebooks support so it's the right place to be innovative by first identifying what working with notebooks really brings to the table and then inventing something different in term of Developer Experience and UX, trully tailored for Rust. That would give us the best of both worlds, and I feel that I'm at a rare spot were I have both Deep Learning, Rust and UX experience and I need to harness that.
-- The API design choices I made are quite unique and ergonomic and thankfully appreciated for that.
+- It has to be more customizable for people to add their own preprocessing steps/layers and I believe I can make a pretty good API for that without the usual rust API nightmare that kind of thing could give.
+- The API design choices I made are quite unique and ergonomic and were thankfully appreciated by various commenters for that, but the lack of some of the above features make the framework not competitive even in the not so user-friendly current Deep Learning tools landscape in Rust (and even in Python the MLops people would add).
 - I don't have much time to make it right because I'll soon finish my engineering studies, so I really must invest the next year on this project until I'm sure I can work on it during possibly a PhD or a R&D job (whichever will be the most interesting or available to me at that time. If you have opportunities, please contact me!)
 - I need to allow and attract potential contributors, because there are people interested in the project and willing to help. 
 - An unchanged Rust cargo project may compile and run instantly if already compiled once, but under Zoom screen sharing expect it to compile for very long anyway.
-
-A youtube upload of my talk will come soon.
 `
 export default {
     title,
