@@ -67,7 +67,10 @@
                 Hi 👋! 
                 <br>
                 <br>
-                I'm Anicet Nougaret, a 21 year old passionate about programming, software engineering, design and art. Currently studying CS engineering at INSA Lyon, France.
+                I'm Anicet, a 22 year old Deep Learning framework author in Rust, Reinforcement Learning enthusiast, game engine thinkerer, front-end wizzard... 
+                <br>
+                <br>
+                Amongst other things.
                 <br>
                 <br>
                 Welcome to my porfolio and blog!
@@ -142,12 +145,12 @@
         align-items: center
 
         .text
-            font-size: 1.5rem
-            line-height: 1.7rem 
+            font-size: 1.3rem
+            line-height: 1.5rem 
 
             @include for-size(tablet-landscape-up)
-                font-size: 2.5rem
-                line-height: 2.9rem
+                font-size: 2.3rem
+                line-height: 2.7rem
             font-weight: 450
             width: 30ch
 

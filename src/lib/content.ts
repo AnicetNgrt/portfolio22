@@ -123,8 +123,55 @@ export interface Story {
 export const stories: {[key:string]: Story[]} = {
     "/resume": [
         {
+            category: "internship (to come)",
+            title: "Data Science intern in astronomical data analysis",
+            covers: [
+                "/pictures/esac/Aerial_view_of_ESAC.jpg"
+            ],
+            institution: "European Space Agency",
+            place: "Madrid, Spain",
+            start: "03/2024",
+            end: "08/2024",
+            article: `
+Article coming soon.            
+`
+        },
+        {
+            category: "exchange semester",
+            title: "Master student in AI, Innovation & Research",
+            covers: [
+                "/pictures/barcelona/Barcelona (1).jpg",
+                "/pictures/barcelona/Barcelona (2).jpg",
+                "/pictures/barcelona/Barcelona (3).jpg",
+                "/pictures/barcelona/Barcelona (4).jpg",
+            ],
+            institution: "UPC / UB",
+            place: "Barcelona, Spain",
+            start: "09/2023",
+            end: "01/2024",
+            article: `
+Article coming soon.            
+`
+        },
+        {
+            category: "internship",
+            title: "NLP & Data Science intern at a large consulting firm",
+            covers: [
+                "/pictures/projects/onepoint/clusteringnlp.png",
+                "/pictures/projects/onepoint/fit.png",
+                "/pictures/paris/paris (2).webp",
+            ],
+            institution: "Onepoint",
+            place: "Paris, France",
+            start: "05/2023",
+            end: "08/2024",
+            article: `
+Article coming soon.            
+`
+        },
+        {
             category: "studies",
-            title: "Computer Science engineering student",
+            title: "Computer Science engineering Master student",
             covers: [
                 "/pictures/insa/memories_insa (3).webp",
                 "/pictures/insa/memories_insa (4).webp",

@@ -100,7 +100,7 @@
             line-height: 2.1rem
             @include for-size(tablet-landscape-up)
                 font-size: 2.2rem
-                line-height: 2.5rem
+                line-height: 2.3rem
             font-weight: 500
             max-width: 17.5ch
             height: 8.7rem
