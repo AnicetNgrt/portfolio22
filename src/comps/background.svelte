@@ -6,6 +6,8 @@
 </div>
 
 <style lang=sass>
+    @import "../styles/helpers.sass"
+
     .bg
         z-index: -1
         position: absolute

@@ -18,6 +18,8 @@
 </div>
 
 <style lang=sass>
+    @import "../styles/helpers.sass"
+
     .languette
         position: absolute
         left: 50%

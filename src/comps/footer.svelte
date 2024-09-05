@@ -31,6 +31,10 @@
 </div>
 
 <style lang=sass>
+    @import "../styles/helpers.sass"
+
+    @import "../styles/helpers.sass"
+
     .footer-container
         position: relative
         background-color: $c0

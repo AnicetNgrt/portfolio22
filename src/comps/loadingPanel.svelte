@@ -34,6 +34,10 @@
 </FullscreenMultiscroll>
 
 <style lang=sass>
+    @import "../styles/helpers.sass"
+
+    @import "../styles/helpers.sass"
+
     .loading-disclaimer
         font-weight: 500
         font-family: $font-display

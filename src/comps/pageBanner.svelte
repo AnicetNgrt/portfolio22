@@ -15,6 +15,8 @@
 </a>
 
 <style lang=sass>
+    @import "../styles/helpers.sass"
+
     .indicator
         display: none
         position: absolute

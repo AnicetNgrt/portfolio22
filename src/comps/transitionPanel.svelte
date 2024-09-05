@@ -40,6 +40,8 @@
 {/if}
 
 <style lang=sass>
+    @import "../styles/helpers.sass"
+
     .loading-emojis
         color: var(--color)
         font-family: $font-mono

@@ -19,6 +19,8 @@
 </div>
 
 <style lang=sass>
+    @import "../styles/helpers.sass"
+
     .bg-container
         z-index: -1
         position: absolute

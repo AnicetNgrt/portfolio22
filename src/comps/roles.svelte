@@ -88,6 +88,8 @@
 {/if}
 
 <style lang=sass>
+    @import "../styles/helpers.sass"
+
     .marquee-container
         height: fit-content
 

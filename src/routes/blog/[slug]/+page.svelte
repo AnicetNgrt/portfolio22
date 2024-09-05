@@ -67,6 +67,8 @@
 </Page>
 
 <style lang=sass>
+    @import "../../../styles/helpers.sass"
+
     .article-container
         width: 100%
         display: flex

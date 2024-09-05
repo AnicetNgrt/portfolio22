@@ -73,6 +73,8 @@
 </button>
 
 <style lang=sass>
+    @import "../styles/helpers.sass"
+
     .story-container
         will-change: transform, width, opacity, border-radius, height
         text-align: left

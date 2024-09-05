@@ -31,6 +31,8 @@
 </Page>
 
 <style lang=sass>
+    @import "../../styles/helpers.sass"
+
     .body
         display: flex
         flex-direction: column

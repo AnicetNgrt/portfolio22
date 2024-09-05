@@ -23,6 +23,10 @@
 </FullscreenPanel>
 
 <style lang=sass>
+    @import "../styles/helpers.sass"
+
+    @import "../styles/helpers.sass"
+
     .multiscroll
         opacity: 0.8
         height: fit-content

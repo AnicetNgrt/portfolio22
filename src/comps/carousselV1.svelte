@@ -43,6 +43,10 @@
 </div>
 
 <style lang=sass>
+    @import "../styles/helpers.sass"
+
+    @import "../styles/helpers.sass"
+
     .caroussel
         display: flex
         flex-direction: column

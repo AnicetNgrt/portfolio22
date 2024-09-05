@@ -67,7 +67,7 @@
                 Hi 👋! 
                 <br>
                 <br>
-                I'm Anicet, a 22 year old Deep Learning framework author in Rust, Reinforcement Learning enthusiast, game engine thinkerer, front-end wizzard... 
+                I'm Anicet, a 23 year old Deep Learning framework author in Rust, Reinforcement Learning enthusiast, game engine thinkerer, front-end wizzard... 
                 <br>
                 <br>
                 Amongst other things.
@@ -93,6 +93,8 @@
 
 
 <style lang="sass">
+    @import "../styles/helpers.sass"
+
     .content
         z-index: 1
         width: 100%

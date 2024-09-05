@@ -54,6 +54,8 @@
 </div>
 
 <style lang=sass>
+    @import "../styles/helpers.sass"
+
     .nav-container
         @include for-size(tablet-landscape-up)
             position: sticky

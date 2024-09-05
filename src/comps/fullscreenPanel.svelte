@@ -57,6 +57,10 @@
 {/if}
 
 <style lang=sass>
+    @import "../styles/helpers.sass"
+
+    @import "../styles/helpers.sass"
+
     .bg
         position: absolute
         top: 0%

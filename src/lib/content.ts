@@ -36,7 +36,7 @@ export const pages: {[key: string]: Page} = {
         botLeft: "◣",
         right: "← ← ← ← ← ← ← ←",
         fr: "Carrière et études",
-        href: "/resume",
+        href: "https://www.linkedin.com/in/anicet-nougaret-b7846b174/",
         emojis: "🚹👔🎓📜✏️🌁💼🦺📂📌🏢🥼",
         bg: "bg-topo"
     },

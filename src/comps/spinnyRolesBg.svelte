@@ -108,6 +108,8 @@
 </IntersectionObserver>
 
 <style lang=sass>
+    @import "../styles/helpers.sass"
+
     .indicator
         z-index: -1
         position: absolute

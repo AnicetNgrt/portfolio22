@@ -11,17 +11,17 @@ const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	// for more information about preprocessors
 	preprocess: preprocess({
-		sass: {
-			prependData: `@import '${sassPath}/helpers'`
-		}
+		// sass: {
+		// 	prependData: `@import '${sassPath}/helpers.sass'`
+		// }
 	}),
 
 	kit: {
 		alias: {
-			"$src": "src",
-			"$src/*": "src/*",
-			"$lib": "src/lib",
-			"$lib/*": "src/lib/*"
+			"$src": "./src",
+			"$src/*": "./src/*",
+			"$lib": "./src/lib",
+			"$lib/*": "./src/lib/*"
 		},
 		adapter: adapter(),
 		prerender: {
